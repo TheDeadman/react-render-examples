@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const SearchPage = () => {
+interface SearchPageProps {
+    selectedOption: string | null;
+    setSelectedOption: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+const SearchPage: React.FC<SearchPageProps> = ({ selectedOption, setSelectedOption }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [results, setResults] = useState<string[]>([]);
-    const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -40,23 +44,21 @@ const SearchPage = () => {
                 </button>
             </div>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <div>
-                {results.length > 0 && (
-                    <select
-                        value={selectedOption || ''}
-                        onChange={(e) => setSelectedOption(e.target.value)}
-                    >
-                        <option value="" disabled>
-                            Select an option
+            {results.length > 0 && (
+                <select
+                    value={selectedOption || ''}
+                    onChange={(e) => setSelectedOption(e.target.value)}
+                >
+                    <option value="" disabled>
+                        Select an option
+                    </option>
+                    {results.map((result, index) => (
+                        <option key={index} value={result}>
+                            {result}
                         </option>
-                        {results.map((result, index) => (
-                            <option key={index} value={result}>
-                                {result}
-                            </option>
-                        ))}
-                    </select>
-                )}
-            </div>
+                    ))}
+                </select>
+            )}
             {selectedOption && (
                 <p>
                     Selected Option: <strong>{selectedOption}</strong>

@@ -5,8 +5,12 @@ interface ListItem {
     description: string;
 }
 
-const ListPage: React.FC = () => {
-    const [list, setList] = useState<ListItem[]>([]);
+interface ListPageProps {
+    list: ListItem[];
+    setList: React.Dispatch<React.SetStateAction<ListItem[]>>;
+}
+
+const ListPage = ({ list, setList }: ListPageProps) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
