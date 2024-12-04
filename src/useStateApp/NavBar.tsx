@@ -1,33 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AppBar, Toolbar, Button, Container } from '@mui/material';
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
     return (
-        <nav style={{ marginBottom: '20px' }}>
-            <ul>
-                <li>
-                    <Link to="/useState">useState App</Link>
-                </li>
-                <li>
-                    <Link to="/useContext">useContext App</Link>
-                </li>
-                <li>
-                    <Link to="/reduxToolkit">reduxToolkit App</Link>
-                </li>
-                <li>
-                    <Link to="/list-page">List Page</Link>
-                </li>
-                <li>
-                    <Link to="/search-page">Search Page</Link>
-                </li>
-                <li>
-                    <Link to="/combined-page">Combined Page</Link>
-                </li>
-                <li>
-                    <Link to="/summary-page">Summary Page</Link>
-                </li>
-            </ul>
-        </nav>
+        <AppBar position="sticky">
+            <Toolbar>
+                <Container>
+                    <Button color="inherit" component={Link} to="/useState">
+                        useState App
+                    </Button>
+                    <Button color="inherit" component={Link} to="/useContext">
+                        useContext App
+                    </Button>
+                    <Button color="inherit" component={Link} to="/reduxToolkit">
+                        reduxToolkit App
+                    </Button>
+                    <Button color="secondary" component={Link} to="/useState/list-page">
+                        List Page
+                    </Button>
+                    <Button color="secondary" component={Link} to="/useState/search-page">
+                        Search Page
+                    </Button>
+                    <Button color="secondary" component={Link} to="/useState/combined-page">
+                        Combined Page
+                    </Button>
+                    <Button color="secondary" component={Link} to="/useState/summary-page">
+                        Summary Page
+                    </Button>
+                </Container>
+            </Toolbar>
+        </AppBar>
     );
 };
 
