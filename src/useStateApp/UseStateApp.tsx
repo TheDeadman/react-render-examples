@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { Box, Container, CssBaseline, Stepper, Step, Button, Typography } from '@mui/material';
+import { Box, Container, CssBaseline, Stepper, Step, Button, Typography, StepLabel } from '@mui/material';
 import ListPage from './ListPage';
 import SearchPage from './SearchPage';
 import CombinedPage from './CombinedPage';
 import SummaryPage from './SummaryPage';
+import RenderCount from '../overall/RenderCount';
 
 interface ListItem {
     title: string;
     description: string;
 }
 
+const steps = ['List Page', 'Search Page', 'Combined Page', 'Summary Page'];
+
 const UseStateApp: React.FC = () => {
     const [list, setList] = useState<ListItem[]>([]);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [activeStep, setActiveStep] = useState(0); // Track the active step in the stepper
 
-    const steps = ['List Page', 'Search Page', 'Combined Page', 'Summary Page'];
     const navigate = useNavigate();
 
     const handleNext = () => {
@@ -35,14 +37,15 @@ const UseStateApp: React.FC = () => {
 
     return (
         <div>
+            <RenderCount componentName='UseStateApp' />
             <CssBaseline />
             <Container>
                 <Box sx={{ marginTop: 4 }}>
                     {/* Stepper Navigation */}
-                    <Stepper activeStep={activeStep} alternativeLabel>
+                    <Stepper activeStep={activeStep}>
                         {steps.map((step, index) => (
                             <Step key={step}>
-                                <Typography>{step}</Typography>
+                                <StepLabel>{step}</StepLabel>
                             </Step>
                         ))}
                     </Stepper>

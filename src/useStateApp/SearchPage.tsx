@@ -12,6 +12,7 @@ import {
     Typography,
     SelectChangeEvent
 } from '@mui/material';
+import RenderCount from '../overall/RenderCount';
 
 interface SearchPageProps {
     selectedOption: string | null;
@@ -44,6 +45,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ selectedOption, setSelectedOpti
 
     return (
         <Box sx={{ padding: 2 }}>
+            <RenderCount componentName='SearchPage' />
             <Typography variant="h4" gutterBottom>
                 Search Page
             </Typography>

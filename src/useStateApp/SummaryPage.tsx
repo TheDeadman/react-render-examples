@@ -1,4 +1,5 @@
 import React from 'react';
+import RenderCount from '../overall/RenderCount';
 
 interface ListItem {
     title: string;
@@ -13,6 +14,7 @@ interface SummaryPageProps {
 const SummaryPage = ({ list, selectedOption }: SummaryPageProps) => {
     return (
         <div>
+            <RenderCount componentName='SummaryPage' />
             <h1>Summary Page (useState)</h1>
 
             <div>
