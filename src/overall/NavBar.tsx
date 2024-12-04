@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
         <AppBar position="sticky">
             <Toolbar>
                 <Container>
-                    <Button color="inherit" component={Link} to="/useState">
+                    <Button color="inherit" component={Link} to="/useState/list-page">
                         useState App
                     </Button>
                     <Button color="inherit" component={Link} to="/useContext">
@@ -15,18 +15,6 @@ const Navbar: React.FC = () => {
                     </Button>
                     <Button color="inherit" component={Link} to="/reduxToolkit">
                         reduxToolkit App
-                    </Button>
-                    <Button color="secondary" component={Link} to="/useState/list-page">
-                        List Page
-                    </Button>
-                    <Button color="secondary" component={Link} to="/useState/search-page">
-                        Search Page
-                    </Button>
-                    <Button color="secondary" component={Link} to="/useState/combined-page">
-                        Combined Page
-                    </Button>
-                    <Button color="secondary" component={Link} to="/useState/summary-page">
-                        Summary Page
                     </Button>
                 </Container>
             </Toolbar>

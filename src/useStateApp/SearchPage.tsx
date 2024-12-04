@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import {
+    TextField,
+    Button,
+    CircularProgress,
+    Select,
+    MenuItem,
+    InputLabel,
+    FormControl,
+    Box,
+    Typography,
+    SelectChangeEvent
+} from '@mui/material';
 
 interface SearchPageProps {
     selectedOption: string | null;
@@ -17,10 +29,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ selectedOption, setSelectedOpti
         setError(null);
 
         try {
-            const response = await axios.get<string[]>(
-                `http://localhost:3001/search`,
-                { params: { query: searchTerm } }
-            );
+            const response = await axios.get<string[]>(`http://localhost:3001/search`, { params: { query: searchTerm } });
             setResults(response.data);
         } catch (err) {
             setError('Failed to fetch search results. Please try again.');
@@ -29,42 +38,51 @@ const SearchPage: React.FC<SearchPageProps> = ({ selectedOption, setSelectedOpti
         }
     };
 
+    const handleSelect = (event: SelectChangeEvent<{ value: unknown }>) => {
+        setSelectedOption(event.target.value as string);
+    };
+
     return (
-        <div>
-            <h1>Search Page (useState)</h1>
-            <div>
-                <input
-                    type="text"
-                    placeholder="Enter search term"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <button onClick={handleSearch} disabled={isLoading}>
-                    {isLoading ? 'Searching...' : 'Search'}
-                </button>
-            </div>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+        <Box sx={{ padding: 2 }}>
+            <Typography variant="h4" gutterBottom>
+                Search Page
+            </Typography>
+            <TextField
+                label="Search Term"
+                variant="outlined"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                fullWidth
+                sx={{ marginBottom: 2 }}
+            />
+            <Button variant="contained" onClick={handleSearch} disabled={isLoading} sx={{ marginBottom: 2 }}>
+                {isLoading ? <CircularProgress size={24} /> : 'Search'}
+            </Button>
+
+            {error && <Typography color="error">{error}</Typography>}
+
             {results.length > 0 && (
-                <select
-                    value={selectedOption || ''}
-                    onChange={(e) => setSelectedOption(e.target.value)}
-                >
-                    <option value="" disabled>
-                        Select an option
-                    </option>
-                    {results.map((result, index) => (
-                        <option key={index} value={result}>
-                            {result}
-                        </option>
-                    ))}
-                </select>
+                <FormControl fullWidth sx={{ marginTop: 2 }}>
+                    <InputLabel>Select an Option</InputLabel>
+                    <Select
+                        value={{ name: selectedOption, value: selectedOption }}
+                        onChange={handleSelect}
+                        label="Select an Option"
+                        displayEmpty
+                    >
+                        {results.map((result, index) => (
+                            <MenuItem key={index} value={result}>
+                                {result}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
             )}
-            {selectedOption && (
-                <p>
-                    Selected Option: <strong>{selectedOption}</strong>
-                </p>
+
+            {results.length === 0 && !isLoading && !error && (
+                <Typography>No results found. Please try another search.</Typography>
             )}
-        </div>
+        </Box>
     );
 };
 
