@@ -1,14 +1,15 @@
 import { Box, Paper, Table, TableHead, TableRow, TableBody, TableCell, Typography } from "@mui/material";
 import RenderCount from "overall/RenderCount";
-import { useAppContextTwo } from "../context";
+import { useAppSelector } from "store/hooks";
+import { selectListItems } from "ReduxToolkitApp/features/List/listSlice";
 
 const ListSummary = () => {
-    const { list } = useAppContextTwo();
+    const listItems = useAppSelector(selectListItems);
     return (
         <Box style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }} sx={{ marginBottom: 4 }}>
             <RenderCount componentName="ListSummary" />
             <Typography variant="h6">List Items</Typography>
-            {list.length > 0 ? (
+            {listItems.length > 0 ? (
                 <Paper sx={{ padding: 2 }}>
                     <Table>
                         <TableHead>
@@ -18,7 +19,7 @@ const ListSummary = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {list.map((item, index) => (
+                            {listItems.map((item, index) => (
                                 <TableRow key={index}>
                                     <TableCell>{item.title}</TableCell>
                                     <TableCell>{item.description}</TableCell>

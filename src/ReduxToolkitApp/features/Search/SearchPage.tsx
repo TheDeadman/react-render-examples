@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import {
     Select,
     MenuItem,
@@ -7,7 +6,6 @@ import {
     FormControl,
     Box,
     Typography,
-    SelectChangeEvent,
 } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
 import SearchForm from './SearchForm';

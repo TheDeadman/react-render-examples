@@ -65,12 +65,12 @@ export const formSlice = createSlice({
 
 export const { setTitle, setDescription, addListItem } = formSlice.actions
 
-const blockMainThread = (ms: number) => {
-    const start = Date.now();
-    while (Date.now() - start < ms) {
-        // Busy-waiting, blocking the thread
-    }
-};
+// const blockMainThread = (ms: number) => {
+//     const start = Date.now();
+//     while (Date.now() - start < ms) {
+//         // Busy-waiting, blocking the thread
+//     }
+// };
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.counter.value

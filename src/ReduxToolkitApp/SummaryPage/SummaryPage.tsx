@@ -13,7 +13,7 @@ const SummaryPage: React.FC = () => {
         <Box style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }} sx={{ padding: 2 }}>
             <RenderCount componentName="SummaryPage" />
             <Typography variant="h4" gutterBottom>
-                Summary Page (useContext)
+                Summary Page (Redux Toolkit)
             </Typography>
 
             <ListSummary />

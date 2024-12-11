@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import NumberInput from './NumberInput';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { selectComponentDelay, setComponentDelay } from './renderCountSlice';
@@ -14,12 +14,38 @@ const RenderCount = ({ componentName = 'Component' }) => {
     const dispatch = useAppDispatch();
     const delay = useAppSelector(selectComponentDelay(componentName))
     const renderCount = useRef(1);
+    const delayRef = useRef(delay);
+    // const delayTest = useRef(false);
+
+    let shouldBlockThread = true;
+    // if (delayTest.current === true) {
+    //     shouldBlockThread = false;
+    //     delayTest.current = false;
+    // }
+    if (delayRef.current !== delay) {
+        shouldBlockThread = false;
+        // delayTest.current = true;
+        delayRef.current = delay;
+    }
+
+    // console.log("should block thread 1: ", shouldBlockThread)
+    // useEffect(() => {
+    //     console.log("DELAY CHANGED")
+    //     shouldBlockThread = false;
+    // }, [delay])
+
+    // console.log("should block thread 2: ", shouldBlockThread)
 
     useEffect(() => {
         dispatch(setComponentDelay({ componentName, delay }))
+        // Disable eslint line as we only want this to run once
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    blockMainThread(delay);
+    if (shouldBlockThread) {
+        console.log("WILL BLOCK!")
+        blockMainThread(delay);
+    }
     useEffect(() => {
         renderCount.current = renderCount.current + 1;
     });

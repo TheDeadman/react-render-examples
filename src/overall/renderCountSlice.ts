@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import axios from 'axios';
 import type { RootState } from 'store/store'
 
 interface RenderCountState {
