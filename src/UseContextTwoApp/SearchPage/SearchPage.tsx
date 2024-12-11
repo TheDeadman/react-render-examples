@@ -10,13 +10,12 @@ import {
     SelectChangeEvent,
 } from '@mui/material';
 import RenderCount from '../../overall/RenderCount';
-import { useAppContextTwo } from '../context';
 import SearchForm from './SearchForm';
-import { useFormContext } from 'UseContextTwoApp/formContext';
+import { useSearchContext } from 'UseContextTwoApp/SearchContext';
+import { REST_URL } from 'variables';
 
 const SearchPage: React.FC = () => {
-    const { selectedOption, setSelectedOption } = useAppContextTwo(); // Use the context
-    const { searchTerm, setSearchTerm, results, setResults } = useFormContext();
+    const { searchTerm, setSearchTerm, results, setResults, selectedOption, setSelectedOption } = useSearchContext();
 
     const [hasSearched, setHasSearched] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +27,7 @@ const SearchPage: React.FC = () => {
         setError(null);
 
         try {
-            const response = await axios.get<string[]>(`http://localhost:3001/search`, {
+            const response = await axios.get<string[]>(`${REST_URL}/search`, {
                 params: { query: searchTerm },
             });
             setResults(response.data);

@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
 import { Box, Container, CssBaseline, Stepper, Step, Button, StepLabel } from '@mui/material';
+import { AppTwoProvider } from './context'; // Import the provider
+import { FormProvider } from './formContext';
 import ListPage from './ListPage/ListPage';
 import SearchPage from './SearchPage/SearchPage';
 import CombinedPage from './CombinedPage';
 import SummaryPage from './SummaryPage/SummaryPage';
 import RenderCount from '../overall/RenderCount';
 import InputAndSummaryPage from './InputsAndSummaryPage';
-import { ListProvider } from './listContext';
-import { SearchProvider } from './SearchContext';
 
 const steps = ['List Page', 'Search Page', 'Combined Page', 'Summary Page', 'Input And Summary Page'];
 
@@ -47,8 +47,8 @@ const UseContextTwoApp = () => {
     };
 
     return (
-        <ListProvider>
-            <SearchProvider>
+        <AppTwoProvider> {/* Wrap the app with the context provider */}
+            <FormProvider>
                 <div style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }}>
                     <RenderCount componentName='UseContextTwoApp' />
                     <CssBaseline />
@@ -99,9 +99,8 @@ const UseContextTwoApp = () => {
                         </Box>
                     </Container>
                 </div>
-            </SearchProvider>
-        </ListProvider>
-
+            </FormProvider>
+        </AppTwoProvider>
     );
 };
 

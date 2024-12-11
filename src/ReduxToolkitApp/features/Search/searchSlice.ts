@@ -2,12 +2,13 @@ import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios';
 import type { RootState } from 'store/store'
+import { REST_URL } from 'variables';
 
 export const searchByText = createAsyncThunk('search/searchByText', async (undefined, thunkApi) => {
     const state = thunkApi.getState() as RootState;
     const searchTerm = selectSearchTerm(state);
 
-    const response = await axios.get<string[]>(`http://localhost:3001/search`, {
+    const response = await axios.get<string[]>(`${REST_URL}/search`, {
         params: { query: searchTerm },
     });
     return response.data;

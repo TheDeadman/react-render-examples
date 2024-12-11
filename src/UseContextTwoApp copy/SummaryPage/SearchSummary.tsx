@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import RenderCount from "overall/RenderCount";
-import { useSearchContext } from "UseContextTwoApp/SearchContext";
+import { useAppContextTwo } from "../context";
 
 const SearchSummary = () => {
-    const { selectedOption } = useSearchContext();
+    const { selectedOption } = useAppContextTwo();
     return (
         <Box style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }}>
             <RenderCount componentName="SearchSummary" />

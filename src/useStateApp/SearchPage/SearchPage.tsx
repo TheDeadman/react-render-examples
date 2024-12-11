@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import RenderCount from '../../overall/RenderCount';
 import SearchForm from './SearchForm';
+import { REST_URL } from 'variables';
 
 
 interface SearchPageProps {
@@ -34,7 +35,7 @@ const SearchPage = ({ selectedOption, setSelectedOption }: SearchPageProps) => {
         setError(null);
 
         try {
-            const response = await axios.get<string[]>(`http://localhost:3001/search`, { params: { query: searchTerm } });
+            const response = await axios.get<string[]>(`${REST_URL}/search`, { params: { query: searchTerm } });
             setResults(response.data);
         } catch (err) {
             setError('Failed to fetch search results. Please try again.');

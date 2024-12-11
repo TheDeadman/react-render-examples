@@ -1,10 +1,10 @@
 import RenderCount from 'overall/RenderCount';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
-import { useListContext } from 'UseContextTwoApp/listContext';
+import { useAppContextTwo } from '../context';
 
 
 const ListTable = () => {
-    const { list } = useListContext(); // Use the context
+    const { list } = useAppContextTwo(); // Use the context
 
     return (
         <div style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }}>

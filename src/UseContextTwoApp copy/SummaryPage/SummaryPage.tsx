@@ -4,6 +4,10 @@ import RenderCount from '../../overall/RenderCount';
 import ListSummary from './ListSummary';
 import SearchSummary from './SearchSummary';
 
+
+
+
+
 const SummaryPage: React.FC = () => {
     return (
         <Box style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }} sx={{ padding: 2 }}>

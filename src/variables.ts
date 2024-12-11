@@ -1,0 +1,1 @@
+export const REST_URL = "https://react-render-example-9064c021e554.herokuapp.com";

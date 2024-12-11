@@ -1,9 +1,9 @@
 import { Box, Paper, Table, TableHead, TableRow, TableBody, TableCell, Typography } from "@mui/material";
 import RenderCount from "overall/RenderCount";
-import { useListContext } from "UseContextTwoApp/listContext";
+import { useAppContextTwo } from "../context";
 
 const ListSummary = () => {
-    const { list } = useListContext();
+    const { list } = useAppContextTwo();
     return (
         <Box style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }} sx={{ marginBottom: 4 }}>
             <RenderCount componentName="ListSummary" />

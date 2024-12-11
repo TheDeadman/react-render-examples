@@ -10,15 +10,16 @@ import {
     SelectChangeEvent,
 } from '@mui/material';
 import RenderCount from '../../overall/RenderCount';
-import { useAppContext } from '../context';
+import { useAppContextTwo } from '../context';
 import SearchForm from './SearchForm';
+import { useFormContext } from '../formContext';
 import { REST_URL } from 'variables';
 
 const SearchPage: React.FC = () => {
-    const { selectedOption, setSelectedOption } = useAppContext(); // Use the context
+    const { selectedOption, setSelectedOption } = useAppContextTwo(); // Use the context
+    const { searchTerm, setSearchTerm, results, setResults } = useFormContext();
+
     const [hasSearched, setHasSearched] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [results, setResults] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 

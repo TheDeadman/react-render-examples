@@ -3,12 +3,16 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from 'store/store'
 
 interface RenderCountState {
+    defaultDelay: number;
     delays: { [s: string]: number }
 }
 
 // Define the initial state using that type
 const initialState: RenderCountState = {
-    delays: {}
+    defaultDelay: 10,
+    delays: {
+        "Change All App Delays": 10
+    }
 }
 
 export const renderCountSlice = createSlice({
@@ -19,13 +23,11 @@ export const renderCountSlice = createSlice({
         setComponentDelay: (state, action: PayloadAction<{ componentName: string, delay: number }>) => {
             const { componentName, delay } = action.payload;
             if (componentName === "Change All App Delays") {
-                console.log("HERE", state.delays)
                 for (const key of Object.keys(state.delays)) {
                     state.delays[key] = delay;
                 }
-                state.delays[componentName] = delay;
+                state.defaultDelay = delay;
             } else {
-
                 state.delays[componentName] = delay;
             }
         }
@@ -39,7 +41,7 @@ export const selectComponentDelay = (componentName: string) => (state: RootState
     if (state.renderCount.delays[componentName] !== undefined) {
         return state.renderCount.delays[componentName]
     }
-    return 10;
+    return state.renderCount.defaultDelay;
 }
 
 export default renderCountSlice.reducer
