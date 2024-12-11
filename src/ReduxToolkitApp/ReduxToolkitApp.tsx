@@ -17,10 +17,10 @@ const getStartingActiveStep = (pathname: string) => {
         activeStep = 1
     } else if (pathname.indexOf('combined-page') !== -1) {
         activeStep = 2
-    } else if (pathname.indexOf('summary-page') !== -1) {
-        activeStep = 3
     } else if (pathname.indexOf('input-and-summary-page') !== -1) {
         activeStep = 4
+    } else if (pathname.indexOf('summary-page') !== -1) {
+        activeStep = 3
     }
 
     return activeStep;
