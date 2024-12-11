@@ -1,58 +1,24 @@
-import React, { useState } from 'react';
-import { TextField, Button, CircularProgress, Select, MenuItem, InputLabel, FormControl, Box, Typography, Table, TableBody, TableCell, TableHead, TableRow, Paper, SelectChangeEvent } from '@mui/material';
-import axios from 'axios';
+import React from 'react';
+import { Box, Divider } from '@mui/material';
 import RenderCount from '../overall/RenderCount';
-import ListPage from './ListPage';
-import SearchPage from './SearchPage';
+import ListPage from './ListPage/ListPage';
+import SearchPage from './SearchPage/SearchPage';
+import { ListItem } from './UseStateApp';
 
 interface CombinedPageProps {
-    list: { title: string; description: string }[];
-    setList: React.Dispatch<React.SetStateAction<{ title: string; description: string }[]>>;
+    list: ListItem[];
+    setList: React.Dispatch<React.SetStateAction<ListItem[]>>;
     selectedOption: string | null;
     setSelectedOption: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const CombinedPage: React.FC<CombinedPageProps> = ({ list, setList, selectedOption, setSelectedOption }) => {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [searchTerm, setSearchTerm] = useState('');
-    const [results, setResults] = useState<string[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-
-    // Handle adding items to the list
-    const handleAddItem = () => {
-        if (title && description) {
-            setList([...list, { title, description }]);
-            setTitle('');
-            setDescription('');
-        }
-    };
-
-    // Handle search functionality
-    const handleSearch = async () => {
-        setIsLoading(true);
-        setError(null);
-
-        try {
-            const response = await axios.get<string[]>(`http://localhost:3001/search`, { params: { query: searchTerm } });
-            setResults(response.data);
-        } catch (err) {
-            setError('Failed to fetch search results. Please try again.');
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    // Handle selecting an option from the dropdown
-    const handleSelect = (event: SelectChangeEvent<{ value: unknown }>) => {
-        setSelectedOption(event.target.value as string);
-    };
-
+const CombinedPage = ({ list, setList, selectedOption, setSelectedOption }: CombinedPageProps) => {
     return (
-        <Box sx={{ padding: 2 }}>
+        <Box style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }} sx={{ padding: 2 }}>
             <RenderCount componentName='CombinedPage' />
             <ListPage list={list} setList={setList} />
+            <br />
+            <Divider />
             <SearchPage selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
         </Box>
     );

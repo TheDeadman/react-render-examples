@@ -1,30 +1,48 @@
-import React, { useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { Box, Container, CssBaseline, Stepper, Step, Button, Typography, StepLabel } from '@mui/material';
-import ListPage from './ListPage';
-import SearchPage from './SearchPage';
+import { useState } from 'react';
+import { Routes, Route, useNavigate, Navigate, useLocation, } from 'react-router-dom';
+import { Box, Container, Stepper, Step, Button, StepLabel } from '@mui/material';
+import ListPage from './ListPage/ListPage';
+import SearchPage from './SearchPage/SearchPage';
 import CombinedPage from './CombinedPage';
-import SummaryPage from './SummaryPage';
+import SummaryPage from './SummaryPage/SummaryPage';
 import RenderCount from '../overall/RenderCount';
+import InputAndSummaryPage from './InputsAndSummaryPage';
 
-interface ListItem {
+export interface ListItem {
     title: string;
     description: string;
 }
 
-const steps = ['List Page', 'Search Page', 'Combined Page', 'Summary Page'];
+const steps = ['List Page', 'Search Page', 'Combined Page', 'Summary Page', 'Input And Summary Page'];
 
-const UseStateApp: React.FC = () => {
+const getStartingActiveStep = (pathname: string) => {
+    let activeStep = 0
+    if (pathname.indexOf('search-page') !== -1) {
+        activeStep = 1
+    } else if (pathname.indexOf('combined-page') !== -1) {
+        activeStep = 2
+    } else if (pathname.indexOf('summary-page') !== -1) {
+        activeStep = 3
+    } else if (pathname.indexOf('input-and-summary-page') !== -1) {
+        activeStep = 4
+    }
+
+    return activeStep;
+}
+
+const UseStateApp = () => {
+    const { pathname } = useLocation();
+    console.log("PATH NAME: ", pathname)
     const [list, setList] = useState<ListItem[]>([]);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
-    const [activeStep, setActiveStep] = useState(0); // Track the active step in the stepper
+    const [activeStep, setActiveStep] = useState(getStartingActiveStep(pathname)); // Track the active step in the stepper
 
     const navigate = useNavigate();
 
     const handleNext = () => {
         if (activeStep < steps.length - 1) {
             setActiveStep(activeStep + 1);
-            navigate(`/useState/${steps[activeStep + 1].toLowerCase().replace(' ', '-')}`);
+            navigate(`/useState/${steps[activeStep + 1].toLowerCase().replaceAll(' ', '-')}`);
         }
     };
 
@@ -36,9 +54,8 @@ const UseStateApp: React.FC = () => {
     };
 
     return (
-        <div>
+        <div style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }}>
             <RenderCount componentName='UseStateApp' />
-            <CssBaseline />
             <Container>
                 <Box sx={{ marginTop: 4 }}>
                     {/* Stepper Navigation */}
@@ -52,35 +69,15 @@ const UseStateApp: React.FC = () => {
 
                     <Box sx={{ marginTop: 2 }}>
                         <Routes>
-                            <Route
-                                path="list-page"
-                                element={<ListPage list={list} setList={setList} />}
-                            />
-                            <Route
-                                path="search-page"
-                                element={
-                                    <SearchPage
-                                        selectedOption={selectedOption}
-                                        setSelectedOption={setSelectedOption}
-                                    />
-                                }
-                            />
-                            <Route
-                                path="combined-page"
-                                element={
-                                    <CombinedPage
-                                        list={list}
-                                        setList={setList}
-                                        selectedOption={selectedOption}
-                                        setSelectedOption={setSelectedOption}
-                                    />
-                                }
-                            />
-                            <Route
-                                path="summary-page"
-                                element={<SummaryPage list={list} selectedOption={selectedOption} />}
-                            />
+                            <Route path="/" element={<Navigate to="list-page" />} /> {/* Redirect to first page */}
+                            <Route path="list-page" element={<ListPage list={list} setList={setList} />} />
+                            <Route path="search-page" element={<SearchPage selectedOption={selectedOption} setSelectedOption={setSelectedOption} />} />
+                            <Route path="combined-page" element={<CombinedPage list={list} setList={setList} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />} />
+                            <Route path="summary-page" element={<SummaryPage list={list} selectedOption={selectedOption} />} />
+                            <Route path="input-and-summary-page" element={<InputAndSummaryPage list={list} setList={setList} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />} />
+
                         </Routes>
+
                     </Box>
 
                     {/* Stepper Buttons */}

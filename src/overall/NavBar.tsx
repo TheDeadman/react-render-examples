@@ -13,6 +13,9 @@ const Navbar: React.FC = () => {
                     <Button color="inherit" component={Link} to="/useContext">
                         useContext App
                     </Button>
+                    <Button color="inherit" component={Link} to="/useContextTwo">
+                        useContext App Two
+                    </Button>
                     <Button color="inherit" component={Link} to="/reduxToolkit">
                         reduxToolkit App
                     </Button>
