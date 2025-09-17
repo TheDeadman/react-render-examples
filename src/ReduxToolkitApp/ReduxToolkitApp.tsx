@@ -1,21 +1,22 @@
 import { useState } from 'react';
 import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
 import { Box, Container, CssBaseline, Stepper, Step, Button, StepLabel } from '@mui/material';
-import { AppTwoProvider } from './context'; // Import the provider
+// import { AppTwoProvider } from './context'; // Import the provider
 import ListPage from './features/List/ListPage';
 import SearchPage from './features/Search/SearchPage';
 import CombinedPage from './CombinedPage';
 import SummaryPage from './SummaryPage/SummaryPage';
 import RenderCount from '../overall/RenderCount';
 import InputAndSummaryPage from './InputsAndSummaryPage';
+import React from 'react';
 
-const steps = ['List Page', 'Search Page', 'Combined Page', 'Summary Page', 'Input And Summary Page'];
+const steps = ['Combined Page', 'List Page', 'Search Page', 'Summary Page', 'Input And Summary Page'];
 
 const getStartingActiveStep = (pathname: string) => {
     let activeStep = 0
-    if (pathname.indexOf('search-page') !== -1) {
+    if (pathname.indexOf('list-page') !== -1) {
         activeStep = 1
-    } else if (pathname.indexOf('combined-page') !== -1) {
+    } else if (pathname.indexOf('search-page') !== -1) {
         activeStep = 2
     } else if (pathname.indexOf('input-and-summary-page') !== -1) {
         activeStep = 4
@@ -46,7 +47,7 @@ const ReduxToolkitApp = () => {
     };
 
     return (
-        <AppTwoProvider> {/* Wrap the app with the context provider */}
+        <React.Fragment key="redux-toolkit-app"> {/* Wrap the app with the context provider */}
             <div style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }}>
                 <RenderCount componentName='UseContextTwoApp' />
                 <CssBaseline />
@@ -63,7 +64,7 @@ const ReduxToolkitApp = () => {
 
                         <Box sx={{ marginTop: 2 }}>
                             <Routes>
-                                <Route path="/" element={<Navigate to="list-page" />} /> {/* Redirect to first page */}
+                                <Route path="/" element={<Navigate to="combined-page" />} /> {/* Redirect to first page */}
                                 <Route
                                     path="list-page"
                                     element={<ListPage />}
@@ -97,7 +98,7 @@ const ReduxToolkitApp = () => {
                     </Box>
                 </Container>
             </div>
-        </AppTwoProvider>
+        </React.Fragment>
     );
 };
 

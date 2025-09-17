@@ -8,13 +8,17 @@ import {
     Box,
     Typography,
     SelectChangeEvent,
+    Button,
 } from '@mui/material';
 import RenderCount from '../../overall/RenderCount';
 import SearchForm from './SearchForm';
 import { useSearchContext } from 'UseContextTwoApp/SearchContext';
 import { REST_URL } from 'variables';
+import SearchCombinedCodeBlock from 'UseContextTwoApp/codeblocks/features/Search/SearchCombinedCodeBlock';
 
 const SearchPage: React.FC = () => {
+    const [showCode, setShowCode] = useState(false);
+
     const { searchTerm, setSearchTerm, results, setResults, selectedOption, setSelectedOption } = useSearchContext();
 
     const [hasSearched, setHasSearched] = useState(false);
@@ -87,6 +91,8 @@ const SearchPage: React.FC = () => {
 
             <div>Current Selection: {selectedOption}</div>
 
+                <Button onClick={() => setShowCode(!showCode)}>Show Code</Button>
+                {showCode && <SearchCombinedCodeBlock />}
         </Box>
     );
 };

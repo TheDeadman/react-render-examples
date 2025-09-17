@@ -1,15 +1,15 @@
-import { Paper, Box, Typography, Button } from '@mui/material';
+import { CopyBlock } from 'react-code-blocks';
+
+const codeText = `
+// ListPage.tsx
+import { Paper, Box, Typography } from '@mui/material';
 import RenderCount from '../../overall/RenderCount';
 import ListTable from './ListTable';
 import ListForm from './ListForm';
 import { useListContext } from 'UseContextTwoApp/listContext';
-import ListCombinedCodeBlock from 'UseContextTwoApp/codeblocks/features/List/ListCombinedCodeBlock';
-import { useState } from 'react';
 
 
 const ListPage = () => {
-    const [showCode, setShowCode] = useState(false);
-
     const { title, setTitle, description, setDescription, setError, list, setList } = useListContext();
 
     const handleAddItem = () => {
@@ -47,10 +47,22 @@ const ListPage = () => {
                     <ListTable />
                 </Paper>
             </Box>
-            <Button onClick={() => setShowCode(!showCode)}>Show Code</Button>
-            {showCode && <ListCombinedCodeBlock />}
         </div>
     );
 };
 
 export default ListPage;
+`
+
+function ListPageCodeBlock() {
+  return (
+    <CopyBlock
+      text={codeText}
+      language={'jsx'}
+      theme={{mode: 'dark', backgroundColor: '#121212'}}
+      showLineNumbers={true}
+    />
+  );
+}
+
+export default ListPageCodeBlock;

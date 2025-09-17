@@ -11,6 +11,7 @@ const getRoutes = (path: string) => {
     }
 
     return {
+        rootPath: '/',
         statePath: `/useState/${endPath}`,
         contextPath: `/useContext/${endPath}`,
         contextTwo: `/useContextTwo/${endPath}`,
@@ -25,6 +26,9 @@ const Navbar: React.FC = () => {
         <AppBar position="sticky">
             <Toolbar>
                 <Container>
+                    <Button color="inherit" component={Link} to={routes.rootPath}>
+                        Home
+                    </Button>
                     <Button color="inherit" component={Link} to={routes.statePath}>
                         useState App
                     </Button>

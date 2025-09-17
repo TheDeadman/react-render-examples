@@ -57,7 +57,7 @@ const RenderCount = ({ componentName = 'Component' }) => {
             <div style={{ display: 'flex' }}>
 
                 <div>
-                    Delay:
+                    Render Delay MS:
                 </div>
                 <NumberInput aria-label="Render Count Number Input" placeholder='...type a number' value={delay} onChange={(event, val) => {
                     if (val) {

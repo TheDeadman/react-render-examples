@@ -10,13 +10,13 @@ import InputAndSummaryPage from './InputsAndSummaryPage';
 import { ListProvider } from './listContext';
 import { SearchProvider } from './SearchContext';
 
-const steps = ['List Page', 'Search Page', 'Combined Page', 'Summary Page', 'Input And Summary Page'];
+const steps = ['Combined Page', 'List Page', 'Search Page', 'Summary Page', 'Input And Summary Page'];
 
 const getStartingActiveStep = (pathname: string) => {
     let activeStep = 0
-    if (pathname.indexOf('search-page') !== -1) {
+    if (pathname.indexOf('list-page') !== -1) {
         activeStep = 1
-    } else if (pathname.indexOf('combined-page') !== -1) {
+    } else if (pathname.indexOf('search-page') !== -1) {
         activeStep = 2
     } else if (pathname.indexOf('input-and-summary-page') !== -1) {
         activeStep = 4

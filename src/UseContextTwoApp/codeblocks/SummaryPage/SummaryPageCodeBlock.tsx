@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Box, Button, Typography } from '@mui/material';
-import RenderCount from '../../overall/RenderCount';
+import { CopyBlock } from 'react-code-blocks';
+
+const codeText = `
+// SummaryPage.tsx
+import React from 'react';
+import { Box, Typography } from '@mui/material';
+import RenderCount from 'overall/RenderCount';
 import ListSummary from './ListSummary';
 import SearchSummary from './SearchSummary';
-import SummaryPageCombined from 'UseContextTwoApp/codeblocks/SummaryPage/SummaryCombinedBlock';
 
 const SummaryPage: React.FC = () => {
-    const [showCode, setShowCode] = useState(false);
-
     return (
         <Box style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }} sx={{ padding: 2 }}>
             <RenderCount componentName="SummaryPage" />
@@ -17,10 +18,22 @@ const SummaryPage: React.FC = () => {
 
             <ListSummary />
             <SearchSummary />
-            <Button onClick={() => setShowCode(!showCode)}>Show Code</Button>
-            {showCode && <SummaryPageCombined />}
+
         </Box>
     );
 };
 
 export default SummaryPage;
+`
+function SummaryPageCodeBlock() {
+  return (
+    <CopyBlock
+      text={codeText}
+      language={'jsx'}
+      theme={{mode: 'dark', backgroundColor: '#121212'}}
+      showLineNumbers={true}
+    />
+  );
+}
+
+export default SummaryPageCodeBlock;

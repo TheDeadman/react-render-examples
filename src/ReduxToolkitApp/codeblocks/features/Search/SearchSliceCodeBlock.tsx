@@ -1,3 +1,7 @@
+import { CopyBlock } from 'react-code-blocks';
+
+const codeText = `
+// searchSlice.ts
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios';
@@ -8,7 +12,7 @@ export const searchByText = createAsyncThunk('search/searchByText', async (_unde
     const state = thunkApi.getState() as RootState;
     const searchTerm = selectSearchTerm(state);
 
-    const response = await axios.get<string[]>(`${REST_URL}/search`, {
+    const response = await axios.get<string[]>(\`\${REST_URL}/search\`, {
         params: { query: searchTerm },
     });
     return response.data;
@@ -40,7 +44,7 @@ const initialState: ListState = {
 
 export const searchSlice = createSlice({
     name: 'search',
-    // `createSlice` will infer the state type from the `initialState` argument
+    // \`createSlice\` will infer the state type from the \`initialState\` argument
     initialState,
     reducers: {
         setSearchTerm: (state, action: PayloadAction<string>) => {
@@ -90,30 +94,8 @@ export const selectIsNoResultsVisible = (state: RootState) => {
     return false;
 }
 
-// // // ADVANCED EXAMPLE
-// // // We want to include the existing selected option in the dropdown even if it is not part of the result set.
-// // // In this initial example, the selector works great in most conditions.
-// // // However, if we do need to include the current selected item in the result set, then we will be creating a new array every time state changes and causing unnecessary re-renders.
-// export const selectSearchDropdownOptions = (state: RootState) => {
-//     const { searchResults, selectedItem } = state.search;
-
-//     let searchDropdownOptions = searchResults;
-
-//     let shouldIncludeSelectedResult = true;
-//     if (searchResults.some(result => result === selectedItem) || !selectedItem) {
-//         shouldIncludeSelectedResult = false;
-//     }
-
-//     if (shouldIncludeSelectedResult) {
-//         searchDropdownOptions = [selectedItem, ...searchResults]
-//     }
-
-//     return searchDropdownOptions;
-// }
-
-
-// // // To resolve the issue, we will memoize before our conditional.
-// // // This first selector didn't exist yet so we create it for the memoized selector to use.
+// To resolve the issue, we will memoize before our conditional.
+//This first selector didn't exist yet so we create it for the memoized selector to use.
 const selectSearchResults = (state: RootState) => state.search.searchResults;
 export const selectSearchDropdownOptions = createSelector([selectSearchResults, selectSelectedItem], (searchResults, selectedItem) => {
     let searchDropdownOptions = searchResults;
@@ -132,3 +114,17 @@ export const selectSearchDropdownOptions = createSelector([selectSearchResults, 
 
 
 export default searchSlice.reducer
+`
+
+function SearchSliceCodeBlock() {
+  return (
+    <CopyBlock
+      text={codeText}
+      language={'jsx'}
+      theme={{mode: 'dark', backgroundColor: '#121212'}}
+      showLineNumbers={true}
+    />
+  );
+}
+
+export default SearchSliceCodeBlock;
