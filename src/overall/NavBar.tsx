@@ -16,8 +16,10 @@ const getRoutes = (path: string) => {
         effectVsMemo: '/examples/effectVsMemo',
         // statePath: `/useState/${endPath}`,
         // contextPath: `/useContext/${endPath}`,
-        contextTwo: `/useContextTwo/${endPath}`,
-        reduxPath: `/reduxToolkit/${endPath}`,
+        contextTwo: `/useContextTwo/combined-page`,
+        reduxPath: `/reduxToolkit/combined-page`,
+        //         contextTwo: `/useContextTwo/${endPath}`,
+        // reduxPath: `/reduxToolkit/${endPath}`,
     }
 }
 
