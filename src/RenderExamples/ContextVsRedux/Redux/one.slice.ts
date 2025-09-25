@@ -1,0 +1,30 @@
+import { createSelector, createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
+import type { RootState } from 'store/store'
+
+// Define a type for the slice state
+interface OneState {
+    textVal: string;
+}
+
+// Define the initial state using that type
+const initialState: OneState = {
+    textVal: 'SliceOne',
+}
+
+export const oneSlice = createSlice({
+    name: 'one',
+    // `createSlice` will infer the state type from the `initialState` argument
+    initialState,
+    reducers: {
+        setTextVal: (state, action: PayloadAction<string>) => {
+            state.textVal = action.payload;
+        },
+    }
+})
+
+export const { setTextVal } = oneSlice.actions;
+
+export const selectTextValOne = (state: RootState) => state.reduxVsContext.one.textVal;
+
+export default oneSlice.reducer;

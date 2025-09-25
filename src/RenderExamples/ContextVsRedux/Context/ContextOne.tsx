@@ -1,0 +1,30 @@
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+
+export type ListItem = { title: string; description: string }
+// Define the shape of the context
+interface AppContextType {
+    textVal: string;
+    setTextVal: React.Dispatch<React.SetStateAction<string>>;
+}
+
+// Create the context with default values
+const AppContext = createContext<AppContextType | undefined>(undefined);
+
+// Create a provider to wrap the app and provide state to components
+export const ContextOneProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [textVal, setTextVal] = useState('ContextOne');
+    return (
+        <AppContext.Provider value={{ textVal, setTextVal }}>
+            {children}
+        </AppContext.Provider>
+    );
+};
+
+// Custom hook to use the app context
+export const useAppContextOne = () => {
+    const context = useContext(AppContext);
+    if (!context) {
+        throw new Error('useAppContext must be used within an AppProvider');
+    }
+    return context;
+};

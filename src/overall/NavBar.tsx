@@ -12,8 +12,10 @@ const getRoutes = (path: string) => {
 
     return {
         rootPath: '/',
-        statePath: `/useState/${endPath}`,
-        contextPath: `/useContext/${endPath}`,
+        examples: '/examples/contextVsRedux',
+        effectVsMemo: '/examples/effectVsMemo',
+        // statePath: `/useState/${endPath}`,
+        // contextPath: `/useContext/${endPath}`,
         contextTwo: `/useContextTwo/${endPath}`,
         reduxPath: `/reduxToolkit/${endPath}`,
     }
@@ -29,12 +31,18 @@ const Navbar: React.FC = () => {
                     <Button color="inherit" component={Link} to={routes.rootPath}>
                         Home
                     </Button>
-                    <Button color="inherit" component={Link} to={routes.statePath}>
+                    <Button color="inherit" component={Link} to={routes.effectVsMemo}>
+                        useEffect Vs useMemo
+                    </Button>
+                    <Button color="inherit" component={Link} to={routes.examples}>
+                        Context Vs Redux
+                    </Button>
+                    {/* <Button color="inherit" component={Link} to={routes.statePath}>
                         useState App
                     </Button>
                     <Button color="inherit" component={Link} to={routes.contextPath}>
                         useContext App
-                    </Button>
+                    </Button> */}
                     <Button color="inherit" component={Link} to={routes.contextTwo}>
                         useContext App Two
                     </Button>
