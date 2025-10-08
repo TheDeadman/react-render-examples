@@ -1,6 +1,4 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import listReducer from 'ReduxToolkitApp/features/List/listSlice'
-import searchReducer from 'ReduxToolkitApp/features/Search/searchSlice'
 import renderCountReducer from 'overall/renderCountSlice';
 import oneReducer from 'RenderExamples/ContextVsRedux/Redux/one.slice';
 import twoReducer from 'RenderExamples/ContextVsRedux/Redux/two.slice';
@@ -15,8 +13,6 @@ const reduxVsContext = combineReducers({
 
 export const store = configureStore({
     reducer: {
-        list: listReducer,
-        search: searchReducer,
         renderCount: renderCountReducer,
         reduxVsContext: reduxVsContext
     },
