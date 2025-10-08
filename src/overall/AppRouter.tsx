@@ -9,6 +9,7 @@ import ReduxToolkitApp from '../ReduxToolkitApp/ReduxToolkitApp';
 import { Box, Container } from '@mui/material';
 import ContextVsReduxRoot from 'RenderExamples/ContextVsRedux/ContextVsReduxRoot';
 import UseEffectVsMemoRoot from 'RenderExamples/useEffectVsMemo/UseEffectVsMemoRoot';
+import ListRenderingExample from 'ListRenderingExample/ListRenderingExample';
 
 const DefaultText = () => {
     return (<div>
@@ -47,6 +48,7 @@ const AppRouter = () => {
                     <Route path="/" element={<DefaultText />} />
                     <Route path="/examples/effectVsMemo" element={<UseEffectVsMemoRoot />} />
                     <Route path="/examples/contextVsRedux" element={<ContextVsReduxRoot />} />
+                    <Route path="/examples/listRendering/*" element={<ListRenderingExample />} />
                     {/* <Route path="/useState/*" element={<UseStateApp />} />
                     <Route path="/useContext/*" element={<UseContextApp />} /> */}
                     <Route path="/useContextTwo/*" element={<UseContextTwoApp />} />

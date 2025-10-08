@@ -14,7 +14,7 @@ const getRoutes = (path: string) => {
         rootPath: '/',
         examples: '/examples/contextVsRedux',
         effectVsMemo: '/examples/effectVsMemo',
-        // statePath: `/useState/${endPath}`,
+        listRenderingPath: `/examples/listRendering`,
         // contextPath: `/useContext/${endPath}`,
         contextTwo: `/useContextTwo/combined-page`,
         reduxPath: `/reduxToolkit/combined-page`,
@@ -39,12 +39,9 @@ const Navbar: React.FC = () => {
                     <Button color="inherit" component={Link} to={routes.examples}>
                         Context Vs Redux
                     </Button>
-                    {/* <Button color="inherit" component={Link} to={routes.statePath}>
-                        useState App
+                    <Button color="inherit" component={Link} to={routes.listRenderingPath}>
+                        List Rendering
                     </Button>
-                    <Button color="inherit" component={Link} to={routes.contextPath}>
-                        useContext App
-                    </Button> */}
                     <Button color="inherit" component={Link} to={routes.contextTwo}>
                         useContext App Two
                     </Button>

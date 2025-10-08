@@ -5,6 +5,7 @@ export type ListItem = { title: string; description: string }
 // Define the shape of the context
 interface AppContextType {
     textValTwo: string;
+    lastUpdated: number;
     combinedTextValTwo: string;
     setTextValTwo: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -21,8 +22,12 @@ export const ContextTwoProvider: React.FC<{ children: ReactNode }> = ({ children
         return `${textVal}-${textValTwo}`
     }, [textVal, textValTwo]);
 
+        const lastUpdated = useMemo(() => {
+            return performance.now()
+        }, [textValTwo])
+
     return (
-        <AppContext.Provider value={{ textValTwo, combinedTextValTwo, setTextValTwo }}>
+        <AppContext.Provider value={{ textValTwo, combinedTextValTwo, setTextValTwo, lastUpdated }}>
             {children}
         </AppContext.Provider>
     );
