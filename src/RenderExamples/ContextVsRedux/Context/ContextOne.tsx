@@ -1,9 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useMemo } from 'react';
 
 export type ListItem = { title: string; description: string }
 // Define the shape of the context
 interface AppContextType {
     textVal: string;
+    lastUpdated: number;
     setTextVal: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -13,8 +14,11 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 // Create a provider to wrap the app and provide state to components
 export const ContextOneProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [textVal, setTextVal] = useState('ContextOne');
+    const lastUpdated = useMemo(() => {
+        return performance.now()
+    }, [textVal])
     return (
-        <AppContext.Provider value={{ textVal, setTextVal }}>
+        <AppContext.Provider value={{ textVal, setTextVal, lastUpdated }}>
             {children}
         </AppContext.Provider>
     );

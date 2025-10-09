@@ -6,6 +6,7 @@ export type ListItem = { title: string; description: string }
 // Define the shape of the context
 interface AppContextType {
     textValThree: string;
+    lastUpdated: number;
     combinedTextValThree: string;
     setTextValThree: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -23,8 +24,12 @@ export const ContextThreeProvider: React.FC<{ children: ReactNode }> = ({ childr
         return `${combinedTextValTwo}-${textValThree}`
     }, [combinedTextValTwo, textValThree]);
 
+        const lastUpdated = useMemo(() => {
+            return performance.now()
+        }, [textValThree])
+
     return (
-        <AppContext.Provider value={{ textValThree, combinedTextValThree, setTextValThree }}>
+        <AppContext.Provider value={{ textValThree, combinedTextValThree, setTextValThree, lastUpdated }}>
             {children}
         </AppContext.Provider>
     );

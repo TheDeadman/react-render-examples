@@ -8,11 +8,11 @@ import TextForm from './TextForm';
 
 // const 
 const ContextOneConsumer = () => {
-    const { textVal } = useAppContextOne();
+    const { textVal, lastUpdated } = useAppContextOne();
     return (
         <Box style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }} sx={{ padding: 2 }}>
             <RenderCount componentName="ConsumerOne" />
-            Context One: {textVal}
+            Context One: {textVal} - Updated: {lastUpdated}
         </Box>
     )
 }

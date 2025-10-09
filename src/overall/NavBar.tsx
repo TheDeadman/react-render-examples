@@ -4,22 +4,12 @@ import { AppBar, Toolbar, Button, Container } from '@mui/material';
 
 const getRoutes = (path: string) => {
     console.log("path: ", path)
-    let splitPath = path.split('/')
-    let endPath = ""
-    if (splitPath.length === 3) {
-        endPath = splitPath[2];
-    }
-
+    
     return {
         rootPath: '/',
-        examples: '/examples/contextVsRedux',
-        effectVsMemo: '/examples/effectVsMemo',
-        // statePath: `/useState/${endPath}`,
-        // contextPath: `/useContext/${endPath}`,
-        contextTwo: `/useContextTwo/combined-page`,
-        reduxPath: `/reduxToolkit/combined-page`,
-        //         contextTwo: `/useContextTwo/${endPath}`,
-        // reduxPath: `/reduxToolkit/${endPath}`,
+        memoizedComponents: '/techniques/memoized-components',
+        contextVsRedux: '/techniques/context-vs-redux',
+        effectVsMemo: '/techniques/useeffect-vs-usememo',
     }
 }
 
@@ -33,23 +23,14 @@ const Navbar: React.FC = () => {
                     <Button color="inherit" component={Link} to={routes.rootPath}>
                         Home
                     </Button>
-                    <Button color="inherit" component={Link} to={routes.effectVsMemo}>
-                        useEffect Vs useMemo
+                    <Button color="inherit" component={Link} to={routes.memoizedComponents}>
+                        Memoized Components
                     </Button>
-                    <Button color="inherit" component={Link} to={routes.examples}>
+                    <Button color="inherit" component={Link} to={routes.contextVsRedux}>
                         Context Vs Redux
                     </Button>
-                    {/* <Button color="inherit" component={Link} to={routes.statePath}>
-                        useState App
-                    </Button>
-                    <Button color="inherit" component={Link} to={routes.contextPath}>
-                        useContext App
-                    </Button> */}
-                    <Button color="inherit" component={Link} to={routes.contextTwo}>
-                        useContext App Two
-                    </Button>
-                    <Button color="inherit" component={Link} to={routes.reduxPath}>
-                        reduxToolkit App
+                    <Button color="inherit" component={Link} to={routes.effectVsMemo}>
+                        useEffect Vs useMemo
                     </Button>
                 </Container>
             </Toolbar>
