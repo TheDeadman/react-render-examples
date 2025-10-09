@@ -8,8 +8,7 @@ const ParentControlsContext: React.FC = () => {
         setUnrelatedState, 
         multiplier, 
         setMultiplier, 
-        count1, 
-        count2 
+        count1
     } = useMemoizedComponentsContext();
 
     return (
@@ -61,7 +60,6 @@ const ParentControlsContext: React.FC = () => {
                     }}
                 />
                 <Typography><strong>Count 1:</strong> {count1}</Typography>
-                <Typography><strong>Count 2:</strong> {count2}</Typography>
             </Box>
         </Paper>
     );

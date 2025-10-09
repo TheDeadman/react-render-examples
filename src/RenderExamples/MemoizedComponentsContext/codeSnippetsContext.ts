@@ -6,7 +6,6 @@ import React, { createContext, useContext, useState, useMemo, useCallback, React
 
 interface MemoizedComponentsContextType {
     count1: number;
-    count2: number;
     multiplier: number;
     unrelatedState: string;
     expensiveValue: number;
@@ -20,7 +19,6 @@ const MemoizedComponentsContext = createContext<MemoizedComponentsContextType | 
 
 export const MemoizedComponentsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [count1, setCount1] = useState(0);
-    const [count2, setCount2] = useState(0);
     const [multiplier, setMultiplier] = useState(1);
     const [unrelatedState, setUnrelatedState] = useState('');
 
@@ -28,7 +26,7 @@ export const MemoizedComponentsProvider: React.FC<{ children: ReactNode }> = ({ 
     const handleIncrement1Bad = () => setCount1(prev => prev + 1);
     
     // ✅ GOOD: Function is memoized
-    const handleIncrement2 = useCallback(() => setCount2(prev => prev + 1), []);
+    const handleIncrement2 = useCallback(() => setCount1(prev => prev + 1), []);
 
     // ✅ GOOD: Expensive computation memoized
     const expensiveValue = useMemo(() => {
@@ -38,7 +36,7 @@ export const MemoizedComponentsProvider: React.FC<{ children: ReactNode }> = ({ 
 
     // ❌ PROBLEM: This object is recreated on every render!
     const value = {
-        count1, count2, multiplier, unrelatedState, expensiveValue,
+        count1, multiplier, unrelatedState, expensiveValue,
         handleIncrement1Bad, handleIncrement2, setMultiplier, setUnrelatedState,
     };
 
@@ -89,7 +87,7 @@ import RenderCount from '../../../overall/RenderCount';
 import { useMemoizedComponentsContext } from '../context';
 
 const MemoizedChildContext = memo(() => {
-    const { count2, handleIncrement2, expensiveValue } = useMemoizedComponentsContext();
+    const { count1, handleIncrement2, expensiveValue } = useMemoizedComponentsContext();
 
     return (
         <Paper>
@@ -98,7 +96,7 @@ const MemoizedChildContext = memo(() => {
                 Memoized Child Component (Context)
             </Typography>
             <Typography>⚠️ React.memo + Context = Still re-renders on ANY context change!</Typography>
-            <Typography>Value: {count2}</Typography>
+            <Typography>Value: {count1}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
             <Button onClick={handleIncrement2} variant="contained">
                 Increment

@@ -2,11 +2,11 @@ import React, { memo } from 'react';
 import { Paper, Typography, Button } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
-import { selectCount2, selectExpensiveValue, incrementCount2 } from '../memoizedComponents.slice';
+import { selectCount1, selectExpensiveValue, incrementCount1 } from '../memoizedComponents.slice';
 
 const MemoizedChild = memo(() => {
     const dispatch = useAppDispatch();
-    const count2 = useAppSelector(selectCount2);
+    const count2 = useAppSelector(selectCount1);
     const expensiveValue = useAppSelector(selectExpensiveValue);
     
     return (
@@ -31,7 +31,7 @@ const MemoizedChild = memo(() => {
             </Typography>
             <Typography>Value: {count2}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Button onClick={() => dispatch(incrementCount2())} variant="contained" color="success" sx={{ mt: 1 }}>
+            <Button onClick={() => dispatch(incrementCount1())} variant="contained" color="success" sx={{ mt: 1 }}>
                 Increment
             </Button>
         </Paper>

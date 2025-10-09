@@ -1,14 +1,13 @@
 import React from 'react';
 import { Paper, Typography, TextField, Box } from '@mui/material';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
-import { selectMultiplier, selectUnrelatedState, setUnrelatedState, setMultiplier, selectCount1, selectCount2 } from '../memoizedComponents.slice';
+import { selectMultiplier, selectUnrelatedState, setUnrelatedState, setMultiplier, selectCount1 } from '../memoizedComponents.slice';
 
 const ParentControlsContext: React.FC = () => {
     const dispatch = useAppDispatch();
     const unrelatedState = useAppSelector(selectUnrelatedState);
     const multiplier = useAppSelector(selectMultiplier);
     const count1 = useAppSelector(selectCount1);
-    const count2 = useAppSelector(selectCount2);
 
     return (
         <Paper 
@@ -59,7 +58,6 @@ const ParentControlsContext: React.FC = () => {
                     }}
                 />
                 <Typography><strong>Count 1:</strong> {count1}</Typography>
-                <Typography><strong>Count 2:</strong> {count2}</Typography>
             </Box>
         </Paper>
     );

@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState, useMemo, useCallback, React
 
 interface MemoizedComponentsContextType {
     count1: number;
-    count2: number;
     multiplier: number;
     unrelatedState: string;
     expensiveValue: number;
@@ -20,7 +19,6 @@ interface MemoizedComponentsProviderProps {
 
 export const MemoizedComponentsProvider: React.FC<MemoizedComponentsProviderProps> = ({ children }) => {
     const [count1, setCount1] = useState(0);
-    const [count2, setCount2] = useState(0);
     const [multiplier, setMultiplier] = useState(1);
     const [unrelatedState, setUnrelatedState] = useState('');
 
@@ -28,7 +26,7 @@ export const MemoizedComponentsProvider: React.FC<MemoizedComponentsProviderProp
     const handleIncrement1Bad = () => setCount1(prev => prev + 1);
     
     // With useCallback - this function is memoized
-    const handleIncrement2 = useCallback(() => setCount2(prev => prev + 1), []);
+    const handleIncrement2 = useCallback(() => setCount1(prev => prev + 1), []);
 
     // Expensive computation that only depends on count1
     const expensiveValue = useMemo(() => {
@@ -38,7 +36,6 @@ export const MemoizedComponentsProvider: React.FC<MemoizedComponentsProviderProp
 
         const value = {
         count1,
-        count2,
         multiplier,
         unrelatedState,
         expensiveValue,
