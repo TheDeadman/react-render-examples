@@ -28,7 +28,7 @@ const MemoizedComponentsExample: React.FC = () => {
     // Expensive computation that only depends on count1
     const expensiveValue = useMemo(() => {
         console.log('Computing expensive value...');
-        return count1 * 1000 + 42;
+        return count1 * 1000;
     }, [count1]);
 
     return (
