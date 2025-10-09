@@ -62,6 +62,12 @@ const RenderOptimizationLanding: React.FC = () => {
             isImplemented: true
         },
         {
+            title: "Memoized Components (Redux)",
+            description: "Explore how Redux Toolkit affects memoization patterns and component rendering behavior compared to props and context.",
+            route: "/techniques/memoized-components-redux",
+            isImplemented: true
+        },
+        {
             title: "Context vs Redux",
             description: "Compare rendering behavior between React Context and Redux when managing shared state across components.",
             route: "/techniques/context-vs-redux",

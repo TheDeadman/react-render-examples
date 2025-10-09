@@ -1,18 +1,14 @@
 import React from 'react';
 import { Paper, Typography, Button } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
+import { useAppSelector, useAppDispatch } from '../../../store/hooks';
+import { selectCount1, selectExpensiveValue, incrementCount1 } from '../memoizedComponents.slice';
 
-interface RegularChildProps {
-    value: number;
-    onIncrement: () => void;
-    expensiveValue: number;
-}
+const RegularChild: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const count1 = useAppSelector(selectCount1);
+    const expensiveValue = useAppSelector(selectExpensiveValue);
 
-const RegularChild: React.FC<RegularChildProps> = ({ 
-    value, 
-    onIncrement, 
-    expensiveValue 
-}) => {
     return (
         <Paper 
             sx={{ 
@@ -26,16 +22,16 @@ const RegularChild: React.FC<RegularChildProps> = ({
                 }
             }}
         >
-            <RenderCount componentName="RegularChild" />
+            <RenderCount componentName="RegularChildRedux" />
             <Typography variant="h6" sx={{ color: '#f44336', fontWeight: 'bold' }}>
-                Regular Child Component
+                Regular Child Component (Redux)
             </Typography>
             <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
                 🔄 Always re-renders (no React.memo)
             </Typography>
-            <Typography>Value: {value}</Typography>
+            <Typography>Value: {count1}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Button onClick={onIncrement} variant="contained" color="error" sx={{ mt: 1 }}>
+            <Button onClick={() => dispatch(incrementCount1())} variant="contained" color="error" sx={{ mt: 1 }}>
                 Increment
             </Button>
         </Paper>

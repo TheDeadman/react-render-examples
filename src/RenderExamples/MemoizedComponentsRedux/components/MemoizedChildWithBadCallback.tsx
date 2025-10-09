@@ -1,18 +1,17 @@
 import React, { memo } from 'react';
 import { Paper, Typography, Button } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
+import { useAppSelector, useAppDispatch } from '../../../store/hooks';
+import { selectCount1, selectExpensiveValue, incrementCount1 } from '../memoizedComponents.slice';
 
-interface MemoizedChildWithBadCallbackProps {
-    value: number;
-    onIncrement: () => void;
-    expensiveValue: number;
-}
-
-const MemoizedChildWithBadCallback = memo<MemoizedChildWithBadCallbackProps>(({ 
-    value, 
-    onIncrement, 
-    expensiveValue 
-}) => {
+const MemoizedChildWithBadCallback = memo(() => {
+    const dispatch = useAppDispatch();
+    const count1 = useAppSelector(selectCount1);
+    const expensiveValue = useAppSelector(selectExpensiveValue);
+    
+    // This demonstrates the "bad" pattern - creating a new function on every render
+    const handleIncrement = () => dispatch(incrementCount1());
+    
     return (
         <Paper 
             sx={{ 
@@ -26,17 +25,17 @@ const MemoizedChildWithBadCallback = memo<MemoizedChildWithBadCallbackProps>(({
                 }
             }}
         >
-            <RenderCount componentName="MemoizedChildWithBadCallback" />
+            <RenderCount componentName="MemoizedChildWithBadCallbackRedux" />
             <Typography variant="h6" sx={{ color: '#ffb74d', fontWeight: 'bold' }}>
-                Memoized Child + Non-Memoized Function
+                Memoized Child + Non-Memoized Function (Redux)
             </Typography>
             <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
-                ⚠️ React.memo but new function props = Still re-renders
+                ⚠️ React.memo + Redux + Non-memoized function = Still re-renders!
             </Typography>
-            <Typography>Value: {value}</Typography>
+            <Typography>Value: {count1}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
             <Button 
-                onClick={onIncrement} 
+                onClick={handleIncrement} 
                 variant="contained" 
                 sx={{ 
                     mt: 1, 

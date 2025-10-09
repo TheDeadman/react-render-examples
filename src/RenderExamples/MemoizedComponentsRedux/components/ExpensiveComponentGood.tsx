@@ -1,21 +1,12 @@
 import React, { useMemo } from 'react';
 import { Paper, Typography } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
+import { useAppSelector } from 'store/hooks';
+import { selectExpensiveValue, selectMultiplier } from '../memoizedComponents.slice';
 
-interface ExpensiveComponentGoodProps {
-    multiplier: number;
-}
-
-function calculateExpensiveValue(multiplier: number): number {
-    console.log('✅ GOOD: Calculating expensive value with useMemo - only when multiplier changes!');
-    return multiplier * 1000;
-}
-
-const ExpensiveComponentGood: React.FC<ExpensiveComponentGoodProps> = ({ multiplier }) => {
-    // ✅ GOOD: This only recalculates when multiplier changes
-    const expensiveValue = useMemo(() => {
-        return calculateExpensiveValue(multiplier);
-    }, [multiplier]);
+const ExpensiveComponentGood = () => {
+    const multiplier = useAppSelector(selectMultiplier);
+    const expensiveValue = useAppSelector(selectExpensiveValue);
 
     return (
         <Paper 

@@ -1,17 +1,17 @@
 import React from 'react';
 import { Paper, Typography } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
-
-interface ExpensiveComponentBadProps {
-    multiplier: number;
-}
+import { useAppSelector } from 'store/hooks';
+import { selectMultiplier } from '../memoizedComponents.slice';
 
 function calculateExpensiveValue(multiplier: number): number {
     console.log('❌ BAD: Recalculating expensive value on every render!');
     return multiplier * 1000;
 }
 
-const ExpensiveComponentBad: React.FC<ExpensiveComponentBadProps> = ({ multiplier }) => {
+const ExpensiveComponentBad = () => {
+    const multiplier = useAppSelector(selectMultiplier);
+    
     // ❌ BAD: This will recalculate on every render
     const expensiveValue = calculateExpensiveValue(multiplier);
 

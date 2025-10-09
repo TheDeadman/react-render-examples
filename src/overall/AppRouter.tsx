@@ -7,6 +7,7 @@ import UseEffectVsMemoRoot from '../RenderExamples/useEffectVsMemo/UseEffectVsMe
 import RenderOptimizationLanding from '../RenderOptimizationLanding';
 import MemoizedComponentsExample from '../RenderExamples/MemoizedComponents/MemoizedComponentsExample';
 import MemoizedComponentsContextExample from '../RenderExamples/MemoizedComponentsContext/MemoizedComponentsContextExample';
+import MemoizedComponentsReduxExample from '../RenderExamples/MemoizedComponentsRedux/MemoizedComponentsExample';
 
 const AppRouter = () => {
     return (
@@ -18,6 +19,7 @@ const AppRouter = () => {
                     <Route path="/" element={<RenderOptimizationLanding />} />
                     <Route path="/techniques/memoized-components" element={<MemoizedComponentsExample />} />
                     <Route path="/techniques/memoized-components-context" element={<MemoizedComponentsContextExample />} />
+                    <Route path="/techniques/memoized-components-redux" element={<MemoizedComponentsReduxExample />} />
                     <Route path="/techniques/context-vs-redux" element={<ContextVsReduxRoot />} />
                     <Route path="/techniques/useeffect-vs-usememo" element={<UseEffectVsMemoRoot />} />
                     

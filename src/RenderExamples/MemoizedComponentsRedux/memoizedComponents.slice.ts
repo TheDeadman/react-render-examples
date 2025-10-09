@@ -47,7 +47,7 @@ export const selectUnrelatedState = (state: { memoizedComponents: MemoizedCompon
 
 export const selectExpensiveValue = (state: { memoizedComponents: MemoizedComponentsState }) => {
     console.log('Computing expensive value (from Redux)...');
-    return state.memoizedComponents.count1 * 1000;
+    return state.memoizedComponents.multiplier * 1000;
 }
 
 export default memoizedComponentsSlice.reducer;

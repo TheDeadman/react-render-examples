@@ -71,33 +71,25 @@ const MemoizedComponentsExample: React.FC = () => {
 
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#ffb74d">
-                        <MemoizedChildWithBadCallback 
-                            value={count1} 
-                            onIncrement={handleIncrement1Bad}  // Same non-memoized function!
-                            expensiveValue={expensiveValue} 
-                        />
+                        <MemoizedChildWithBadCallback />
                     </ComponentLabel>
                 </Grid>
 
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#66bb6a">
-                        <MemoizedChild 
-                            value={count2} 
-                            onIncrement={handleIncrement2} 
-                            expensiveValue={expensiveValue} 
-                        />
+                        <MemoizedChild />
                     </ComponentLabel>
                 </Grid>
 
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#f44336">
-                        <ExpensiveComponentBad multiplier={multiplier} />
+                        <ExpensiveComponentBad />
                     </ComponentLabel>
                 </Grid>
 
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#66bb6a">
-                        <ExpensiveComponentGood multiplier={multiplier} />
+                        <ExpensiveComponentGood />
                     </ComponentLabel>
                 </Grid>
             </Grid>
