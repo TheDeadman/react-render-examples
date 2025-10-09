@@ -3,18 +3,20 @@ import renderCountReducer from 'overall/renderCountSlice';
 import oneReducer from 'RenderExamples/ContextVsRedux/Redux/one.slice';
 import twoReducer from 'RenderExamples/ContextVsRedux/Redux/two.slice';
 import threeReducer from 'RenderExamples/ContextVsRedux/Redux/three.slice';
+import memoizedComponentsReducer from 'RenderExamples/MemoizedComponentsRedux/memoizedComponents.slice';
 // ...
 
 const reduxVsContext = combineReducers({
     one: oneReducer,
     two: twoReducer,
-    three: threeReducer
+    three: threeReducer,
 })
 
 export const store = configureStore({
     reducer: {
         renderCount: renderCountReducer,
-        reduxVsContext: reduxVsContext
+        reduxVsContext: reduxVsContext,
+        memoizedComponents: memoizedComponentsReducer,
     },
 })
 
