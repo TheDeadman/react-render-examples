@@ -8,22 +8,19 @@ const ObservationGuideContext: React.FC = () => {
                 What to Observe (Context Version):
             </Typography>
             <Typography variant="body2" paragraph>
-                • Type in "Unrelated State" field - notice how ALL context consumers re-render!
+                • Type in "Unrelated State" field - notice how ALL context consumers re-render
             </Typography>
             <Typography variant="body2" paragraph>
                 • <strong>Regular Child (Context):</strong> Always re-renders (no React.memo)
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Children (Context):</strong> React.memo doesn't help! All context consumers re-render when ANY context value changes
+                • <strong>Memoized Children (Context):</strong> React.memo doesn't help. All context consumers re-render when ANY context value changes
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Key Issue:</strong> Context creates a new object reference on every render, breaking React.memo optimization
+                • <strong>Key Issue:</strong> Context creates a new object reference on every render, breaking React.memo optimization. Even if you try to wrap the return value of a context in useMemo, it won't help in the vast majority of cases.
             </Typography>
             <Typography variant="body2" paragraph>
                 • <strong>useMemo still works:</strong> Expensive calculations can still be optimized within components
-            </Typography>
-            <Typography variant="body2">
-                • Compare with the props version to see the difference in rendering behavior
             </Typography>
         </Box>
     );

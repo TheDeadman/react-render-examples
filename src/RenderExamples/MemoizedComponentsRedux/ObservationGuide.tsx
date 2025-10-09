@@ -17,7 +17,7 @@ const ObservationGuide: React.FC = () => {
                 • <strong>Memoized Child + Non-Memoized Function:</strong> Still re-renders every time because it receives a new function reference, even though it's wrapped in React.memo.
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Child (with useCallback):</strong> Only re-renders when count2 or expensiveValue actually changes
+                • <strong>Memoized Child (with useCallback):</strong> Only re-renders when count1 or expensiveValue actually changes
             </Typography>
             <Typography variant="body2" paragraph>
                 • <strong>Non-Memoized Expensive Component (red):</strong> Recalculates on every render - check console logs!

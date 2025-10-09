@@ -124,7 +124,7 @@ const MemoizedComponentsExample: React.FC = () => {
                 />
 
                 <CodeViewer
-                    title="Memoized Child with Non-Memoized Callback (Still Re-renders!)"
+                    title="Memoized Child with Non-Memoized Callback (Still Re-renders)"
                     code={codeSnippets.memoizedChildWithBadCallback}
                     explanation={explanations.memoizedChildWithBadCallback}
                 />

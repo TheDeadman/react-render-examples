@@ -34,7 +34,7 @@ export const MemoizedComponentsProvider: React.FC<{ children: ReactNode }> = ({ 
         return count1 * 1000;
     }, [count1]);
 
-    // ❌ PROBLEM: This object is recreated on every render!
+    // ❌ PROBLEM: This object is recreated on every render
     const value = {
         count1, multiplier, unrelatedState, expensiveValue,
         handleIncrement1Bad, handleIncrement2, setMultiplier, setUnrelatedState,
@@ -48,7 +48,7 @@ export const MemoizedComponentsProvider: React.FC<{ children: ReactNode }> = ({ 
 };
 
 // Context API creates new object references on every render,
-// which breaks React.memo() optimizations for consumers!`,
+// which breaks React.memo() optimizations for consumers`,
 
   regularChildContext: `// RegularChildContext.tsx - Non-memoized child using Context
 import React from 'react';
@@ -95,7 +95,7 @@ const MemoizedChildContext = memo(() => {
             <Typography variant="h6">
                 Memoized Child Component (Context)
             </Typography>
-            <Typography>⚠️ React.memo + Context = Still re-renders on ANY context change!</Typography>
+            <Typography>⚠️ React.memo + Context = Still re-renders on ANY context change</Typography>
             <Typography>Value: {count1}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
             <Button onClick={handleIncrement2} variant="contained">
@@ -108,7 +108,7 @@ const MemoizedChildContext = memo(() => {
 export default MemoizedChildContext;
 
 // React.memo() doesn't help with Context because the context value 
-// object is recreated on every render, breaking memoization!`,
+// object is recreated on every render, breaking memoization`,
 
   expensiveComponentBadContext: `// ExpensiveComponentBadContext.tsx - Non-memoized expensive calculation
 import React from 'react';
@@ -121,7 +121,7 @@ const ExpensiveComponentBadContext: React.FC = () => {
     
     // ❌ BAD: This will recalculate on every render
     const expensiveValue = (() => {
-        console.log('❌ BAD (Context): Recalculating expensive value on every render!');
+        console.log('❌ BAD (Context): Recalculating expensive value on every render');
         return multiplier * 1000;
     })();
 
@@ -131,7 +131,7 @@ const ExpensiveComponentBadContext: React.FC = () => {
             <Typography variant="h6">
                 ❌ Non-Memoized Calculation (Context)
             </Typography>
-            <Typography>🔄 Recalculates on every render (expensive!)</Typography>
+            <Typography>🔄 Recalculates on every render (expensive)</Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
         </Paper>
@@ -140,7 +140,7 @@ const ExpensiveComponentBadContext: React.FC = () => {
 
 export default ExpensiveComponentBadContext;
 
-// This recalculates on EVERY context change, even unrelated ones!`,
+// This recalculates on EVERY context change, even unrelated ones`,
 
   expensiveComponentGoodContext: `// ExpensiveComponentGoodContext.tsx - Memoized expensive calculation
 import React, { useMemo } from 'react';
@@ -153,7 +153,7 @@ const ExpensiveComponentGoodContext: React.FC = () => {
     
     // ✅ GOOD: This only recalculates when multiplier changes
     const expensiveValue = useMemo(() => {
-        console.log('✅ GOOD (Context): Calculating expensive value with useMemo!');
+        console.log('✅ GOOD (Context): Calculating expensive value with useMemo');
         return multiplier * 1000;
     }, [multiplier]);
 
@@ -172,7 +172,7 @@ const ExpensiveComponentGoodContext: React.FC = () => {
 
 export default ExpensiveComponentGoodContext;
 
-// useMemo() still works within components, even with Context!
+// useMemo() still works within components, even with Context
 // Only recalculates when the dependency (multiplier) actually changes`
 };
 
@@ -185,5 +185,5 @@ export const explanationsContext = {
   
   expensiveComponentBadContext: "This component shows how expensive calculations can become even more problematic with Context. The calculation runs on every context change, not just when the relevant data changes. This is why you should be careful about what you put in context.",
   
-  expensiveComponentGoodContext: "The good news is that useMemo() still works within components! Even though the component re-renders on every context change, the expensive calculation only runs when the multiplier dependency actually changes. This shows how to optimize expensive operations even in a context-heavy architecture."
+  expensiveComponentGoodContext: "useMemo() still works within components. Even though the component re-renders on every context change, the expensive calculation only runs when the multiplier dependency actually changes. This shows how to optimize expensive operations even in a context-heavy architecture."
 };

@@ -6,7 +6,7 @@ import { selectCount1, selectExpensiveValue, incrementCount1 } from '../memoized
 
 const MemoizedChild = memo(() => {
     const dispatch = useAppDispatch();
-    const count2 = useAppSelector(selectCount1);
+    const count1 = useAppSelector(selectCount1);
     const expensiveValue = useAppSelector(selectExpensiveValue);
     
     return (
@@ -29,7 +29,7 @@ const MemoizedChild = memo(() => {
             <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
                 ⚠️ React.memo + Redux = Still re-renders on ANY state change!
             </Typography>
-            <Typography>Value: {count2}</Typography>
+            <Typography>Value: {count1}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
             <Button onClick={() => dispatch(incrementCount1())} variant="contained" color="success" sx={{ mt: 1 }}>
                 Increment
