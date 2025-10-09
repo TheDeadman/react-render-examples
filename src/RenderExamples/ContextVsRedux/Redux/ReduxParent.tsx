@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box } from '@mui/material';
-import RenderCount from 'overall/RenderCount';
+import { Box, Typography, Grid } from '@mui/material';
+import RenderCount from '../../../overall/RenderCount';
 import TextForm from './TextForm';
-import { useAppSelector } from 'store/hooks';
+import { useAppSelector } from '../../../store/hooks';
 import { selectTextValTwo } from './two.slice';
 import { selectTextValOne } from './one.slice';
 import { selectCombinedTextValThree, selectTextValThree } from './three.slice';
@@ -11,9 +11,22 @@ import { selectCombinedTextValThree, selectTextValThree } from './three.slice';
 const SliceOneConsumer = () => {
     const textVal = useAppSelector(selectTextValOne);
     return (
-        <Box style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }} sx={{ padding: 2 }}>
+        <Box 
+            sx={{ 
+                border: '2px solid #ff6f00', 
+                margin: 1, 
+                padding: 2,
+                backgroundColor: 'rgba(255, 111, 0, 0.05)',
+                borderRadius: 1,
+                '&:hover': {
+                    backgroundColor: 'rgba(255, 111, 0, 0.1)',
+                }
+            }}
+        >
             <RenderCount componentName="ConsumerOne" />
-            Context One: {textVal}
+            <Typography variant="body1" sx={{ color: '#ff6f00', fontWeight: 500 }}>
+                Redux One: {textVal}
+            </Typography>
         </Box>
     )
 }
@@ -21,9 +34,22 @@ const SliceOneConsumer = () => {
 const SliceTwoConsumer = () => {
     const textValTwo = useAppSelector(selectTextValTwo);
     return (
-        <Box style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }} sx={{ padding: 2 }}>
+        <Box 
+            sx={{ 
+                border: '2px solid #ff6f00', 
+                margin: 1, 
+                padding: 2,
+                backgroundColor: 'rgba(255, 111, 0, 0.05)',
+                borderRadius: 1,
+                '&:hover': {
+                    backgroundColor: 'rgba(255, 111, 0, 0.1)',
+                }
+            }}
+        >
             <RenderCount componentName="ConsumerTwo" />
-            Context Two: {textValTwo}
+            <Typography variant="body1" sx={{ color: '#ff6f00', fontWeight: 500 }}>
+                Redux Two: {textValTwo}
+            </Typography>
         </Box>
     )
 }
@@ -31,9 +57,22 @@ const SliceTwoConsumer = () => {
 const SliceThreeConsumer = () => {
     const textValThree = useAppSelector(selectTextValThree);
     return (
-        <Box style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }} sx={{ padding: 2 }}>
+        <Box 
+            sx={{ 
+                border: '2px solid #ff6f00', 
+                margin: 1, 
+                padding: 2,
+                backgroundColor: 'rgba(255, 111, 0, 0.05)',
+                borderRadius: 1,
+                '&:hover': {
+                    backgroundColor: 'rgba(255, 111, 0, 0.1)',
+                }
+            }}
+        >
             <RenderCount componentName="ConsumerThree" />
-            Context Three: {textValThree}
+            <Typography variant="body1" sx={{ color: '#ff6f00', fontWeight: 500 }}>
+                Redux Three: {textValThree}
+            </Typography>
         </Box>
     )
 }
@@ -42,25 +81,81 @@ const CombinedValueConsumer = () => {
     const combinedTextValThree = useAppSelector(selectCombinedTextValThree);
 
     return (
-        <Box style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }} sx={{ padding: 2 }}>
-            <RenderCount componentName="ConsumerThree" />
-            Combined Value: {combinedTextValThree}
+        <Box 
+            sx={{ 
+                border: '2px solid #ff6f00', 
+                margin: 1, 
+                padding: 2,
+                backgroundColor: 'rgba(255, 111, 0, 0.05)',
+                borderRadius: 1,
+                '&:hover': {
+                    backgroundColor: 'rgba(255, 111, 0, 0.1)',
+                }
+            }}
+        >
+            <RenderCount componentName="CombinedValueConsumer" />
+            <Typography variant="body1" sx={{ color: '#ff6f00', fontWeight: 500 }}>
+                Combined Value: {combinedTextValThree}
+            </Typography>
         </Box>
     )
 }
 
 const ReduxParent: React.FC = () => {
     return (
-        <Box style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }} sx={{ padding: 2 }}>
-            <RenderCount componentName="ContextParent" />
-            <h3>Redux Version</h3>
-            <SliceOneConsumer />
-            <SliceTwoConsumer />
-            <SliceThreeConsumer />
-            <CombinedValueConsumer />
-            <TextForm />
+        <Box 
+            sx={{ 
+                border: '2px solid #ff6f00',
+                borderRadius: 2,
+                p: 2,
+                mt: 2,
+                backgroundColor: '#1e1e1e',
+                position: 'relative'
+            }}
+        >
+            {/* Redux Section Label */}
+            <Box 
+                sx={{ 
+                    position: 'absolute',
+                    top: -12,
+                    left: 16,
+                    backgroundColor: '#ff6f00',
+                    color: 'white',
+                    px: 2,
+                    py: 0.5,
+                    borderRadius: 1,
+                    fontSize: '0.75rem',
+                    fontWeight: 'bold'
+                }}
+            >
+                REDUX STORE
+            </Box>
+            
+            <RenderCount componentName="ReduxParent" />
+            <Typography variant="h5" gutterBottom sx={{ color: '#ff6f00', mt: 2 }}>
+                Redux Version
+            </Typography>
+            <Typography variant="body2" paragraph sx={{ color: '#bbb' }}>
+                Redux selectors only trigger re-renders when selected state changes
+            </Typography>
+            <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                    <SliceOneConsumer />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <SliceTwoConsumer />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <SliceThreeConsumer />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <CombinedValueConsumer />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextForm />
+                </Grid>
+            </Grid>
         </Box>
-
     );
 };
 
