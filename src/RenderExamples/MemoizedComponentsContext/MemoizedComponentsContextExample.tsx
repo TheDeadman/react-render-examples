@@ -89,7 +89,7 @@ const MemoizedComponentsExampleContent: React.FC = () => {
                     </Grid>
 
                     <Grid item xs={12} md={6}>
-                        <ComponentLabelContext color="#66bb6a">
+                        <ComponentLabelContext color="#ba68c8">
                             <ExpensiveComponentGoodContext />
                         </ComponentLabelContext>
                     </Grid>

@@ -13,7 +13,7 @@ const ExpensiveComponentGood = () => {
             sx={{ 
                 p: 2, 
                 m: 1, 
-                border: '2px solid #66bb6a',
+                border: '2px solid #ba68c8',
                 borderRadius: 2,
                 backgroundColor: '#1a1a1a',
                 '&:hover': {
@@ -22,7 +22,7 @@ const ExpensiveComponentGood = () => {
             }}
         >
             <RenderCount componentName="ExpensiveComponentGood" />
-            <Typography variant="h6" sx={{ color: '#66bb6a', fontWeight: 'bold' }}>
+            <Typography variant="h6" sx={{ color: '#ba68c8', fontWeight: 'bold' }}>
                 ✅ Memoized Calculation
             </Typography>
             <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>

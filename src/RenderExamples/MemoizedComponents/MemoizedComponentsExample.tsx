@@ -122,7 +122,7 @@ const MemoizedComponentsExample: React.FC = () => {
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                    <ComponentLabel color="#66bb6a">
+                    <ComponentLabel color="#ba68c8">
                         <ExpensiveComponentGood multiplier={multiplier} />
                     </ComponentLabel>
                 </Grid>

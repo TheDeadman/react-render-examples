@@ -13,20 +13,21 @@ const SliceOneConsumer = () => {
     return (
         <Box 
             sx={{ 
-                border: '2px solid #ff6f00', 
-                margin: 1, 
-                padding: 2,
-                backgroundColor: 'rgba(255, 111, 0, 0.05)',
-                borderRadius: 1,
+                p: 2, 
+                m: 1, 
+                border: '2px solid #ff6f00',
+                borderRadius: 2,
+                backgroundColor: '#1a1a1a',
                 '&:hover': {
-                    backgroundColor: 'rgba(255, 111, 0, 0.1)',
+                    backgroundColor: '#2a2a2a'
                 }
             }}
         >
             <RenderCount componentName="ConsumerOne" />
-            <Typography variant="body1" sx={{ color: '#ff6f00', fontWeight: 500 }}>
-                Redux One: {textVal}
+            <Typography variant="body2" sx={{ color: '#ff6f00', fontWeight: 'bold' }}>
+                Redux One Consumer
             </Typography>
+            <Typography>Value: {textVal}</Typography>
         </Box>
     )
 }
@@ -36,20 +37,21 @@ const SliceTwoConsumer = () => {
     return (
         <Box 
             sx={{ 
-                border: '2px solid #ff6f00', 
-                margin: 1, 
-                padding: 2,
-                backgroundColor: 'rgba(255, 111, 0, 0.05)',
-                borderRadius: 1,
+                p: 2, 
+                m: 1, 
+                border: '2px solid #ff6f00',
+                borderRadius: 2,
+                backgroundColor: '#1a1a1a',
                 '&:hover': {
-                    backgroundColor: 'rgba(255, 111, 0, 0.1)',
+                    backgroundColor: '#2a2a2a'
                 }
             }}
         >
             <RenderCount componentName="ConsumerTwo" />
-            <Typography variant="body1" sx={{ color: '#ff6f00', fontWeight: 500 }}>
-                Redux Two: {textValTwo}
+            <Typography variant="body2" sx={{ color: '#ff6f00', fontWeight: 'bold' }}>
+                Redux Two Consumer
             </Typography>
+            <Typography>Value: {textValTwo}</Typography>
         </Box>
     )
 }
@@ -59,20 +61,21 @@ const SliceThreeConsumer = () => {
     return (
         <Box 
             sx={{ 
-                border: '2px solid #ff6f00', 
-                margin: 1, 
-                padding: 2,
-                backgroundColor: 'rgba(255, 111, 0, 0.05)',
-                borderRadius: 1,
+                p: 2, 
+                m: 1, 
+                border: '2px solid #ff6f00',
+                borderRadius: 2,
+                backgroundColor: '#1a1a1a',
                 '&:hover': {
-                    backgroundColor: 'rgba(255, 111, 0, 0.1)',
+                    backgroundColor: '#2a2a2a'
                 }
             }}
         >
             <RenderCount componentName="ConsumerThree" />
-            <Typography variant="body1" sx={{ color: '#ff6f00', fontWeight: 500 }}>
-                Redux Three: {textValThree}
+            <Typography variant="body2" sx={{ color: '#ff6f00', fontWeight: 'bold' }}>
+                Redux Three Consumer
             </Typography>
+            <Typography>Value: {textValThree}</Typography>
         </Box>
     )
 }
@@ -83,20 +86,21 @@ const CombinedValueConsumer = () => {
     return (
         <Box 
             sx={{ 
-                border: '2px solid #ff6f00', 
-                margin: 1, 
-                padding: 2,
-                backgroundColor: 'rgba(255, 111, 0, 0.05)',
-                borderRadius: 1,
+                p: 2, 
+                m: 1, 
+                border: '2px solid #ff6f00',
+                borderRadius: 2,
+                backgroundColor: '#1a1a1a',
                 '&:hover': {
-                    backgroundColor: 'rgba(255, 111, 0, 0.1)',
+                    backgroundColor: '#2a2a2a'
                 }
             }}
         >
             <RenderCount componentName="CombinedValueConsumer" />
-            <Typography variant="body1" sx={{ color: '#ff6f00', fontWeight: 500 }}>
-                Combined Value: {combinedTextValThree}
+            <Typography variant="body2" sx={{ color: '#ff6f00', fontWeight: 'bold' }}>
+                Combined Value Consumer
             </Typography>
+            <Typography>Combined Value: {combinedTextValThree}</Typography>
         </Box>
     )
 }

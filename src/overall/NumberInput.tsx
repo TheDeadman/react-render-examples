@@ -70,28 +70,26 @@ const grey = {
 const StyledInputRoot = styled('div')(
     ({ theme }) => `
 
-    width: 150px;
+    width: 80px;
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
-  border-radius: 8px;
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-//   box-shadow: 0 2px 2px ${theme.palette.mode === 'dark' ? grey[900] : grey[50]};
+  border-radius: 4px;
+  color: #fff;
+  background: #1a1a1a;
+  border: 1px solid #666;
   display: grid;
   grid-template-columns: 1fr 19px;
-//   grid-template-rows: 1fr 1fr;
   overflow: hidden;
-  column-gap: 8px;
+  column-gap: 4px;
   padding-left: 4px;
 
   &.${numberInputClasses.focused} {
-    border-color: ${blue[400]};
-    box-shadow: 0 0 0 3px ${theme.palette.mode === 'dark' ? blue[600] : blue[200]};
+    border-color: #42a5f5;
+    box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.2);
   }
 
   &:hover {
-    border-color: ${blue[400]};
+    border-color: #42a5f5;
   }
 
   /* firefox */
@@ -106,16 +104,15 @@ const StyledInputElement = styled('input')(
   font-size: 0.875rem;
   font-family: inherit;
   font-weight: 400;
-//   line-height: 1.5;
   grid-column: 1/2;
   grid-row: 1/3;
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  color: #fff;
   background: inherit;
   border: none;
   border-radius: inherit;
-//   padding: 8px 12px;
   outline: 0;
   width: 80px;
+  padding: 4px 8px;
 `,
 );
 
@@ -133,16 +130,15 @@ const StyledButton = styled('button')(
   font-size: 0.875rem;
   line-height: 1;
   box-sizing: border-box;
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  background: #2a2a2a;
   border: 0;
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
+  color: #42a5f5;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 120ms;
 
   &:hover {
-    background: ${theme.palette.mode === 'dark' ? grey[800] : grey[50]};
-    border-color: ${theme.palette.mode === 'dark' ? grey[600] : grey[300]};
+    background: #3a3a3a;
     cursor: pointer;
   }
 

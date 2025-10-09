@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
+import { Box, Typography, Chip } from '@mui/material';
 import NumberInput from './NumberInput';
-import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { selectComponentDelay, setComponentDelay } from './renderCountSlice';
 
 const blockMainThread = (ms: number) => {
@@ -51,21 +52,54 @@ const RenderCount = ({ componentName = 'Component' }) => {
     });
 
     return (
-        <div style={{ border: 'thin solid white', margin: 5, padding: 5, background: '#4a4a72', display: 'flex' }}>
-            {componentName} Render Count: {renderCount.current}
-            &nbsp; &nbsp; &nbsp;
-            <div style={{ display: 'flex' }}>
+        <Box 
+            sx={{ 
+                border: '1px solid #666',
+                borderRadius: 1,
+                p: 1,
+                mt: 1,
+                mb: 1,
+                backgroundColor: '#2a2a2a',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+                gap: 1
 
-                <div>
-                    Render Delay MS:
-                </div>
-                <NumberInput aria-label="Render Count Number Input" placeholder='...type a number' value={delay} onChange={(event, val) => {
-                    if (val) {
-                        dispatch(setComponentDelay({ componentName, delay: val }));
-                    }
-                }} />
-            </div>
-        </div>
+            }}
+        >
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Chip 
+                    label={componentName}
+                    size="small"
+                    sx={{ 
+                        backgroundColor: '#4a4a72',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        fontSize: '0.7rem'
+                    }}
+                />
+                <Typography variant="body2" sx={{ color: '#fff', fontSize: '0.8rem' }}>
+                    Renders: {renderCount.current}
+                </Typography>
+            </Box>
+            
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography variant="body2" sx={{ color: '#ccc', fontSize: '0.75rem' }}>
+                    Delay (ms):
+                </Typography>
+                <NumberInput 
+                    aria-label="Render Count Number Input" 
+                    placeholder='0' 
+                    value={delay} 
+                    onChange={(event, val) => {
+                        if (val !== null) {
+                            dispatch(setComponentDelay({ componentName, delay: val }));
+                        }
+                    }} 
+                />
+            </Box>
+        </Box>
     );
 };
 

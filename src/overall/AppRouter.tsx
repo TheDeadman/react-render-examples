@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Box } from '@mui/material';
 import Navbar from './NavBar';
 import RenderCount from './RenderCount';
 import ContextVsReduxRoot from '../RenderExamples/ContextVsRedux/ContextVsReduxRoot';
@@ -12,8 +13,7 @@ import MemoizedComponentsReduxExample from '../RenderExamples/MemoizedComponents
 const AppRouter = () => {
     return (
         <Router>
-            <div>
-                <RenderCount componentName='AppRouter' />
+            <Box sx={{ backgroundColor: '#1e1e1e', minHeight: '100vh' }}>
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<RenderOptimizationLanding />} />
@@ -27,7 +27,7 @@ const AppRouter = () => {
                     <Route path="/examples/effectVsMemo" element={<UseEffectVsMemoRoot />} />
                     <Route path="/examples/contextVsRedux" element={<ContextVsReduxRoot />} />
                 </Routes>
-            </div>
+            </Box>
         </Router>
     );
 };
