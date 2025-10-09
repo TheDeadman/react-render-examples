@@ -18,25 +18,15 @@ const RegularChild: React.FC<RegularChildProps> = ({
     expensiveValue 
 }) => {
     return (
-        <Paper 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #f44336',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a'
-            }}
-        >
+        <Paper>
             <RenderCount componentName="RegularChild" />
-            <Typography variant="h6" sx={{ color: '#f44336', fontWeight: 'bold' }}>
+            <Typography variant="h6">
                 Regular Child Component
             </Typography>
-            <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
-                🔄 Always re-renders (no React.memo)
-            </Typography>
+            <Typography>🔄 Always re-renders (no React.memo)</Typography>
             <Typography>Value: {value}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Button onClick={onIncrement} variant="contained" color="error" sx={{ mt: 1 }}>
+            <Button onClick={onIncrement} variant="contained">
                 Increment
             </Button>
         </Paper>
@@ -65,25 +55,15 @@ const MemoizedChild = memo<MemoizedChildProps>(({
     expensiveValue 
 }) => {
     return (
-        <Paper 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #66bb6a',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a'
-            }}
-        >
+        <Paper>
             <RenderCount componentName="MemoizedChild" />
-            <Typography variant="h6" sx={{ color: '#66bb6a', fontWeight: 'bold' }}>
+            <Typography variant="h6">
                 Memoized Child Component
             </Typography>
-            <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
-                ✅ React.memo + useCallback = Optimized
-            </Typography>
+            <Typography>✅ React.memo + useCallback = Optimized</Typography>
             <Typography>Value: {value}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Button onClick={onIncrement} variant="contained" color="success" sx={{ mt: 1 }}>
+            <Button onClick={onIncrement} variant="contained">
                 Increment
             </Button>
         </Paper>
@@ -115,22 +95,12 @@ const ExpensiveComponentBad: React.FC<ExpensiveComponentBadProps> = ({ multiplie
     const expensiveValue = calculateExpensiveValue(multiplier);
 
     return (
-        <Paper 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #f44336',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a'
-            }}
-        >
+        <Paper>
             <RenderCount componentName="ExpensiveComponentBad" />
-            <Typography variant="h6" sx={{ color: '#f44336', fontWeight: 'bold' }}>
+            <Typography variant="h6">
                 ❌ Non-Memoized Expensive Component
             </Typography>
-            <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
-                🔄 Recalculates on every render (expensive!)
-            </Typography>
+            <Typography>🔄 Recalculates on every render (expensive!)</Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
         </Paper>
@@ -163,22 +133,12 @@ const ExpensiveComponentGood: React.FC<ExpensiveComponentGoodProps> = ({ multipl
     }, [multiplier]);
 
     return (
-        <Paper 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #66bb6a',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a'
-            }}
-        >
+        <Paper>
             <RenderCount componentName="ExpensiveComponentGood" />
-            <Typography variant="h6" sx={{ color: '#66bb6a', fontWeight: 'bold' }}>
+            <Typography variant="h6">
                 ✅ Memoized Expensive Component
             </Typography>
-            <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
-                🧮 useMemo prevents expensive recalculations
-            </Typography>
+            <Typography>🧮 useMemo prevents expensive recalculations</Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
         </Paper>
@@ -214,9 +174,7 @@ const MemoizedComponentsExample: React.FC = () => {
     }, [count1]);
 
     return (
-        <Container maxWidth="lg">
-            {/* ... Other JSX ... */}
-            
+        <Container>
             {/* Regular child - will always re-render */}
             <RegularChild 
                 value={count1} 
@@ -261,25 +219,15 @@ const MemoizedChildWithBadCallback = memo<MemoizedChildWithBadCallbackProps>(({
     expensiveValue 
 }) => {
     return (
-        <Paper 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #ffb74d',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a'
-            }}
-        >
+        <Paper>
             <RenderCount componentName="MemoizedChildWithBadCallback" />
-            <Typography variant="h6" sx={{ color: '#ffb74d', fontWeight: 'bold' }}>
+            <Typography variant="h6">
                 Memoized Child + Non-Memoized Function
             </Typography>
-            <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
-                ⚠️ React.memo without useCallback = Still re-renders!
-            </Typography>
+            <Typography>⚠️ React.memo without useCallback = Still re-renders!</Typography>
             <Typography>Value: {value}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Button onClick={onIncrement} variant="contained" color="warning" sx={{ mt: 1 }}>
+            <Button onClick={onIncrement} variant="contained">
                 Increment
             </Button>
         </Paper>
@@ -302,7 +250,7 @@ export default MemoizedChildWithBadCallback;
 };
 
 export const explanations = {
-  regularChild: "This component re-renders every time the parent re-renders because it's NOT wrapped in React.memo(). Without memo, React always re-renders child components when the parent re-renders, regardless of whether props have changed. Notice the red border indicating 'no optimization'.",
+  regularChild: "This component re-renders every time the parent re-renders because it's NOT wrapped in React.memo(). Without memo, React always re-renders child components when the parent re-renders, regardless of whether props have changed.",
   
   memoizedChild: "This component is wrapped in React.memo() AND receives a memoized callback (useCallback). It only re-renders when its props actually change. Both conditions are necessary - React.memo() for shallow prop comparison + useCallback() for stable function references = optimal performance (green border).",
   
