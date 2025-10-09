@@ -51,19 +51,19 @@ const RenderOptimizationLanding: React.FC = () => {
     const techniques = [
         {
             title: "Memoized Components",
-            description: "Learn how React.memo, useMemo, and useCallback can prevent unnecessary re-renders and optimize component performance.",
+            description: "React.memo, useMemo, and useCallback can prevent unnecessary re-renders and optimize component performance.",
             route: "/techniques/memoized-components",
             isImplemented: true
         },
         {
             title: "Memoized Components (Context)",
-            description: "See how React Context affects the same memoization techniques and why context can break React.memo optimizations.",
+            description: "React Context affects the same memoization techniques and why context can break React.memo optimizations.",
             route: "/techniques/memoized-components-context",
             isImplemented: true
         },
         {
             title: "Memoized Components (Redux)",
-            description: "Explore how Redux Toolkit affects memoization patterns and component rendering behavior compared to props and context.",
+            description: "How Redux Toolkit affects memoization patterns and component rendering behavior compared to props and context.",
             route: "/techniques/memoized-components-redux",
             isImplemented: true
         },
@@ -81,20 +81,14 @@ const RenderOptimizationLanding: React.FC = () => {
         },
         {
             title: "List Rendering Optimization",
-            description: "Explore techniques for optimizing list rendering including virtualization and key strategies.",
+            description: "Techniques for optimized list rendering.",
             route: "/techniques/list-rendering",
             isImplemented: false
         },
         {
             title: "Component Splitting",
-            description: "Learn how breaking components into smaller pieces can isolate re-renders and improve performance.",
+            description: "How breaking components into smaller pieces can help isolate re-renders and improve performance.",
             route: "/techniques/component-splitting",
-            isImplemented: false
-        },
-        {
-            title: "State Colocation",
-            description: "Discover how moving state closer to where it's used can reduce unnecessary re-renders.",
-            route: "/techniques/state-colocation",
             isImplemented: false
         }
     ];
