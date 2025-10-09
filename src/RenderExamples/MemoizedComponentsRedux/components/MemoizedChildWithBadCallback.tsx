@@ -9,7 +9,6 @@ const MemoizedChildWithBadCallback = memo(() => {
     const count1 = useAppSelector(selectCount1);
     const expensiveValue = useAppSelector(selectExpensiveValue);
     
-    // This demonstrates the "bad" pattern - creating a new function on every render
     const handleIncrement = () => dispatch(incrementCount1());
     
     return (
