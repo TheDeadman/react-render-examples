@@ -6,7 +6,8 @@ import { codeSnippets, explanations } from './codeSnippets';
 import RegularChild from './components/RegularChild';
 import MemoizedChild from './components/MemoizedChild';
 import MemoizedChildWithBadCallback from './components/MemoizedChildWithBadCallback';
-import ExpensiveComponent from './components/ExpensiveComponent';
+import ExpensiveComponentBad from './components/ExpensiveComponentBad';
+import ExpensiveComponentGood from './components/ExpensiveComponentGood';
 import ComponentLabel from './components/ComponentLabel';
 import ColorLegend from './components/ColorLegend';
 import ParentControls from './components/ParentControls';
@@ -87,12 +88,6 @@ const MemoizedComponentsExample: React.FC = () => {
                     </Grid>
 
                 <Grid item xs={12} md={6}>
-                    <ComponentLabel color="#ba68c8">
-                        <ExpensiveComponent multiplier={multiplier} />
-                    </ComponentLabel>
-                </Grid>
-
-                <Grid item xs={12} md={6}>
                     <ComponentLabel color="#f44336">
                         <RegularChild 
                             value={count1} 
@@ -119,6 +114,18 @@ const MemoizedComponentsExample: React.FC = () => {
                             onIncrement={handleIncrement2} 
                             expensiveValue={expensiveValue} 
                         />
+                    </ComponentLabel>
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                    <ComponentLabel color="#f44336">
+                        <ExpensiveComponentBad multiplier={multiplier} />
+                    </ComponentLabel>
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                    <ComponentLabel color="#66bb6a">
+                        <ExpensiveComponentGood multiplier={multiplier} />
                     </ComponentLabel>
                 </Grid>
             </Grid>
@@ -159,9 +166,15 @@ const MemoizedComponentsExample: React.FC = () => {
                 />
 
                 <CodeViewer
-                    title="Expensive Component (useMemo for calculations)"
-                    code={codeSnippets.expensiveComponent}
-                    explanation={explanations.expensiveComponent}
+                    title="Expensive Component (WITHOUT useMemo - Bad Performance)"
+                    code={codeSnippets.expensiveComponentBad}
+                    explanation={explanations.expensiveComponentBad}
+                />
+
+                <CodeViewer
+                    title="Expensive Component (WITH useMemo - Good Performance)"
+                    code={codeSnippets.expensiveComponentGood}
+                    explanation={explanations.expensiveComponentGood}
                 />
             </Box>
             </Box>

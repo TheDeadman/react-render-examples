@@ -20,7 +20,10 @@ const ObservationGuide: React.FC = () => {
                 • <strong>Memoized Child (with useCallback):</strong> Only re-renders when count2 or expensiveValue actually changes
             </Typography>
             <Typography variant="body2" paragraph>
-                • ExpensiveComponent shows the difference between memoized and non-memoized calculations
+                • <strong>Non-Memoized Expensive Component (red):</strong> Recalculates on every render - check console logs!
+            </Typography>
+            <Typography variant="body2" paragraph>
+                • <strong>Memoized Expensive Component (green):</strong> Only recalculates when multiplier changes
             </Typography>
             <Typography variant="body2">
                 • Check the browser console to see when expensive calculations occur

@@ -43,7 +43,7 @@ const RenderCount = ({ componentName = 'Component' }) => {
     }, [])
 
     if (shouldBlockThread) {
-        console.log("WILL BLOCK!")
+        // console.log("WILL BLOCK!")
         blockMainThread(delay);
     }
     useEffect(() => {
