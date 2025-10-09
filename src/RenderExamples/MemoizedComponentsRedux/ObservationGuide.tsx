@@ -5,28 +5,31 @@ const ObservationGuide: React.FC = () => {
     return (
         <Box sx={{ mt: 4, p: 3, backgroundColor: '#1e1e1e', borderRadius: 1, border: '1px solid #333' }}>
             <Typography variant="h6" gutterBottom>
-                What to Observe:
+                What to Observe with Redux:
             </Typography>
             <Typography variant="body2" paragraph>
-                • Type in "Unrelated State" field - notice which components re-render
+                • Type in "Unrelated State" field - notice NO child components re-render! Redux only re-renders components when their subscribed state changes
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Regular Child:</strong> Always re-renders. It has no React.memo and is not getting a memoized function prop.
+                • <strong>Regular Child (Red):</strong> Re-renders when count1 or multiplier changes (subscribed via selectCount1 and selectExpensiveValue)
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Child + Non-Memoized Function:</strong> Still re-renders every time because it receives a new function reference, even though it's wrapped in React.memo.
+                • <strong>Memoized Child + Non-Memoized Function (Orange):</strong> React.memo works with Redux! Only re-renders when count1 or multiplier changes, not on unrelated state
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Child (with useCallback):</strong> Only re-renders when count1 or expensiveValue actually changes
+                • <strong>Memoized Child (Green):</strong> React.memo works perfectly! Only re-renders when subscribed state (count1 or multiplier) actually changes
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Non-Memoized Expensive Component:</strong> Recalculates on every render - check console logs
+                • <strong>Expensive Components (Red & Purple):</strong> Only re-render when multiplier changes since they only subscribe to selectMultiplier
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Expensive Component:</strong> Only recalculates when multiplier changes
+                • <strong>Key Redux Insight:</strong> Components only re-render when state they subscribe to via useAppSelector changes - not all state changes
+            </Typography>
+            <Typography variant="body2" paragraph>
+                • <strong>The difference:</strong> ExpensiveComponentBad recalculates on every render, ExpensiveComponentGood uses useMemo to prevent unnecessary calculations
             </Typography>
             <Typography variant="body2">
-                • Check the browser console to see when expensive calculations occur
+                • <strong>Redux + React.memo:</strong> Works great together! Redux's selective subscriptions + React.memo provide efficient re-rendering
             </Typography>
         </Box>
     );

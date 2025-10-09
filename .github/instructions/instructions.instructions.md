@@ -6,3 +6,5 @@ The goal of this repository is to demonstrate how react rendering works with dif
 Each component should contain a render counter to display how many times it has been rendered. This will help illustrate the differences in rendering behavior between the various state management libraries.
 
 No "!" in code snippets or text.
+
+No exclamation points in code snippets or text.

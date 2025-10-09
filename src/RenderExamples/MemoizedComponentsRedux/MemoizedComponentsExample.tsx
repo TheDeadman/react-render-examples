@@ -50,8 +50,9 @@ const MemoizedComponentsExample: React.FC = () => {
                         Memoized Components Example (Redux)
                     </Typography>
                     <Typography variant="body1" paragraph>
-                        This example demonstrates the same optimizations as the props version, but using Redux for state management.
-                        Notice how Redux affects rendering behavior differently than Context or props.
+                        This example demonstrates how Redux works efficiently with React rendering optimization patterns.
+                        Components using useAppSelector only re-render when the specific state they subscribe to changes.
+                        Combined with React.memo, this creates an efficient rendering strategy where components only update when necessary.
                     </Typography>
                     
                     {/* Color Legend */}
@@ -102,29 +103,30 @@ const MemoizedComponentsExample: React.FC = () => {
                     Code Examples & Explanations
                 </Typography>
                 <Typography variant="body1" paragraph>
-                    Toggle the code sections below to understand why each optimization works:
+                    Toggle the code sections below to understand how Redux selective subscriptions work with React.memo.
+                    Notice how components only re-render when their specific subscribed state changes:
                 </Typography>
 
                 <CodeViewer
-                    title="Parent Component with useCallback & useMemo"
+                    title="Parent Component"
                     code={codeSnippets.parentComponent}
                     explanation={explanations.parentComponent}
                 />
 
                 <CodeViewer
-                    title="Regular Child Component (Non-Memoized)"
+                    title="Regular Child Component"
                     code={codeSnippets.regularChild}
                     explanation={explanations.regularChild}
                 />
 
                 <CodeViewer
-                    title="Memoized Child Component (React.memo)"
+                    title="Memoized Child Component"
                     code={codeSnippets.memoizedChild}
                     explanation={explanations.memoizedChild}
                 />
 
                 <CodeViewer
-                    title="Memoized Child with Non-Memoized Callback (Still Re-renders)"
+                    title="Memoized Child with Non-Memoized Callback"
                     code={codeSnippets.memoizedChildWithBadCallback}
                     explanation={explanations.memoizedChildWithBadCallback}
                 />
