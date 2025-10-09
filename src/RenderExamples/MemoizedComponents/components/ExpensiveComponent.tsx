@@ -8,12 +8,12 @@ interface ExpensiveComponentProps {
 
 const ExpensiveComponent: React.FC<ExpensiveComponentProps> = ({ multiplier }) => {
     // Without useMemo - this will recalculate on every render
-    const expensiveValueBad = Array.from({ length: 1000 }, (_, i) => i * multiplier).reduce((a, b) => a + b, 0);
+    const expensiveValueBad = multiplier * 1000;
     
     // With useMemo - this will only recalculate when multiplier changes
     const expensiveValueGood = useMemo(() => {
         console.log('Calculating expensive value...');
-        return Array.from({ length: 1000 }, (_, i) => i * multiplier).reduce((a, b) => a + b, 0);
+        return multiplier * 1000;
     }, [multiplier]);
 
     return (

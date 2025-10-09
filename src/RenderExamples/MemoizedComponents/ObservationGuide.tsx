@@ -11,10 +11,10 @@ const ObservationGuide: React.FC = () => {
                 • Type in "Unrelated State" field - notice which components re-render
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Regular Child:</strong> Always re-renders (no React.memo)
+                • <strong>Regular Child:</strong> Always re-renders. It has no React.memo and is not getting a memoized function prop.
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Child + Non-Memoized Function:</strong> Still re-renders every time because it receives a new function reference, even though it's wrapped in React.memo!
+                • <strong>Memoized Child + Non-Memoized Function:</strong> Still re-renders every time because it receives a new function reference, even though it's wrapped in React.memo.
             </Typography>
             <Typography variant="body2" paragraph>
                 • <strong>Memoized Child (with useCallback):</strong> Only re-renders when count2 or expensiveValue actually changes

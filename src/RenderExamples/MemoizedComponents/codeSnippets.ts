@@ -107,7 +107,7 @@ interface ExpensiveComponentBadProps {
 
 function calculateExpensiveValue(multiplier: number): number {
     console.log('❌ BAD: Recalculating expensive value on every render!');
-    return Array.from({ length: 10000 }, (_, i) => i * multiplier).reduce((a, b) => a + b, 0);
+    return multiplier * 1000;
 }
 
 const ExpensiveComponentBad: React.FC<ExpensiveComponentBadProps> = ({ multiplier }) => {
@@ -150,10 +150,10 @@ import RenderCount from '../../../overall/RenderCount';
 interface ExpensiveComponentGoodProps {
     multiplier: number;
 }
-    
+
 function calculateExpensiveValue(multiplier: number): number {
     console.log('✅ GOOD: Calculating expensive value with useMemo - only when multiplier changes!');
-    return Array.from({ length: 10000 }, (_, i) => i * multiplier).reduce((a, b) => a + b, 0);
+    return multiplier * 1000;
 }
 
 const ExpensiveComponentGood: React.FC<ExpensiveComponentGoodProps> = ({ multiplier }) => {
