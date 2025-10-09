@@ -15,7 +15,6 @@ import ObservationGuide from './ObservationGuide';
 
 const MemoizedComponentsExample: React.FC = () => {
     const [count1, setCount1] = useState(0);
-    const [count2, setCount2] = useState(0);
     const [multiplier, setMultiplier] = useState(1);
     const [unrelatedState, setUnrelatedState] = useState('');
 
@@ -23,7 +22,7 @@ const MemoizedComponentsExample: React.FC = () => {
     const handleIncrement1Bad = () => setCount1(prev => prev + 1);
     
     // With useCallback - this function is memoized
-    const handleIncrement2 = useCallback(() => setCount2(prev => prev + 1), []);
+    const handleIncrement2 = useCallback(() => setCount1(prev => prev + 1), []);
 
     // Expensive computation that only depends on count1
     const expensiveValue = useMemo(() => {
@@ -83,7 +82,6 @@ const MemoizedComponentsExample: React.FC = () => {
                             multiplier={multiplier}
                             onMultiplierChange={setMultiplier}
                             count1={count1}
-                            count2={count2}
                         />
                     </Grid>
 
@@ -110,7 +108,7 @@ const MemoizedComponentsExample: React.FC = () => {
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#66bb6a">
                         <MemoizedChild 
-                            value={count2} 
+                            value={count1} 
                             onIncrement={handleIncrement2} 
                             expensiveValue={expensiveValue} 
                         />

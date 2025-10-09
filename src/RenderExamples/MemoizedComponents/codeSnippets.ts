@@ -157,7 +157,6 @@ import RenderCount from '../../overall/RenderCount';
 
 const MemoizedComponentsExample: React.FC = () => {
     const [count1, setCount1] = useState(0);
-    const [count2, setCount2] = useState(0);
     const [multiplier, setMultiplier] = useState(1);
     const [unrelatedState, setUnrelatedState] = useState('');
 
@@ -165,7 +164,7 @@ const MemoizedComponentsExample: React.FC = () => {
     const handleIncrement1Bad = () => setCount1(prev => prev + 1);
     
     // ✅ GOOD: Function is memoized and stays the same
-    const handleIncrement2 = useCallback(() => setCount2(prev => prev + 1), []);
+    const handleIncrement2 = useCallback(() => setCount1(prev => prev + 1), []);
 
     // ✅ GOOD: Expensive computation that only runs when count1 changes
     const expensiveValue = useMemo(() => {
@@ -191,7 +190,7 @@ const MemoizedComponentsExample: React.FC = () => {
             
             {/* Optimized child - only re-renders when props actually change */}
             <MemoizedChild 
-                value={count2} 
+                value={count1} 
                 onIncrement={handleIncrement2}     // Memoized function reference
                 expensiveValue={expensiveValue} 
             />

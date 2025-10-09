@@ -7,7 +7,6 @@ interface ParentControlsProps {
     multiplier: number;
     onMultiplierChange: (value: number) => void;
     count1: number;
-    count2: number;
 }
 
 const ParentControls: React.FC<ParentControlsProps> = ({
@@ -15,8 +14,7 @@ const ParentControls: React.FC<ParentControlsProps> = ({
     onUnrelatedStateChange,
     multiplier,
     onMultiplierChange,
-    count1,
-    count2
+    count1
 }) => {
     return (
         <Paper 
@@ -67,7 +65,6 @@ const ParentControls: React.FC<ParentControlsProps> = ({
                     }}
                 />
                 <Typography><strong>Count 1:</strong> {count1}</Typography>
-                <Typography><strong>Count 2:</strong> {count2}</Typography>
             </Box>
         </Paper>
     );
