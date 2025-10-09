@@ -50,6 +50,57 @@ export const MemoizedComponentsProvider: React.FC<{ children: ReactNode }> = ({ 
 // Context API creates new object references on every render,
 // which breaks React.memo() optimizations for consumers`,
 
+  parentComponentContext: `// MemoizedComponentsContextExample.tsx - Parent component using Context
+import React from 'react';
+import { Box, Typography, Container, Grid } from '@mui/material';
+import RenderCount from '../../overall/RenderCount';
+import { MemoizedComponentsProvider } from './context';
+import RegularChildContext from './components/RegularChildContext';
+import MemoizedChildContext from './components/MemoizedChildContext';
+import MemoizedChildWithBadCallbackContext from './components/MemoizedChildWithBadCallbackContext';
+import ExpensiveComponentBadContext from './components/ExpensiveComponentBadContext';
+import ExpensiveComponentGoodContext from './components/ExpensiveComponentGoodContext';
+import ParentControlsContext from './components/ParentControlsContext';
+
+const MemoizedComponentsExampleContent: React.FC = () => {
+    return (
+        <Container maxWidth="lg">
+            <RenderCount componentName="MemoizedComponentsContextProvider" />
+            <Typography variant="h4" gutterBottom>
+                Memoized Components Example (React Context)
+            </Typography>
+            
+            <Grid container spacing={3}>
+                {/* Parent controls for managing state */}
+                <ParentControlsContext />
+                
+                {/* All child components get state from Context, not props */}
+                <RegularChildContext />
+                <MemoizedChildWithBadCallbackContext />
+                <MemoizedChildContext />
+                
+                {/* Expensive computation examples */}
+                <ExpensiveComponentBadContext />
+                <ExpensiveComponentGoodContext />
+            </Grid>
+        </Container>
+    );
+};
+
+const MemoizedComponentsContextExample: React.FC = () => {
+    return (
+        <MemoizedComponentsProvider>
+            <MemoizedComponentsExampleContent />
+        </MemoizedComponentsProvider>
+    );
+};
+
+export default MemoizedComponentsContextExample;
+
+// Context pattern: Provider wraps all consumers
+// State management is centralized in the provider
+// All consumers re-render when ANY context value changes`,
+
   regularChildContext: `// RegularChildContext.tsx - Non-memoized child using Context
 import React from 'react';
 import { Paper, Typography, Button } from '@mui/material';
@@ -109,6 +160,36 @@ export default MemoizedChildContext;
 
 // React.memo() doesn't help with Context because the context value 
 // object is recreated on every render, breaking memoization`,
+
+  memoizedChildWithBadCallbackContext: `// MemoizedChildWithBadCallbackContext.tsx - Memoized + non-memoized function (Context)
+import React, { memo } from 'react';
+import { Paper, Typography, Button } from '@mui/material';
+import RenderCount from '../../../overall/RenderCount';
+import { useMemoizedComponentsContext } from '../context';
+
+const MemoizedChildWithBadCallbackContext = memo(() => {
+    const { count1, handleIncrement1Bad, expensiveValue } = useMemoizedComponentsContext();
+
+    return (
+        <Paper>
+            <RenderCount componentName="MemoizedChildWithBadCallbackContext" />
+            <Typography variant="h6">
+                Memoized Child + Non-Memoized Function (Context)
+            </Typography>
+            <Typography>⚠️ React.memo + Context + Non-Memoized Function = Always re-renders!</Typography>
+            <Typography>Value: {count1}</Typography>
+            <Typography>Expensive Value: {expensiveValue}</Typography>
+            <Button onClick={handleIncrement1Bad} variant="contained">
+                Increment
+            </Button>
+        </Paper>
+    );
+});
+
+export default MemoizedChildWithBadCallbackContext;
+
+// Even with React.memo(), this component re-renders on every context change
+// Context breaks memoization regardless of function memoization strategies`,
 
   expensiveComponentBadContext: `// ExpensiveComponentBadContext.tsx - Non-memoized expensive calculation
 import React from 'react';
@@ -179,9 +260,13 @@ export default ExpensiveComponentGoodContext;
 export const explanationsContext = {
   context: "React Context creates a provider that shares state across components without prop drilling. However, when ANY value in the context changes, ALL consumers re-render because the context value object is recreated. This breaks React.memo() optimizations and can cause performance issues in large applications.",
   
+  parentComponentContext: "The Context parent component demonstrates how React Context shifts state management from local state and props to a centralized provider. The provider wraps all consumers and manages shared state. Unlike props-based examples, child components get data directly from context rather than through prop passing.",
+  
   regularChildContext: "This component behaves the same as the props version - it re-renders on every context change because it's not wrapped in React.memo(). The difference is that it gets data from context instead of props.",
   
   memoizedChildContext: "This demonstrates the key limitation of React Context: even though this component is wrapped in React.memo(), it still re-renders on EVERY context change. This happens because the context provider creates a new value object on each render, breaking memoization.",
+  
+  memoizedChildWithBadCallbackContext: "This component shows that with Context, even the distinction between memoized and non-memoized functions becomes irrelevant for preventing re-renders. React.memo() is completely ineffective with Context because context consumers always re-render when the context value changes, regardless of optimization strategies.",
   
   expensiveComponentBadContext: "This component shows how expensive calculations can become even more problematic with Context. The calculation runs on every context change, not just when the relevant data changes. This is why you should be careful about what you put in context.",
   

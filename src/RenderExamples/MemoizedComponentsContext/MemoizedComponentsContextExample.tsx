@@ -113,13 +113,25 @@ const MemoizedComponentsExampleContent: React.FC = () => {
                     />
 
                     <CodeViewerContext
+                        title="Parent Component (Context Provider Pattern)"
+                        code={codeSnippetsContext.parentComponentContext}
+                        explanation={explanationsContext.parentComponentContext}
+                    />
+
+                    <CodeViewerContext
                         title="Regular Child Component (Context Version)"
                         code={codeSnippetsContext.regularChildContext}
                         explanation={explanationsContext.regularChildContext}
                     />
 
                     <CodeViewerContext
-                        title="Memoized Child Component (Context Breaks React.memo!)"
+                        title="Memoized Child + Non-Memoized Function (Context Version)"
+                        code={codeSnippetsContext.memoizedChildWithBadCallbackContext}
+                        explanation={explanationsContext.memoizedChildWithBadCallbackContext}
+                    />
+
+                    <CodeViewerContext
+                        title="Memoized Child Component (Context Breaks React.memo)"
                         code={codeSnippetsContext.memoizedChildContext}
                         explanation={explanationsContext.memoizedChildContext}
                     />
