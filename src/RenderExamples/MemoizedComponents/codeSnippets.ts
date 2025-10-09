@@ -3,8 +3,6 @@
 export const codeSnippets = {
   regularChild: `// RegularChild.tsx - Non-memoized child component
 import React from 'react';
-import { Paper, Typography, Button } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 
 interface RegularChildProps {
     value: number;
@@ -18,30 +16,22 @@ const RegularChild: React.FC<RegularChildProps> = ({
     expensiveValue 
 }) => {
     return (
-        <Paper>
-            <RenderCount componentName="RegularChild" />
-            <Typography variant="h6">
-                Regular Child Component
-            </Typography>
-            <Typography>🔄 Always re-renders (no React.memo)</Typography>
-            <Typography>Value: {value}</Typography>
-            <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Button onClick={onIncrement} variant="contained">
+        <div>
+            <h3>Regular Child Component</h3>
+            <p>🔄 Always re-renders (no React.memo)</p>
+            <p>Value: {value}</p>
+            <p>Expensive Value: {expensiveValue}</p>
+            <button onClick={onIncrement}>
                 Increment
-            </Button>
-        </Paper>
+            </button>
+        </div>
     );
 };
 
-export default RegularChild;
-
-// This component will re-render every time the parent re-renders
-// because it's NOT wrapped in React.memo()`,
+export default RegularChild;`,
 
   memoizedChild: `// MemoizedChild.tsx - Memoized child component
 import React, { memo } from 'react';
-import { Paper, Typography, Button } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 
 interface MemoizedChildProps {
     value: number;
@@ -55,31 +45,24 @@ const MemoizedChild = memo<MemoizedChildProps>(({
     expensiveValue 
 }) => {
     return (
-        <Paper>
-            <RenderCount componentName="MemoizedChild" />
-            <Typography variant="h6">
-                Memoized Child Component
-            </Typography>
-            <Typography>✅ React.memo + useCallback = Optimized</Typography>
-            <Typography>Value: {value}</Typography>
-            <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Button onClick={onIncrement} variant="contained">
+        <div>
+            <h3>Memoized Child Component</h3>
+            <p>✅ React.memo + useCallback = Optimized</p>
+            <p>Value: {value}</p>
+            <p>Expensive Value: {expensiveValue}</p>
+            <button onClick={onIncrement}>
                 Increment
-            </Button>
-        </Paper>
+            </button>
+        </div>
     );
 });
 
 MemoizedChild.displayName = 'MemoizedChild';
-export default MemoizedChild;
 
-// React.memo() prevents re-renders when props haven't changed.
-// Combined with useCallback in parent = optimal performance`,
+export default MemoizedChild;`,
 
   expensiveComponentBad: `// ExpensiveComponentBad.tsx - Shows expensive calculation WITHOUT useMemo
 import React from 'react';
-import { Paper, Typography } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 
 interface ExpensiveComponentBadProps {
     multiplier: number;
@@ -95,27 +78,20 @@ const ExpensiveComponentBad: React.FC<ExpensiveComponentBadProps> = ({ multiplie
     const expensiveValue = calculateExpensiveValue(multiplier);
 
     return (
-        <Paper>
-            <RenderCount componentName="ExpensiveComponentBad" />
-            <Typography variant="h6">
-                ❌ Non-Memoized Expensive Component
-            </Typography>
-            <Typography>🔄 Recalculates on every render (expensive!)</Typography>
-            <Typography>Multiplier: {multiplier}</Typography>
-            <Typography>Expensive Value: {expensiveValue}</Typography>
-        </Paper>
+        <div>
+            <h3>❌ Non-Memoized Calculation</h3>
+            <p>🔄 Recalculates on every render (expensive!)</p>
+            <p>Multiplier: {multiplier}</p>
+            <p>Expensive Value: {expensiveValue}</p>
+            <small>Check console - this logs on every parent re-render!</small>
+        </div>
     );
 };
 
-export default ExpensiveComponentBad;
-
-// This component recalculates the expensive value on EVERY render
-// Even when unrelated state changes! Check the console logs.`,
+export default ExpensiveComponentBad;`,
 
   expensiveComponentGood: `// ExpensiveComponentGood.tsx - Shows expensive calculation WITH useMemo
 import React, { useMemo } from 'react';
-import { Paper, Typography } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 
 interface ExpensiveComponentGoodProps {
     multiplier: number;
@@ -133,78 +109,113 @@ const ExpensiveComponentGood: React.FC<ExpensiveComponentGoodProps> = ({ multipl
     }, [multiplier]);
 
     return (
-        <Paper>
-            <RenderCount componentName="ExpensiveComponentGood" />
-            <Typography variant="h6">
-                ✅ Memoized Expensive Component
-            </Typography>
-            <Typography>🧮 useMemo prevents expensive recalculations</Typography>
-            <Typography>Multiplier: {multiplier}</Typography>
-            <Typography>Expensive Value: {expensiveValue}</Typography>
-        </Paper>
+        <div>
+            <h3>✅ Memoized Calculation</h3>
+            <p>🧮 useMemo prevents expensive recalculations</p>
+            <p>Multiplier: {multiplier}</p>
+            <p>Expensive Value: {expensiveValue}</p>
+            <small>Check console - this only logs when multiplier changes!</small>
+        </div>
     );
 };
 
-export default ExpensiveComponentGood;
-
-// useMemo() memoizes the result and only recalculates when dependencies change.
-// Change the multiplier vs unrelated state to see the difference!`,
+export default ExpensiveComponentGood;`,
 
   parentComponent: `// MemoizedComponentsExample.tsx - Parent component with hooks
 import React, { useState, useMemo, useCallback } from 'react';
-import { Box, Typography, Container, Grid } from '@mui/material';
-import RenderCount from '../../overall/RenderCount';
+import RegularChild from './components/RegularChild';
+import MemoizedChild from './components/MemoizedChild';
+import MemoizedChildWithBadCallback from './components/MemoizedChildWithBadCallback';
+import ExpensiveComponentBad from './components/ExpensiveComponentBad';
+import ExpensiveComponentGood from './components/ExpensiveComponentGood';
+import ParentControls from './components/ParentControls';
 
 const MemoizedComponentsExample: React.FC = () => {
     const [count1, setCount1] = useState(0);
     const [multiplier, setMultiplier] = useState(1);
     const [unrelatedState, setUnrelatedState] = useState('');
 
-    // ❌ BAD: Creates a new function on every render
+    // Without useCallback - this creates a new function on every render
     const handleIncrement1Bad = () => setCount1(prev => prev + 1);
     
-    // ✅ GOOD: Function is memoized and stays the same
+    // With useCallback - this function is memoized
     const handleIncrement2 = useCallback(() => setCount1(prev => prev + 1), []);
 
-    // ✅ GOOD: Expensive computation that only runs when count1 changes
+    // Expensive computation that only depends on count1
     const expensiveValue = useMemo(() => {
         console.log('Computing expensive value...');
         return count1 * 1000;
     }, [count1]);
 
     return (
-        <Container>
-            {/* Regular child - will always re-render */}
-            <RegularChild 
-                value={count1} 
-                onIncrement={handleIncrement1Bad}  // New function every render!
-                expensiveValue={expensiveValue} 
-            />
-            
-            {/* Memoized child with bad callback - still re-renders! */}
-            <MemoizedChildWithBadCallback 
-                value={count1} 
-                onIncrement={handleIncrement1Bad}  // Same non-memoized function!
-                expensiveValue={expensiveValue} 
-            />
-            
-            {/* Optimized child - only re-renders when props actually change */}
-            <MemoizedChild 
-                value={count1} 
-                onIncrement={handleIncrement2}     // Memoized function reference
-                expensiveValue={expensiveValue} 
-            />
-        </Container>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <div>
+                <div>
+                    PARENT COMPONENT
+                </div>
+                
+                <div>
+                    <h2>
+                        Memoized Components Example
+                    </h2>
+                    <p>
+                        This example demonstrates React.memo, useMemo, and useCallback optimizations.
+                        Watch the render counters to see which components re-render when state changes.
+                    </p>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '24px' }}>
+                    <div>
+                        <ParentControls
+                            unrelatedState={unrelatedState}
+                            onUnrelatedStateChange={setUnrelatedState}
+                            multiplier={multiplier}
+                            onMultiplierChange={setMultiplier}
+                            count1={count1}
+                        />
+                    </div>
+
+                <div>
+                    <RegularChild 
+                        value={count1} 
+                        onIncrement={handleIncrement1Bad} 
+                        expensiveValue={expensiveValue} 
+                    />
+                </div>
+
+                <div>
+                    <MemoizedChildWithBadCallback 
+                        value={count1} 
+                        onIncrement={handleIncrement1Bad}
+                        expensiveValue={expensiveValue} 
+                    />
+                </div>
+
+                <div>
+                    <MemoizedChild 
+                        value={count1} 
+                        onIncrement={handleIncrement2} 
+                        expensiveValue={expensiveValue} 
+                    />
+                </div>
+
+                <div>
+                    <ExpensiveComponentBad multiplier={multiplier} />
+                </div>
+
+                <div>
+                    <ExpensiveComponentGood multiplier={multiplier} />
+                </div>
+            </div>
+            </div>
+        </div>
     );
 };
 
-// useCallback() + useMemo() + React.memo() = Optimal rendering performance
-// The key is that ALL THREE must work together!`,
+export default MemoizedComponentsExample;`,
 
   memoizedChildWithBadCallback: `// MemoizedChildWithBadCallback.tsx - Shows why React.memo alone isn't enough
 import React, { memo } from 'react';
-import { Paper, Typography, Button } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 
 interface MemoizedChildWithBadCallbackProps {
     value: number;
@@ -218,34 +229,25 @@ const MemoizedChildWithBadCallback = memo<MemoizedChildWithBadCallbackProps>(({
     expensiveValue 
 }) => {
     return (
-        <Paper>
-            <RenderCount componentName="MemoizedChildWithBadCallback" />
-            <Typography variant="h6">
+        <div>
+            <h3>
                 Memoized Child + Non-Memoized Function
-            </Typography>
-            <Typography>⚠️ React.memo without useCallback = Still re-renders!</Typography>
-            <Typography>Value: {value}</Typography>
-            <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Button onClick={onIncrement} variant="contained">
+            </h3>
+            <p>
+                ⚠️ React.memo but new function props = Still re-renders
+            </p>
+            <p>Value: {value}</p>
+            <p>Expensive Value: {expensiveValue}</p>
+            <button onClick={onIncrement}>
                 Increment
-            </Button>
-        </Paper>
+            </button>
+        </div>
     );
 });
 
 MemoizedChildWithBadCallback.displayName = 'MemoizedChildWithBadCallback';
-export default MemoizedChildWithBadCallback;
 
-// Usage in parent (this causes the problem):
-<MemoizedChildWithBadCallback 
-    value={count1} 
-    onIncrement={handleIncrement1Bad}  // ❌ New function every render!
-    expensiveValue={expensiveValue} 
-/>
-
-// Even with React.memo(), this component re-renders every time because
-// the onIncrement prop is a new function reference each render.
-// React.memo() does shallow comparison - new function = re-render!`
+export default MemoizedChildWithBadCallback;`
 };
 
 export const explanations = {

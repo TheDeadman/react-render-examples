@@ -3,8 +3,6 @@
 export const codeSnippets = {
   regularChild: `// RegularChild.tsx - Non-memoized child component using Redux
 import React from 'react';
-import { Paper, Typography, Button } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { selectCount1, selectExpensiveValue, incrementCount1 } from '../memoizedComponents.slice';
 
@@ -14,18 +12,17 @@ const RegularChild: React.FC = () => {
     const expensiveValue = useAppSelector(selectExpensiveValue);
     
     return (
-        <Paper>
-            <RenderCount componentName="RegularChildRedux" />
-            <Typography variant="h6">
+        <div>
+            <h3>
                 Regular Child Component (Redux)
-            </Typography>
-            <Typography>🔄 Always re-renders on ANY Redux state change</Typography>
-            <Typography>Value: {count1}</Typography>
-            <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Button onClick={() => dispatch(incrementCount1())} variant="contained">
+            </h3>
+            <p>🔄 Always re-renders on ANY Redux state change</p>
+            <p>Value: {count1}</p>
+            <p>Expensive Value: {expensiveValue}</p>
+            <button onClick={() => dispatch(incrementCount1())}>
                 Increment
-            </Button>
-        </Paper>
+            </button>
+        </div>
     );
 };
 
@@ -81,8 +78,6 @@ export default memoizedComponentsSlice.reducer;`,
 
   memoizedChild: `// MemoizedChild.tsx - Memoized child component using Redux
 import React, { memo } from 'react';
-import { Paper, Typography, Button } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { selectCount1, selectExpensiveValue, incrementCount1 } from '../memoizedComponents.slice';
 
@@ -92,18 +87,17 @@ const MemoizedChild = memo(() => {
     const expensiveValue = useAppSelector(selectExpensiveValue);
     
     return (
-        <Paper>
-            <RenderCount componentName="MemoizedChildRedux" />
-            <Typography variant="h6">
+        <div>
+            <h3>
                 Memoized Child Component (Redux)
-            </Typography>
-            <Typography>⚠️ React.memo + Redux = Still re-renders on ANY state change!</Typography>
-            <Typography>Value: {count1}</Typography>
-            <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Button onClick={() => dispatch(incrementCount1())} variant="contained">
+            </h3>
+            <p>⚠️ React.memo + Redux = Still re-renders on ANY state change!</p>
+            <p>Value: {count1}</p>
+            <p>Expensive Value: {expensiveValue}</p>
+            <button onClick={() => dispatch(incrementCount1())}>
                 Increment
-            </Button>
-        </Paper>
+            </button>
+        </div>
     );
 });
 
@@ -115,8 +109,6 @@ export default MemoizedChild;
 
   expensiveComponentBad: `// ExpensiveComponentBad.tsx - Expensive calculation WITHOUT useMemo (Redux)
 import React from 'react';
-import { Paper, Typography } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import { useAppSelector } from '../../../store/hooks';
 import { selectMultiplier } from '../memoizedComponents.slice';
 
@@ -132,25 +124,14 @@ const ExpensiveComponentBad: React.FC = () => {
     const expensiveValue = calculateExpensiveValue(multiplier);
 
     return (
-        <Paper>
-            <RenderCount componentName="ExpensiveComponentBadRedux" />
-            <Typography variant="h6">
+        <div>
+            <h3>
                 ❌ Non-Memoized Calculation (Redux)
-            </Typography>
-            <Typography>🔄 Recalculates on every render (expensive!)</Typography>
-            <Typography>Multiplier: {multiplier}</Typography>
-            <Typography>Expensive Value: {expensiveValue}</Typography>
-        </Paper>
-    );
-};
-
-export default ExpensiveComponentBad;
-                ❌ Non-Memoized Expensive Component
-            </Typography>
-            <Typography>🔄 Recalculates on every render (expensive!)</Typography>
-            <Typography>Multiplier: {multiplier}</Typography>
-            <Typography>Expensive Value: {expensiveValue}</Typography>
-        </Paper>
+            </h3>
+            <p>🔄 Recalculates on every render (expensive!)</p>
+            <p>Multiplier: {multiplier}</p>
+            <p>Expensive Value: {expensiveValue}</p>
+        </div>
     );
 };
 
@@ -161,8 +142,6 @@ export default ExpensiveComponentBad;
 
   expensiveComponentGood: `// ExpensiveComponentGood.tsx - Uses memoized selector in Redux
 import React from 'react';
-import { Paper, Typography } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import { useAppSelector } from '../../../store/hooks';
 import { selectExpensiveValue, selectMultiplier } from '../memoizedComponents.slice';
 
@@ -171,15 +150,14 @@ const ExpensiveComponentGood: React.FC = () => {
     const expensiveValue = useAppSelector(selectExpensiveValue); // Memoized in selector
     
     return (
-        <Paper>
-            <RenderCount componentName="ExpensiveComponentGoodRedux" />
-            <Typography variant="h6">
+        <div>
+            <h3>
                 ✅ Memoized Calculation (Redux)
-            </Typography>
-            <Typography>🧮 Calculation memoized in Redux selector</Typography>
-            <Typography>Multiplier: {multiplier}</Typography>
-            <Typography>Expensive Value: {expensiveValue}</Typography>
-        </Paper>
+            </h3>
+            <p>🧮 Calculation memoized in Redux selector</p>
+            <p>Multiplier: {multiplier}</p>
+            <p>Expensive Value: {expensiveValue}</p>
+        </div>
     );
 };
 
@@ -190,8 +168,6 @@ export default ExpensiveComponentGood;
 
   parentComponent: `// MemoizedComponentsExample.tsx - Redux Parent component
 import React from 'react';
-import { Box, Typography, Container, Grid } from '@mui/material';
-import RenderCount from '../../overall/RenderCount';
 import RegularChild from './components/RegularChild';
 import MemoizedChild from './components/MemoizedChild';
 import MemoizedChildWithBadCallback from './components/MemoizedChildWithBadCallback';
@@ -201,13 +177,12 @@ import ParentControls from './components/ParentControls';
 
 const MemoizedComponentsExample: React.FC = () => {
     return (
-        <Container maxWidth="lg">
-            <RenderCount componentName="MemoizedComponentsExample" />
-            <Typography variant="h4" gutterBottom>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <h2>
                 Memoized Components Example (Redux)
-            </Typography>
+            </h2>
             
-            <Grid container spacing={3}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '24px' }}>
                 {/* Parent controls for managing Redux state */}
                 <ParentControls />
                 
@@ -219,18 +194,18 @@ const MemoizedComponentsExample: React.FC = () => {
                 {/* Expensive computation examples with Redux */}
                 <ExpensiveComponentBad />
                 <ExpensiveComponentGood />
-            </Grid>
-        </Container>
+            </div>
+        </div>
     );
 };
 
-// useCallback() + useMemo() + React.memo() = Optimal rendering performance
-// The key is that ALL THREE must work together!`,
+export default MemoizedComponentsExample;
+
+// Redux eliminates the need for prop drilling but memoization patterns still apply
+// Components still re-render when their selected Redux state changes`,
 
   memoizedChildWithBadCallback: `// MemoizedChildWithBadCallback.tsx - Redux version with non-memoized function
 import React, { memo } from 'react';
-import { Paper, Typography, Button } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { selectCount1, selectExpensiveValue, incrementCount1 } from '../memoizedComponents.slice';
 
@@ -243,34 +218,25 @@ const MemoizedChildWithBadCallback = memo(() => {
     const handleIncrement = () => dispatch(incrementCount1());
     
     return (
-        <Paper>
-            <RenderCount componentName="MemoizedChildWithBadCallbackRedux" />
-            <Typography variant="h6">
+        <div>
+            <h3>
                 Memoized Child + Non-Memoized Function (Redux)
-            </Typography>
-            <Typography>⚠️ React.memo + Redux + Non-memoized function = Still re-renders!</Typography>
-            <Typography>Value: {count1}</Typography>
-            <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Button onClick={handleIncrement} variant="contained">
+            </h3>
+            <p>⚠️ React.memo + Redux + Non-memoized function = Still re-renders!</p>
+            <p>Value: {count1}</p>
+            <p>Expensive Value: {expensiveValue}</p>
+            <button onClick={handleIncrement}>
                 Increment
-            </Button>
-        </Paper>
+            </button>
+        </div>
     );
 });
 
 MemoizedChildWithBadCallback.displayName = 'MemoizedChildWithBadCallback';
 export default MemoizedChildWithBadCallback;
 
-// Usage in parent (this causes the problem):
-<MemoizedChildWithBadCallback 
-    value={count1} 
-    onIncrement={handleIncrement1Bad}  // ❌ New function every render!
-    expensiveValue={expensiveValue} 
-/>
-
-// Even with React.memo(), this component re-renders every time because
-// the onIncrement prop is a new function reference each render.
-// React.memo() does shallow comparison - new function = re-render!`
+// Even with React.memo(), this component re-renders because Redux state changes
+// Plus creating new function references on every render prevents memoization benefits`
 };
 
 export const explanations = {
