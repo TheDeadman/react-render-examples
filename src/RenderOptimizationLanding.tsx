@@ -56,6 +56,12 @@ const RenderOptimizationLanding: React.FC = () => {
             isImplemented: true
         },
         {
+            title: "Memoized Components (Context)",
+            description: "See how React Context affects the same memoization techniques and why context can break React.memo optimizations.",
+            route: "/techniques/memoized-components-context",
+            isImplemented: true
+        },
+        {
             title: "Context vs Redux",
             description: "Compare rendering behavior between React Context and Redux when managing shared state across components.",
             route: "/techniques/context-vs-redux",
