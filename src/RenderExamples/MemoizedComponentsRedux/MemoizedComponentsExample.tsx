@@ -17,6 +17,7 @@ import styles from 'MemoizedComponents.module.scss';
 const MemoizedComponentsExample: React.FC = () => {
     return (
         <Container maxWidth="lg">
+            {/* Remove START */}
             <Box className={styles.examplePanel}>
                 {/* Parent Component Label */}
                 <Box className={styles.parentLabel}>
@@ -40,36 +41,48 @@ const MemoizedComponentsExample: React.FC = () => {
 
                 <Grid container>
                     <Grid item xs={12} md={6}>
+                        {/* Remove END */}
                         <ParentControls/>
+                        {/* Remove START */}
                     </Grid>
 
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#f44336">
+                        {/* Remove END */}
                         <RegularChild />
+                        {/* Remove START */}
                     </ComponentLabel>
                 </Grid>
 
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#ffb74d">
+                        {/* Remove END */}
                         <MemoizedChildWithBadCallback />
+                        {/* Remove START */}
                     </ComponentLabel>
                 </Grid>
 
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#66bb6a">
+                        {/* Remove END */}
                         <MemoizedChild />
+                        {/* Remove START */}
                     </ComponentLabel>
                 </Grid>
 
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#f44336">
+                        {/* Remove END */}
                         <ExpensiveComponentBad />
+                        {/* Remove START */}
                     </ComponentLabel>
                 </Grid>
 
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#ba68c8">
+                        {/* Remove END */}
                         <ExpensiveComponentGood />
+                        {/* Remove START */}
                     </ComponentLabel>
                 </Grid>
             </Grid>
@@ -123,6 +136,7 @@ const MemoizedComponentsExample: React.FC = () => {
                 />
             </Box>
             </Box>
+            {/* Remove END */}
         </Container>
     );
 };

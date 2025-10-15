@@ -3,7 +3,7 @@ import { Box, Typography, Container, Grid } from '@mui/material';
 import RenderCount from '../../overall/RenderCount';
 import { MemoizedComponentsProvider } from './context';
 import CodeViewerContext from './CodeViewerContext';
-import { codeSnippetsContext, explanationsContext } from './codeSnippetsContext';
+import { codeSnippetsContext, explanationsContext } from './codeSnippets';
 import RegularChildContext from './components/RegularChildContext';
 import MemoizedChildContext from './components/MemoizedChildContext';
 import MemoizedChildWithBadCallbackContext from './components/MemoizedChildWithBadCallbackContext';
@@ -18,6 +18,7 @@ import styles from 'MemoizedComponents.module.scss';
 const MemoizedComponentsExampleContent: React.FC = () => {
     return (
         <Container maxWidth="lg">
+            {/* Remove START */}
             <Box className={`${styles.examplePanel}`}>
                 {/* Context Provider Label */}
                 <Box className={styles.parentLabel}>
@@ -40,36 +41,48 @@ const MemoizedComponentsExampleContent: React.FC = () => {
 
                 <Grid container>
                     <Grid item xs={12} md={6}>
+                        {/* Remove END */}
                         <ParentControlsContext />
+                        {/* Remove START */}
                     </Grid>
 
                     <Grid item xs={12} md={6}>
                         <ComponentLabelContext color="#f44336">
+                            {/* Remove END */}
                             <RegularChildContext />
+                            {/* Remove START */}
                         </ComponentLabelContext>
                     </Grid>
 
                     <Grid item xs={12} md={6}>
                         <ComponentLabelContext color="#ffb74d">
+                            {/* Remove END */}
                             <MemoizedChildWithBadCallbackContext />
+                            {/* Remove START */}
                         </ComponentLabelContext>
                     </Grid>
 
                     <Grid item xs={12} md={6}>
                         <ComponentLabelContext color="#ffb74d">
+                            {/* Remove END */}
                             <MemoizedChildContext />
+                            {/* Remove START */}
                         </ComponentLabelContext>
                     </Grid>
 
                     <Grid item xs={12} md={6}>
                         <ComponentLabelContext color="#f44336">
+                            {/* Remove END */}
                             <ExpensiveComponentBadContext />
+                            {/* Remove START */}
                         </ComponentLabelContext>
                     </Grid>
 
                     <Grid item xs={12} md={6}>
                         <ComponentLabelContext color="#ba68c8">
+                            {/* Remove END */}
                             <ExpensiveComponentGoodContext />
+                            {/* Remove START */}
                         </ComponentLabelContext>
                     </Grid>
                 </Grid>
@@ -128,6 +141,7 @@ const MemoizedComponentsExampleContent: React.FC = () => {
                     />
                 </Box>
             </Box>
+                {/* Remove END */}
         </Container>
     );
 };

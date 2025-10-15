@@ -1,8 +1,7 @@
 // Code snippets for the MemoizedComponents Context example
 
 export const codeSnippetsContext = {
-  context: `// context.tsx - React Context for state management
-import React, { createContext, useContext, useState, useMemo, useCallback, ReactNode } from 'react';
+    context: `import React, { createContext, useContext, useState, useMemo, useCallback, ReactNode } from 'react';
 
 interface MemoizedComponentsContextType {
     count1: number;
@@ -26,10 +25,10 @@ export const MemoizedComponentsProvider: React.FC<MemoizedComponentsProviderProp
     const [multiplier, setMultiplier] = useState(1);
     const [unrelatedState, setUnrelatedState] = useState('');
 
-    // Without useCallback this creates a new function on every render
+    // Without useCallback - this creates a new function on every render
     const handleIncrement1Bad = () => setCount1(prev => prev + 1);
     
-    // With useCallback the function reference stays stable
+    // With useCallback - this function is memoized
     const handleIncrement2 = useCallback(() => setCount1(prev => prev + 1), []);
 
     // Expensive computation that only depends on count1
@@ -38,8 +37,7 @@ export const MemoizedComponentsProvider: React.FC<MemoizedComponentsProviderProp
         return count1 * 1000;
     }, [count1]);
 
-    // Context value is a new object on each render
-    const value = {
+        const value = {
         count1,
         multiplier,
         unrelatedState,
@@ -65,8 +63,8 @@ export const useMemoizedComponentsContext = () => {
     return context;
 };`,
 
-  parentComponentContext: `// MemoizedComponentsContextExample.tsx - Parent component using Context
-import React from 'react';
+  parentComponentContext: `import React from 'react';
+import { Container } from '@mui/material';
 import { MemoizedComponentsProvider } from './context';
 import RegularChildContext from './components/RegularChildContext';
 import MemoizedChildContext from './components/MemoizedChildContext';
@@ -77,43 +75,14 @@ import ParentControlsContext from './components/ParentControlsContext';
 
 const MemoizedComponentsExampleContent: React.FC = () => {
     return (
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <div>PARENT COMPONENT</div>
-
-            <div>
-                <h2>Memoized Components Example (React Context)</h2>
-                <p>
-                    This version mirrors the props example but lifts state into React Context.
-                    Notice how sharing state via context changes render behavior.
-                </p>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '24px' }}>
-                <div>
-                    <ParentControlsContext />
-                </div>
-
-                <div>
-                    <RegularChildContext />
-                </div>
-
-                <div>
-                    <MemoizedChildWithBadCallbackContext />
-                </div>
-
-                <div>
-                    <MemoizedChildContext />
-                </div>
-
-                <div>
-                    <ExpensiveComponentBadContext />
-                </div>
-
-                <div>
-                    <ExpensiveComponentGoodContext />
-                </div>
-            </div>
-        </div>
+        <Container maxWidth="lg">
+            <ParentControlsContext />
+            <RegularChildContext />
+            <MemoizedChildWithBadCallbackContext />
+            <MemoizedChildContext />
+            <ExpensiveComponentBadContext />
+            <ExpensiveComponentGoodContext />
+        </Container>
     );
 };
 
@@ -127,45 +96,63 @@ const MemoizedComponentsContextExample: React.FC = () => {
 
 export default MemoizedComponentsContextExample;`,
 
-  regularChildContext: `// RegularChildContext.tsx - Non-memoized child using Context
-import React from 'react';
+  regularChildContext: `import React from 'react';
+import { Paper, Typography, Button } from '@mui/material';
 import { useMemoizedComponentsContext } from '../context';
+import styles from 'MemoizedComponents.module.scss';
 
 const RegularChildContext: React.FC = () => {
     const { count1, handleIncrement1Bad, expensiveValue } = useMemoizedComponentsContext();
 
     return (
-        <div>
-            <h3>Regular Child Component (Context)</h3>
-            <p>🔄 Always re-renders (no React.memo)</p>
-            <p>Value: {count1}</p>
-            <p>Expensive Value: {expensiveValue}</p>
-            <button onClick={handleIncrement1Bad}>
+        <Paper className={\`\${styles.card} \${styles.cardRed}\`}>
+            <Typography variant="h6" className={\`\${styles.title} \${styles.titleRed}\`}>
+                Regular Child Component (Context)
+            </Typography>
+            <Typography variant="body2" className={styles.infoText}>
+                🔄 Always re-renders (no React.memo)
+            </Typography>
+            <Typography>Value: {count1}</Typography>
+            <Typography>Expensive Value: {expensiveValue}</Typography>
+            <Button 
+                onClick={handleIncrement1Bad} 
+                variant="contained" 
+                className={\`\${styles.button} \${styles.buttonRed}\`}
+            >
                 Increment
-            </button>
-        </div>
+            </Button>
+        </Paper>
     );
 };
 
 export default RegularChildContext;`,
 
-  memoizedChildContext: `// MemoizedChildContext.tsx - Memoized child using Context
-import React, { memo } from 'react';
+  memoizedChildContext: `import React, { memo } from 'react';
+import { Paper, Typography, Button } from '@mui/material';
 import { useMemoizedComponentsContext } from '../context';
+import styles from 'MemoizedComponents.module.scss';
 
 const MemoizedChildContext = memo(() => {
     const { count1, handleIncrement2, expensiveValue } = useMemoizedComponentsContext();
 
     return (
-        <div>
-            <h3>Memoized Child Component (Context)</h3>
-            <p>⚠️ React.memo + Context = Still re-renders when any context value changes</p>
-            <p>Value: {count1}</p>
-            <p>Expensive Value: {expensiveValue}</p>
-            <button onClick={handleIncrement2}>
+        <Paper className={\`\${styles.card} \${styles.cardOrange}\`}>
+            <Typography variant="h6" className={\`\${styles.title} \${styles.titleOrange}\`}>
+                Memoized Child Component (Context)
+            </Typography>
+            <Typography variant="body2" className={styles.infoText}>
+                ⚠️ React.memo + Context = Still re-renders when any context value changes
+            </Typography>
+            <Typography>Value: {count1}</Typography>
+            <Typography>Expensive Value: {expensiveValue}</Typography>
+            <Button 
+                onClick={handleIncrement2} 
+                variant="contained" 
+                className={\`\${styles.button} \${styles.buttonOrange}\`}
+            >
                 Increment
-            </button>
-        </div>
+            </Button>
+        </Paper>
     );
 });
 
@@ -173,23 +160,32 @@ MemoizedChildContext.displayName = 'MemoizedChildContext';
 
 export default MemoizedChildContext;`,
 
-  memoizedChildWithBadCallbackContext: `// MemoizedChildWithBadCallbackContext.tsx - Memoized child using a non-memoized function (Context)
-import React, { memo } from 'react';
+  memoizedChildWithBadCallbackContext: `import React, { memo } from 'react';
+import { Paper, Typography, Button } from '@mui/material';
 import { useMemoizedComponentsContext } from '../context';
+import styles from 'MemoizedComponents.module.scss';
 
 const MemoizedChildWithBadCallbackContext = memo(() => {
     const { count1, handleIncrement1Bad, expensiveValue } = useMemoizedComponentsContext();
 
     return (
-        <div>
-            <h3>Memoized Child + Non-Memoized Function (Context)</h3>
-            <p>⚠️ React.memo + Context + Non-Memoized Function = Always re-renders</p>
-            <p>Value: {count1}</p>
-            <p>Expensive Value: {expensiveValue}</p>
-            <button onClick={handleIncrement1Bad}>
+        <Paper className={\`\${styles.card} \${styles.cardOrange}\`}>
+            <Typography variant="h6" className={\`\${styles.title} \${styles.titleOrange}\`}>
+                Memoized Child + Non-Memoized Function (Context)
+            </Typography>
+            <Typography variant="body2" className={styles.infoText}>
+                ⚠️ React.memo + Context + Non-Memoized Function = Always re-renders
+            </Typography>
+            <Typography>Value: {count1}</Typography>
+            <Typography>Expensive Value: {expensiveValue}</Typography>
+            <Button 
+                onClick={handleIncrement1Bad} 
+                variant="contained" 
+                className={\`\${styles.button} \${styles.buttonOrange}\`}
+            >
                 Increment
-            </button>
-        </div>
+            </Button>
+        </Paper>
     );
 });
 
@@ -197,53 +193,67 @@ MemoizedChildWithBadCallbackContext.displayName = 'MemoizedChildWithBadCallbackC
 
 export default MemoizedChildWithBadCallbackContext;`,
 
-  expensiveComponentBadContext: `// ExpensiveComponentBadContext.tsx - Non-memoized expensive calculation
-import React from 'react';
+  expensiveComponentBadContext: `import React from 'react';
+import { Paper, Typography } from '@mui/material';
 import { useMemoizedComponentsContext } from '../context';
+import styles from 'MemoizedComponents.module.scss';
 
 const ExpensiveComponentBadContext: React.FC = () => {
     const { multiplier } = useMemoizedComponentsContext();
-
-    // This recalculates on every render
+    
+    // ❌ BAD: This will recalculate on every render
     const expensiveValue = (() => {
         console.log('❌ BAD (Context): Recalculating expensive value on every render');
         return multiplier * 1000;
     })();
 
     return (
-        <div>
-            <h3>❌ Non-Memoized Calculation (Context)</h3>
-            <p>🔄 Recalculates on every render (expensive)</p>
-            <p>Multiplier: {multiplier}</p>
-            <p>Expensive Value: {expensiveValue}</p>
-            <small>Check the console to see how often this logs when context updates</small>
-        </div>
+        <Paper className={\`\${styles.card} \${styles.cardRed}\`}>
+            <Typography variant="h6" className={\`\${styles.title} \${styles.titleRed}\`}>
+                ❌ Non-Memoized Calculation (Context)
+            </Typography>
+            <Typography variant="body2" className={styles.infoText}>
+                🔄 Recalculates on every render (expensive)
+            </Typography>
+            <Typography>Multiplier: {multiplier}</Typography>
+            <Typography>Expensive Value: {expensiveValue}</Typography>
+            <Typography variant="caption" className={\`\${styles.caption} \${styles.captionRed}\`}>
+                Check the console to see how often this logs when context updates
+            </Typography>
+        </Paper>
     );
 };
 
 export default ExpensiveComponentBadContext;`,
 
-  expensiveComponentGoodContext: `// ExpensiveComponentGoodContext.tsx - Memoized expensive calculation
-import React, { useMemo } from 'react';
+  expensiveComponentGoodContext: `import React, { useMemo } from 'react';
+import { Paper, Typography } from '@mui/material';
 import { useMemoizedComponentsContext } from '../context';
+import styles from 'MemoizedComponents.module.scss';
 
 const ExpensiveComponentGoodContext: React.FC = () => {
     const { multiplier } = useMemoizedComponentsContext();
-
-    // Only recalculates when multiplier changes
+    
+    // ✅ GOOD: This only recalculates when multiplier changes
     const expensiveValue = useMemo(() => {
         console.log('✅ GOOD (Context): Calculating expensive value with useMemo - only when multiplier changes');
         return multiplier * 1000;
     }, [multiplier]);
 
     return (
-        <div>
-            <h3>✅ Memoized Expensive Component (Context)</h3>
-            <p>🧮 useMemo prevents expensive recalculations</p>
-            <p>Multiplier: {multiplier}</p>
-            <p>Expensive Value: {expensiveValue}</p>
-            <small>Check the console to confirm that logging only occurs when multiplier changes</small>
-        </div>
+        <Paper className={\`\${styles.card} \${styles.cardPurple}\`}>
+            <Typography variant="h6" className={\`\${styles.title} \${styles.titlePurple}\`}>
+                ✅ Memoized Expensive Component (Context)
+            </Typography>
+            <Typography variant="body2" className={styles.infoText}>
+                🧮 useMemo prevents expensive recalculations
+            </Typography>
+            <Typography>Multiplier: {multiplier}</Typography>
+            <Typography>Expensive Value: {expensiveValue}</Typography>
+            <Typography variant="caption" className={\`\${styles.caption} \${styles.captionGreen}\`}>
+                Check the console to confirm that logging only occurs when multiplier changes
+            </Typography>
+        </Paper>
     );
 };
 
