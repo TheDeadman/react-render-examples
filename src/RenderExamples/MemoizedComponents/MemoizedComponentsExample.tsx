@@ -14,7 +14,7 @@ import ParentControls from './components/ParentControls';
 import ObservationGuide from './ObservationGuide';
 import styles from 'MemoizedComponents.module.scss';
 
-const MemoizedComponentsExample: React.FC = () => {
+const MemoizedComponentsExample = () => {
     const [count1, setCount1] = useState(0);
     const [multiplier, setMultiplier] = useState(1);
     const [unrelatedState, setUnrelatedState] = useState('');
@@ -33,6 +33,7 @@ const MemoizedComponentsExample: React.FC = () => {
 
     return (
         <Container maxWidth="lg">
+            {/* Remove START */}
             <Box className={styles.examplePanel}>
                 {/* Parent Component Label */}
                 <Box className={styles.parentLabel}>
@@ -55,6 +56,7 @@ const MemoizedComponentsExample: React.FC = () => {
 
                 <Grid container>
                     <Grid item xs={12} md={6}>
+                        {/* Remove END */}
                         <ParentControls
                             unrelatedState={unrelatedState}
                             onUnrelatedStateChange={setUnrelatedState}
@@ -62,54 +64,64 @@ const MemoizedComponentsExample: React.FC = () => {
                             onMultiplierChange={setMultiplier}
                             count1={count1}
                         />
+                        {/* Remove START */}
                     </Grid>
 
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#f44336">
+                        {/* Remove END */}
                         <RegularChild 
                             value={count1} 
                             onIncrement={handleIncrement1Bad} 
                             expensiveValue={expensiveValue} 
                         />
+                        {/* Remove START */}
                     </ComponentLabel>
                 </Grid>
 
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#ffb74d">
+                        {/* Remove END */}
                         <MemoizedChildWithBadCallback 
                             value={count1} 
                             onIncrement={handleIncrement1Bad}  // Same non-memoized function
                             expensiveValue={expensiveValue} 
                         />
+                        {/* Remove START */}
                     </ComponentLabel>
                 </Grid>
 
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#66bb6a">
+                        {/* Remove END */}
                         <MemoizedChild 
                             value={count1} 
                             onIncrement={handleIncrement2} 
                             expensiveValue={expensiveValue} 
                         />
+                        {/* Remove START */}
                     </ComponentLabel>
                 </Grid>
 
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#f44336">
+                        {/* Remove END */}
                         <ExpensiveComponentBad multiplier={multiplier} />
+                        {/* Remove START */}
                     </ComponentLabel>
                 </Grid>
 
                 <Grid item xs={12} md={6}>
                     <ComponentLabel color="#ba68c8">
+                        {/* Remove END */}
                         <ExpensiveComponentGood multiplier={multiplier} />
+                        {/* Remove START */}
                     </ComponentLabel>
                 </Grid>
             </Grid>
 
             <ObservationGuide />
 
-            {/* Code Examples Section */}
             <Box className={styles.codeSection}>
                 <Typography variant="h5" gutterBottom>
                     Code Examples & Explanations
@@ -155,6 +167,7 @@ const MemoizedComponentsExample: React.FC = () => {
                 />
             </Box>
             </Box>
+                {/* Remove END */}
         </Container>
     );
 };
