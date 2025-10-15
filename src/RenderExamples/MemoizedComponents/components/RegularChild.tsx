@@ -1,7 +1,7 @@
 import React from 'react';
 import { Paper, Typography, Button } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
-import { createButtonStyles, createCardStyles, createTitleStyles, infoTextStyles } from '../styles';
+import styles from 'MemoizedComponents.module.scss';
 
 interface RegularChildProps {
     value: number;
@@ -15,14 +15,12 @@ const RegularChild: React.FC<RegularChildProps> = ({
     expensiveValue 
 }) => {
     return (
-        <Paper 
-            sx={createCardStyles('#f44336')}
-        >
+        <Paper className={`${styles.card} ${styles.cardRed}`}>
             <RenderCount componentName="RegularChild" />
-            <Typography variant="h6" sx={createTitleStyles('#f44336')}>
+            <Typography variant="h6" className={`${styles.title} ${styles.titleRed}`}>
                 Regular Child Component
             </Typography>
-            <Typography variant="body2" sx={infoTextStyles}>
+            <Typography variant="body2" className={styles.infoText}>
                 🔄 Always re-renders (no React.memo)
             </Typography>
             <Typography>Value: {value}</Typography>
@@ -30,7 +28,7 @@ const RegularChild: React.FC<RegularChildProps> = ({
             <Button 
                 onClick={onIncrement} 
                 variant="contained" 
-                sx={createButtonStyles('#f44336', '#d32f2f')}
+                className={`${styles.button} ${styles.buttonRed}`}
             >
                 Increment
             </Button>

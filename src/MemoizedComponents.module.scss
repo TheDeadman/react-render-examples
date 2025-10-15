@@ -1,0 +1,301 @@
+$card-background: #1a1a1a;
+$card-hover: #2a2a2a;
+$panel-background: #121212;
+$subtle-border: #555;
+$muted-text: #bbb;
+
+$blue: #42a5f5;
+$red: #f44336;
+$green: #66bb6a;
+$orange: #ffb74d;
+$orange-hover: #ffa726;
+$purple: #ba68c8;
+
+@mixin card-base {
+  padding: 16px;
+  margin: 8px;
+  border-radius: 8px;
+  background-color: $card-background;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $card-hover;
+  }
+}
+
+@mixin card-accent($color) {
+  border: 2px solid $color;
+}
+
+@mixin title-accent($color) {
+  color: $color;
+  font-weight: 700;
+}
+
+@mixin button-accent($color, $hover-color: $color) {
+  background-color: $color;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
+@mixin text-field-accent($color) {
+  margin-bottom: 16px;
+
+  :global(.MuiOutlinedInput-root) {
+    background-color: $card-hover;
+
+    fieldset {
+      border-color: $subtle-border;
+    }
+
+    &:hover fieldset {
+      border-color: $color;
+    }
+
+    &.Mui-focused fieldset {
+      border-color: $color;
+    }
+  }
+
+  :global(.MuiInputLabel-root) {
+    color: $color;
+
+    &.Mui-focused {
+      color: $color;
+    }
+  }
+}
+
+@mixin label-base {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  z-index: 1;
+}
+
+.card {
+  @include card-base;
+
+  .title {
+    font-weight: 700;
+  }
+
+  .titleBlue {
+    color: $blue;
+  }
+
+  .titleRed {
+    color: $red;
+  }
+
+  .titleGreen {
+    color: $green;
+  }
+
+  .titleOrange {
+    color: $orange;
+  }
+
+  .titlePurple {
+    color: $purple;
+  }
+
+  .infoText {
+    color: $muted-text;
+    margin-bottom: 8px;
+  }
+
+  .caption {
+    font-style: italic;
+  }
+
+  .captionRed {
+    color: $red;
+  }
+
+  .captionGreen {
+    color: $green;
+  }
+
+  .captionPurple {
+    color: $purple;
+  }
+
+  .button {
+    margin-top: 8px;
+    font-weight: 600;
+  }
+
+  .buttonRed {
+    @include button-accent($red, #d32f2f);
+  }
+
+  .buttonGreen {
+    @include button-accent($green, #4caf50);
+  }
+
+  .buttonOrange {
+    @include button-accent($orange, $orange-hover);
+  }
+
+  .textFieldBlue {
+    @include text-field-accent($blue);
+  }
+
+  .textFieldRed {
+    @include text-field-accent($red);
+  }
+
+  .textFieldGreen {
+    @include text-field-accent($green);
+  }
+}
+
+.cardBlue {
+  @include card-accent($blue);
+}
+
+.cardRed {
+  @include card-accent($red);
+}
+
+.cardGreen {
+  @include card-accent($green);
+}
+
+.cardOrange {
+  @include card-accent($orange);
+}
+
+.cardPurple {
+  @include card-accent($purple);
+}
+
+.cardParent {
+  //   margin: 0;
+  background-color: #1e1e1e;
+
+  &:hover {
+    background-color: #1e1e1e;
+  }
+}
+
+.parentControls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.componentLabelWrapper {
+  position: relative;
+}
+
+.label {
+  @include label-base;
+}
+
+.labelBlue {
+  background-color: $blue;
+}
+
+.labelRed {
+  background-color: $red;
+}
+
+.labelGreen {
+  background-color: $green;
+}
+
+.labelOrange {
+  background-color: $orange;
+}
+
+.labelPurple {
+  background-color: $purple;
+}
+
+.parentLabel {
+  @include label-base;
+  top: -12px;
+  left: 16px;
+  padding: 4px 12px;
+  font-size: 14px;
+  background-color: $blue;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legendTitle {
+  margin-right: 16px;
+  font-weight: 700;
+}
+
+.legendSwatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.legendSwatchRed {
+  background-color: $red;
+}
+
+.legendSwatchOrange {
+  background-color: $orange;
+}
+
+.legendSwatchGreen {
+  background-color: $green;
+}
+
+.legendSwatchPurple {
+  background-color: $purple;
+}
+
+.examplePanel {
+  border: 3px solid $blue;
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 16px;
+  background-color: $panel-background;
+  position: relative;
+}
+
+.headerSection {
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+.headerTitle {
+  color: $blue;
+  font-weight: 700;
+}
+
+.headerDescription {
+  color: $muted-text;
+}
+
+.codeSection {
+  margin-top: 48px;
+}

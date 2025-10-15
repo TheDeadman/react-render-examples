@@ -12,7 +12,7 @@ import ComponentLabel from './components/ComponentLabel';
 import ColorLegend from './components/ColorLegend';
 import ParentControls from './components/ParentControls';
 import ObservationGuide from './ObservationGuide';
-import { createLabelStyles } from './styles';
+import styles from 'MemoizedComponents.module.scss';
 
 const MemoizedComponentsExample: React.FC = () => {
     const [count1, setCount1] = useState(0);
@@ -33,35 +33,18 @@ const MemoizedComponentsExample: React.FC = () => {
 
     return (
         <Container maxWidth="lg">
-            <Box 
-                sx={{ 
-                    border: '3px solid #42a5f5',
-                    borderRadius: 3,
-                    p: 3,
-                    mt: 2,
-                    backgroundColor: '#121212',
-                    position: 'relative'
-                }}
-            >
+            <Box className={styles.examplePanel}>
                 {/* Parent Component Label */}
-                <Box 
-                    sx={createLabelStyles('#42a5f5', {
-                        top: -12,
-                        left: 16,
-                        px: 2,
-                        py: 0.5,
-                        fontSize: '0.875rem'
-                    })}
-                >
+                <Box className={styles.parentLabel}>
                     PARENT COMPONENT
                 </Box>
                 
                 <RenderCount componentName="MemoizedComponentsExample" />
-                <Box sx={{ mt: 2, mb: 4 }}>
-                    <Typography variant="h4" gutterBottom sx={{ color: '#42a5f5' }}>
+                <Box className={styles.headerSection}>
+                    <Typography variant="h4" gutterBottom className={styles.headerTitle}>
                         Memoized Components Example
                     </Typography>
-                    <Typography variant="body1" paragraph>
+                    <Typography variant="body1" paragraph className={styles.headerDescription}>
                         This example demonstrates React.memo, useMemo, and useCallback optimizations.
                         Watch the render counters to see which components re-render when state changes.
                     </Typography>
@@ -70,7 +53,7 @@ const MemoizedComponentsExample: React.FC = () => {
                     <ColorLegend />
                 </Box>
 
-                <Grid container spacing={3}>
+                <Grid container>
                     <Grid item xs={12} md={6}>
                         <ParentControls
                             unrelatedState={unrelatedState}
@@ -127,7 +110,7 @@ const MemoizedComponentsExample: React.FC = () => {
             <ObservationGuide />
 
             {/* Code Examples Section */}
-            <Box sx={{ mt: 6 }}>
+            <Box className={styles.codeSection}>
                 <Typography variant="h5" gutterBottom>
                     Code Examples & Explanations
                 </Typography>

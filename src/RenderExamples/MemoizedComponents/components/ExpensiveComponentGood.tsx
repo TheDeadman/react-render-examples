@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Paper, Typography } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
-import { createCardStyles, createCaptionStyles, createTitleStyles, infoTextStyles } from '../styles';
+import styles from 'MemoizedComponents.module.scss';
 
 interface ExpensiveComponentGoodProps {
     multiplier: number;
@@ -19,21 +19,18 @@ const ExpensiveComponentGood: React.FC<ExpensiveComponentGoodProps> = ({ multipl
     }, [multiplier]);
 
     return (
-        <Paper 
-            sx={createCardStyles('#ba68c8')}
-            className='styled-card'
-        >
+        <Paper className={`${styles.card} ${styles.cardPurple}`}>
             <RenderCount componentName="ExpensiveComponentGood" />
-            <Typography variant="h6" sx={createTitleStyles('#ba68c8')}>
+            <Typography variant="h6" className={`${styles.title} ${styles.titlePurple}`}>
                 ✅ Memoized Calculation
             </Typography>
-            <Typography variant="body2" sx={infoTextStyles}>
+            <Typography variant="body2" className={styles.infoText}>
                 🧮 useMemo prevents expensive recalculations
             </Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Typography variant="caption" sx={createCaptionStyles('#66bb6a')}>
-                Check console - this only logs when multiplier changes.
+            <Typography variant="caption" className={`${styles.caption} ${styles.captionGreen}`}>
+                Check the console to confirm that logging only occurs when multiplier changes
             </Typography>
         </Paper>
     );

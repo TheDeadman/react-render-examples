@@ -1,7 +1,7 @@
 import React from 'react';
 import { Paper, Typography } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
-import { createCardStyles, createCaptionStyles, createTitleStyles, infoTextStyles } from '../styles';
+import styles from 'MemoizedComponents.module.scss';
 
 interface ExpensiveComponentBadProps {
     multiplier: number;
@@ -17,19 +17,17 @@ const ExpensiveComponentBad: React.FC<ExpensiveComponentBadProps> = ({ multiplie
     const expensiveValue = calculateExpensiveValue(multiplier);
 
     return (
-        <Paper 
-            sx={createCardStyles('#f44336')}
-        >
+        <Paper className={`${styles.card} ${styles.cardRed}`}>
             <RenderCount componentName="ExpensiveComponentBad" />
-            <Typography variant="h6" sx={createTitleStyles('#f44336')}>
+            <Typography variant="h6" className={`${styles.title} ${styles.titleRed}`}>
                 ❌ Non-Memoized Calculation
             </Typography>
-            <Typography variant="body2" sx={infoTextStyles}>
+            <Typography variant="body2" className={styles.infoText}>
                 🔄 Recalculates on every render (expensive)
             </Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Typography variant="caption" sx={createCaptionStyles('#f44336')}>
+            <Typography variant="caption" className={`${styles.caption} ${styles.captionRed}`}>
                 Check the console to see how often this logs during parent renders
             </Typography>
         </Paper>

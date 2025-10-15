@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Paper, Typography, Button } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
-import { createButtonStyles, createCardStyles, createTitleStyles, infoTextStyles } from '../styles';
+import styles from 'MemoizedComponents.module.scss';
 
 interface MemoizedChildProps {
     value: number;
@@ -15,14 +15,12 @@ const MemoizedChild = memo<MemoizedChildProps>(({
     expensiveValue 
 }) => {
     return (
-        <Paper 
-            sx={createCardStyles('#66bb6a')}
-        >
+        <Paper className={`${styles.card} ${styles.cardGreen}`}>
             <RenderCount componentName="MemoizedChild" />
-            <Typography variant="h6" sx={createTitleStyles('#66bb6a')}>
+            <Typography variant="h6" className={`${styles.title} ${styles.titleGreen}`}>
                 Memoized Child Component
             </Typography>
-            <Typography variant="body2" sx={infoTextStyles}>
+            <Typography variant="body2" className={styles.infoText}>
                 ✅ React.memo + useCallback = Optimized
             </Typography>
             <Typography>Value: {value}</Typography>
@@ -30,7 +28,7 @@ const MemoizedChild = memo<MemoizedChildProps>(({
             <Button 
                 onClick={onIncrement} 
                 variant="contained" 
-                sx={createButtonStyles('#66bb6a', '#4caf50')}
+                className={`${styles.button} ${styles.buttonGreen}`}
             >
                 Increment
             </Button>

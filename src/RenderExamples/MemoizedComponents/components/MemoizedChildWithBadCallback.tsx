@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Paper, Typography, Button } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
-import { createButtonStyles, createCardStyles, createTitleStyles, infoTextStyles } from '../styles';
+import styles from 'MemoizedComponents.module.scss';
 
 interface MemoizedChildWithBadCallbackProps {
     value: number;
@@ -15,14 +15,12 @@ const MemoizedChildWithBadCallback = memo<MemoizedChildWithBadCallbackProps>(({
     expensiveValue 
 }) => {
     return (
-        <Paper 
-            sx={createCardStyles('#ffb74d')}
-        >
+        <Paper className={`${styles.card} ${styles.cardOrange}`}>
             <RenderCount componentName="MemoizedChildWithBadCallback" />
-            <Typography variant="h6" sx={createTitleStyles('#ffb74d')}>
+            <Typography variant="h6" className={`${styles.title} ${styles.titleOrange}`}>
                 Memoized Child + Non-Memoized Function
             </Typography>
-            <Typography variant="body2" sx={infoTextStyles}>
+            <Typography variant="body2" className={styles.infoText}>
                 ⚠️ React.memo but new function props = Still re-renders
             </Typography>
             <Typography>Value: {value}</Typography>
@@ -30,7 +28,7 @@ const MemoizedChildWithBadCallback = memo<MemoizedChildWithBadCallbackProps>(({
             <Button 
                 onClick={onIncrement} 
                 variant="contained" 
-                sx={createButtonStyles('#ffb74d', '#ffa726')}
+                className={`${styles.button} ${styles.buttonOrange}`}
             >
                 Increment
             </Button>

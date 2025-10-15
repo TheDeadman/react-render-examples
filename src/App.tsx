@@ -5,6 +5,7 @@ import RenderCount from 'overall/RenderCount';
 import './App.scss'
 
 const darkTheme = createTheme({
+    cssVariables: true,
     palette: {
         mode: 'dark',
     },
