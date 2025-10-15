@@ -1,4 +1,4 @@
-import { Button, CircularProgress, TextField } from "@mui/material";
+import { TextField, Box } from "@mui/material";
 import RenderCount from "overall/RenderCount";
 import { useAppContextOne } from "./ContextOne";
 import { useAppContextThree } from "./ContextThree";
@@ -15,33 +15,101 @@ const TextForm = () => {
     const {textValTwo, setTextValTwo} = useAppContextTwo();
     const {textValThree, setTextValThree} = useAppContextThree();
     return (
-        <div style={{ border: 'thin solid #5151d1', margin: 2, padding: 2 }}>
+        <Box 
+            sx={{ 
+                border: '2px solid #ff6f00', 
+                margin: 1, 
+                padding: 2,
+                backgroundColor: 'rgba(255, 111, 0, 0.05)',
+                borderRadius: 1,
+                '&:hover': {
+                    backgroundColor: 'rgba(255, 111, 0, 0.1)',
+                }
+            }}
+        >
             <RenderCount componentName='TextForm' />
             <TextField
-                label="Context One Val"
+                label="useMemo One Val"
                 variant="outlined"
                 value={textVal}
                 onChange={(e) => setTextVal(e.target.value)}
                 fullWidth
-                sx={{ marginBottom: 2 }}
+                sx={{ 
+                    marginBottom: 2,
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: '#ff6f00',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#ff6f00',
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: '#ff6f00',
+                        },
+                    },
+                    '& .MuiInputLabel-root': {
+                        color: '#ff6f00',
+                        '&.Mui-focused': {
+                            color: '#ff6f00',
+                        },
+                    },
+                }}
             />
             <TextField
-                label="Context Two Val"
+                label="useMemo Two Val"
                 variant="outlined"
                 value={textValTwo}
                 onChange={(e) => setTextValTwo(e.target.value)}
                 fullWidth
-                sx={{ marginBottom: 2 }}
+                sx={{ 
+                    marginBottom: 2,
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: '#ff6f00',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#ff6f00',
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: '#ff6f00',
+                        },
+                    },
+                    '& .MuiInputLabel-root': {
+                        color: '#ff6f00',
+                        '&.Mui-focused': {
+                            color: '#ff6f00',
+                        },
+                    },
+                }}
             />
             <TextField
-                label="Context Three Val"
+                label="useMemo Three Val"
                 variant="outlined"
                 value={textValThree}
                 onChange={(e) => setTextValThree(e.target.value)}
                 fullWidth
-                sx={{ marginBottom: 2 }}
+                sx={{ 
+                    marginBottom: 2,
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderColor: '#ff6f00',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#ff6f00',
+                        },
+                        '&.Mui-focused fieldset': {
+                            borderColor: '#ff6f00',
+                        },
+                    },
+                    '& .MuiInputLabel-root': {
+                        color: '#ff6f00',
+                        '&.Mui-focused': {
+                            color: '#ff6f00',
+                        },
+                    },
+                }}
             />
-        </div>
+        </Box>
 
     )
 }

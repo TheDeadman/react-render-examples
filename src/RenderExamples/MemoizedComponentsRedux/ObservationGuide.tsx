@@ -8,16 +8,16 @@ const ObservationGuide: React.FC = () => {
                 What to Observe with Redux:
             </Typography>
             <Typography variant="body2" paragraph>
-                • Type in "Unrelated State" field - notice NO child components re-render! Redux only re-renders components when their subscribed state changes
+                • Type in "Unrelated State" field - notice NO child components re-render. Redux only re-renders components when their subscribed state changes
             </Typography>
             <Typography variant="body2" paragraph>
                 • <strong>Regular Child (Red):</strong> Re-renders when count1 or multiplier changes (subscribed via selectCount1 and selectExpensiveValue)
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Child + Non-Memoized Function (Orange):</strong> React.memo works with Redux! Only re-renders when count1 or multiplier changes, not on unrelated state
+                • <strong>Memoized Child + Non-Memoized Function (Orange):</strong> React.memo works with Redux. Only re-renders when count1 or multiplier changes, not on unrelated state
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Child (Green):</strong> React.memo works perfectly! Only re-renders when subscribed state (count1 or multiplier) actually changes
+                • <strong>Memoized Child (Green):</strong> React.memo works perfectly. Only re-renders when subscribed state (count1 or multiplier) actually changes
             </Typography>
             <Typography variant="body2" paragraph>
                 • <strong>Expensive Components (Red & Purple):</strong> Only re-render when multiplier changes since they only subscribe to selectMultiplier
@@ -29,7 +29,7 @@ const ObservationGuide: React.FC = () => {
                 • <strong>The difference:</strong> ExpensiveComponentBad recalculates on every render, ExpensiveComponentGood uses useMemo to prevent unnecessary calculations
             </Typography>
             <Typography variant="body2">
-                • <strong>Redux + React.memo:</strong> Works great together! Redux's selective subscriptions + React.memo provide efficient re-rendering
+                • <strong>Redux + React.memo:</strong> Works great together. Redux's selective subscriptions + React.memo provide efficient re-rendering
             </Typography>
         </Box>
     );
