@@ -39,9 +39,8 @@ const RegularChild: React.FC<RegularChildProps> = ({
 
 export default RegularChild;`,
 
-  memoizedChild: `import React, { memo } from 'react';
+    memoizedChild: `import React, { memo } from 'react';
 import { Paper, Typography, Button } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import styles from 'MemoizedComponents.module.scss';
 
 interface MemoizedChildProps {
@@ -57,7 +56,6 @@ const MemoizedChild = memo<MemoizedChildProps>(({
 }) => {
     return (
         <Paper className={\`\${styles.card} \${styles.cardGreen}\`}>
-            <RenderCount componentName="MemoizedChild" />
             <Typography variant="h6" className={\`\${styles.title} \${styles.titleGreen}\`}>
                 Memoized Child Component
             </Typography>
@@ -81,9 +79,8 @@ MemoizedChild.displayName = 'MemoizedChild';
 
 export default MemoizedChild;`,
 
-  expensiveComponentBad: `import React from 'react';
+    expensiveComponentBad: `import React from 'react';
 import { Paper, Typography } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import styles from 'MemoizedComponents.module.scss';
 
 interface ExpensiveComponentBadProps {
@@ -101,7 +98,6 @@ const ExpensiveComponentBad: React.FC<ExpensiveComponentBadProps> = ({ multiplie
 
     return (
         <Paper className={\`\${styles.card} \${styles.cardRed}\`}>
-            <RenderCount componentName="ExpensiveComponentBad" />
             <Typography variant="h6" className={\`\${styles.title} \${styles.titleRed}\`}>
                 ❌ Non-Memoized Calculation
             </Typography>
@@ -119,9 +115,8 @@ const ExpensiveComponentBad: React.FC<ExpensiveComponentBadProps> = ({ multiplie
 
 export default ExpensiveComponentBad;`,
 
-  expensiveComponentGood: `import React, { useMemo } from 'react';
+    expensiveComponentGood: `import React, { useMemo } from 'react';
 import { Paper, Typography } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import styles from 'MemoizedComponents.module.scss';
 
 interface ExpensiveComponentGoodProps {
@@ -141,7 +136,6 @@ const ExpensiveComponentGood: React.FC<ExpensiveComponentGoodProps> = ({ multipl
 
     return (
         <Paper className={\`\${styles.card} \${styles.cardPurple}\`}>
-            <RenderCount componentName="ExpensiveComponentGood" />
             <Typography variant="h6" className={\`\${styles.title} \${styles.titlePurple}\`}>
                 ✅ Memoized Calculation
             </Typography>
@@ -222,9 +216,8 @@ const MemoizedComponentsExample = () => {
 
 export default MemoizedComponentsExample;`,
 
-  memoizedChildWithBadCallback: `import React, { memo } from 'react';
+    memoizedChildWithBadCallback: `import React, { memo } from 'react';
 import { Paper, Typography, Button } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import styles from 'MemoizedComponents.module.scss';
 
 interface MemoizedChildWithBadCallbackProps {
@@ -240,7 +233,6 @@ const MemoizedChildWithBadCallback = memo<MemoizedChildWithBadCallbackProps>(({
 }) => {
     return (
         <Paper className={\`\${styles.card} \${styles.cardOrange}\`}>
-            <RenderCount componentName="MemoizedChildWithBadCallback" />
             <Typography variant="h6" className={\`\${styles.title} \${styles.titleOrange}\`}>
                 Memoized Child + Non-Memoized Function
             </Typography>
