@@ -3,6 +3,7 @@ import { Paper, Typography, Button } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { selectCount1, selectExpensiveValue, incrementCount1 } from '../memoizedComponents.slice';
+import styles from 'MemoizedComponents.module.scss';
 
 const MemoizedChildWithBadCallback = memo(() => {
     const dispatch = useAppDispatch();
@@ -12,35 +13,20 @@ const MemoizedChildWithBadCallback = memo(() => {
     const handleIncrement = () => dispatch(incrementCount1());
     
     return (
-        <Paper 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #ffb74d',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a',
-                '&:hover': {
-                    backgroundColor: '#2a2a2a'
-                }
-            }}
-        >
+        <Paper className={`${styles.card} ${styles.cardOrange}`}>
             <RenderCount componentName="MemoizedChildWithBadCallbackRedux" />
-            <Typography variant="h6" sx={{ color: '#ffb74d', fontWeight: 'bold' }}>
+            <Typography variant="h6" className={`${styles.title} ${styles.titleOrange}`}>
                 Memoized Child + Non-Memoized Function (Redux)
             </Typography>
-            <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
-                ⚠️ React.memo + Redux + Non-memoized function = Still re-renders!
+            <Typography variant="body2" className={styles.infoText}>
+                ⚠️ React.memo + Redux with a non memoized function still rerenders
             </Typography>
             <Typography>Value: {count1}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
             <Button 
                 onClick={handleIncrement} 
                 variant="contained" 
-                sx={{ 
-                    mt: 1, 
-                    backgroundColor: '#ffb74d', 
-                    '&:hover': { backgroundColor: '#ffa726' } 
-                }}
+                className={`${styles.button} ${styles.buttonOrange}`}
             >
                 Increment
             </Button>

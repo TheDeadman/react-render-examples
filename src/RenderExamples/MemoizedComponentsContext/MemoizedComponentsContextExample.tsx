@@ -21,7 +21,7 @@ const MemoizedComponentsExampleContent: React.FC = () => {
             <Box className={`${styles.examplePanel}`}>
                 {/* Context Provider Label */}
                 <Box className={styles.parentLabel}>
-                    CONTEXT PROVIDER
+                    PARENT COMPONENT
                 </Box>
                 
                 <RenderCount componentName="MemoizedComponentsContextProvider" />

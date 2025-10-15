@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Paper, Typography } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
+import styles from 'MemoizedComponents.module.scss';
 
 interface ExpensiveComponentProps {
     multiplier: number;
@@ -17,23 +18,12 @@ const ExpensiveComponent: React.FC<ExpensiveComponentProps> = ({ multiplier }) =
     }, [multiplier]);
 
     return (
-        <Paper 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #ba68c8',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a',
-                '&:hover': {
-                    backgroundColor: '#2a2a2a'
-                }
-            }}
-        >
+        <Paper className={`${styles.card} ${styles.cardPurple}`}>
             <RenderCount componentName="ExpensiveComponent" />
-            <Typography variant="h6" sx={{ color: '#ba68c8', fontWeight: 'bold' }}>
+            <Typography variant="h6" className={`${styles.title} ${styles.titlePurple}`}>
                 Expensive Computation Component
             </Typography>
-            <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
+            <Typography variant="body2" className={styles.infoText}>
                 🧮 useMemo prevents expensive recalculations
             </Typography>
             <Typography>Bad Value (recalculates every render): {expensiveValueBad}</Typography>

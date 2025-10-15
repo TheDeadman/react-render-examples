@@ -12,44 +12,23 @@ import ComponentLabel from './components/ComponentLabel';
 import ColorLegend from './components/ColorLegend';
 import ParentControls from './components/ParentControls';
 import ObservationGuide from './ObservationGuide';
+import styles from 'MemoizedComponents.module.scss';
 
 const MemoizedComponentsExample: React.FC = () => {
     return (
         <Container maxWidth="lg">
-            <Box 
-                sx={{ 
-                    border: '3px solid #42a5f5',
-                    borderRadius: 3,
-                    p: 3,
-                    mt: 2,
-                    backgroundColor: '#121212',
-                    position: 'relative'
-                }}
-            >
+            <Box className={styles.examplePanel}>
                 {/* Parent Component Label */}
-                <Box 
-                    sx={{ 
-                        position: 'absolute',
-                        top: -12,
-                        left: 16,
-                        backgroundColor: '#42a5f5',
-                        color: 'white',
-                        px: 2,
-                        py: 0.5,
-                        borderRadius: 1,
-                        fontSize: '0.875rem',
-                        fontWeight: 'bold'
-                    }}
-                >
+                <Box className={styles.parentLabel}>
                     PARENT COMPONENT
                 </Box>
                 
                 <RenderCount componentName="MemoizedComponentsExample" />
-                <Box sx={{ mt: 2, mb: 4 }}>
-                    <Typography variant="h4" gutterBottom sx={{ color: '#ff6f00' }}>
+                <Box className={styles.headerSection}>
+                    <Typography variant="h4" gutterBottom className={`${styles.headerTitle} ${styles.headerTitleOrange}`}>
                         Memoized Components Example (Redux)
                     </Typography>
-                    <Typography variant="body1" paragraph>
+                    <Typography variant="body1" paragraph className={styles.headerDescription}>
                         This example demonstrates how Redux works efficiently with React rendering optimization patterns.
                         Components using useAppSelector only re-render when the specific state they subscribe to changes.
                         Combined with React.memo, this creates an efficient rendering strategy where components only update when necessary.
@@ -59,7 +38,7 @@ const MemoizedComponentsExample: React.FC = () => {
                     <ColorLegend />
                 </Box>
 
-                <Grid container spacing={3}>
+                <Grid container>
                     <Grid item xs={12} md={6}>
                         <ParentControls/>
                     </Grid>
@@ -98,7 +77,7 @@ const MemoizedComponentsExample: React.FC = () => {
             <ObservationGuide />
 
             {/* Code Examples Section */}
-            <Box sx={{ mt: 6 }}>
+            <Box className={styles.codeSection}>
                 <Typography variant="h5" gutterBottom>
                     Code Examples & Explanations
                 </Typography>

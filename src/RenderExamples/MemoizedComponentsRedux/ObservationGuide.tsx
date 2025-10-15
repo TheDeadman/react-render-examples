@@ -5,7 +5,7 @@ const ObservationGuide: React.FC = () => {
     return (
         <Box sx={{ mt: 4, p: 3, backgroundColor: '#1e1e1e', borderRadius: 1, border: '1px solid #333' }}>
             <Typography variant="h6" gutterBottom>
-                What to Observe with Redux:
+                What to Observe (Redux Version):
             </Typography>
             <Typography variant="body2" paragraph>
                 • Type in "Unrelated State" field - notice NO child components re-render. Redux only re-renders components when their subscribed state changes

@@ -8,25 +8,22 @@ const ObservationGuide: React.FC = () => {
                 What to Observe:
             </Typography>
             <Typography variant="body2" paragraph>
-                • Type in "Unrelated State" field - notice which components re-render
+                • Type in "Unrelated State" field - notice which components re-render even though they are not referencing that state.
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Regular Child:</strong> Always re-renders. It has no React.memo and is not getting a memoized function prop.
+                • <strong>Regular Child:</strong> Always re-renders. It has no React.memo so parent re-renders always cause it to re-render.
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Child + Non-Memoized Function:</strong> Still re-renders every time because it receives a new function reference, even though it's wrapped in React.memo.
+                • <strong>Memoized Child + Non-Memoized Function:</strong> Has React.memo but still re-renders every time because it receives a new function reference each render.
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Child (with useCallback):</strong> Only re-renders when count1 or expensiveValue actually changes
+                • <strong>Memoized Child + useCallback Function:</strong> Only re-renders when count1 or expensiveValue actually changes.
             </Typography>
             <Typography variant="body2" paragraph>
                 • <strong>Non-Memoized Expensive Component:</strong> Recalculates on every render - check console logs
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Expensive Component:</strong> Only recalculates when multiplier changes
-            </Typography>
-            <Typography variant="body2">
-                • Check the browser console to see when expensive calculations occur
+                • <strong>Memoized Expensive Component:</strong> Only recalculates when multiplier changes - check console logs
             </Typography>
         </Box>
     );

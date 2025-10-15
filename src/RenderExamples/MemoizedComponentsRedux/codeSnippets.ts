@@ -91,7 +91,7 @@ const MemoizedChild = memo(() => {
             <h3>
                 Memoized Child Component (Redux)
             </h3>
-            <p>⚠️ React.memo + Redux = Still re-renders on ANY state change!</p>
+            <p>⚠️ React.memo + Redux rerenders when the subscribed state updates</p>
             <p>Value: {count1}</p>
             <p>Expensive Value: {expensiveValue}</p>
             <button onClick={() => dispatch(incrementCount1())}>
@@ -113,7 +113,7 @@ import { useAppSelector } from '../../../store/hooks';
 import { selectMultiplier } from '../memoizedComponents.slice';
 
 function calculateExpensiveValue(multiplier: number): number {
-    console.log('❌ BAD: Recalculating expensive value on every render!');
+    console.log('❌ BAD: Recalculating expensive value on every render');
     return multiplier * 1000;
 }
 
@@ -128,7 +128,7 @@ const ExpensiveComponentBad: React.FC = () => {
             <h3>
                 ❌ Non-Memoized Calculation (Redux)
             </h3>
-            <p>🔄 Recalculates on every render (expensive!)</p>
+            <p>🔄 Recalculates on every render (expensive)</p>
             <p>Multiplier: {multiplier}</p>
             <p>Expensive Value: {expensiveValue}</p>
         </div>
@@ -138,7 +138,7 @@ const ExpensiveComponentBad: React.FC = () => {
 export default ExpensiveComponentBad;
 
 // This component recalculates the expensive value on EVERY render
-// Even when unrelated state changes! Check the console logs.`,
+// Even when unrelated state changes. Check the console logs.`,
 
   expensiveComponentGood: `// ExpensiveComponentGood.tsx - Uses memoized selector in Redux
 import React from 'react';
@@ -222,7 +222,7 @@ const MemoizedChildWithBadCallback = memo(() => {
             <h3>
                 Memoized Child + Non-Memoized Function (Redux)
             </h3>
-            <p>⚠️ React.memo + Redux + Non-memoized function = Still re-renders!</p>
+            <p>⚠️ React.memo + Redux with a non memoized function still rerenders</p>
             <p>Value: {count1}</p>
             <p>Expensive Value: {expensiveValue}</p>
             <button onClick={handleIncrement}>
