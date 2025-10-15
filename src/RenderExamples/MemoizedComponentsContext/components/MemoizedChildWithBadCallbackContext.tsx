@@ -2,33 +2,27 @@ import React, { memo } from 'react';
 import { Paper, Typography, Button } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
 import { useMemoizedComponentsContext } from '../context';
+import styles from 'MemoizedComponents.module.scss';
 
 const MemoizedChildWithBadCallbackContext = memo(() => {
     const { count1, handleIncrement1Bad, expensiveValue } = useMemoizedComponentsContext();
 
     return (
-        <Paper 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #ffb74d',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a',
-                '&:hover': {
-                    backgroundColor: '#2a2a2a'
-                }
-            }}
-        >
+        <Paper className={`${styles.card} ${styles.cardOrange}`}>
             <RenderCount componentName="MemoizedChildWithBadCallbackContext" />
-            <Typography variant="h6" sx={{ color: '#ffb74d', fontWeight: 'bold' }}>
+            <Typography variant="h6" className={`${styles.title} ${styles.titleOrange}`}>
                 Memoized Child + Non-Memoized Function (Context)
             </Typography>
-            <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
-                ⚠️ React.memo + Context + Non-Memoized Function = Always re-renders!
+            <Typography variant="body2" className={styles.infoText}>
+                ⚠️ React.memo + Context + Non-Memoized Function = Always re-renders
             </Typography>
             <Typography>Value: {count1}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Button onClick={handleIncrement1Bad} variant="contained" color="warning" sx={{ mt: 1 }}>
+            <Button 
+                onClick={handleIncrement1Bad} 
+                variant="contained" 
+                className={`${styles.button} ${styles.buttonOrange}`}
+            >
                 Increment
             </Button>
         </Paper>

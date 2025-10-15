@@ -13,44 +13,23 @@ import ComponentLabelContext from './components/ComponentLabelContext';
 import ColorLegendContext from './components/ColorLegendContext';
 import ParentControlsContext from './components/ParentControlsContext';
 import ObservationGuideContext from './ObservationGuideContext';
+import styles from 'MemoizedComponents.module.scss';
 
 const MemoizedComponentsExampleContent: React.FC = () => {
     return (
         <Container maxWidth="lg">
-            <Box 
-                sx={{ 
-                    border: '3px solid #9c27b0',
-                    borderRadius: 3,
-                    p: 3,
-                    mt: 2,
-                    backgroundColor: '#121212',
-                    position: 'relative'
-                }}
-            >
+            <Box className={`${styles.examplePanel}`}>
                 {/* Context Provider Label */}
-                <Box 
-                    sx={{ 
-                        position: 'absolute',
-                        top: -12,
-                        left: 16,
-                        backgroundColor: '#9c27b0',
-                        color: 'white',
-                        px: 2,
-                        py: 0.5,
-                        borderRadius: 1,
-                        fontSize: '0.875rem',
-                        fontWeight: 'bold'
-                    }}
-                >
+                <Box className={styles.parentLabel}>
                     CONTEXT PROVIDER
                 </Box>
                 
                 <RenderCount componentName="MemoizedComponentsContextProvider" />
-                <Box sx={{ mt: 2, mb: 4 }}>
-                    <Typography variant="h4" gutterBottom sx={{ color: '#9c27b0' }}>
+                <Box className={styles.headerSection}>
+                    <Typography variant="h4" gutterBottom className={`${styles.headerTitle} ${styles.headerTitlePurple}`}>
                         Memoized Components Example (React Context)
                     </Typography>
-                    <Typography variant="body1" paragraph>
+                    <Typography variant="body1" paragraph className={styles.headerDescription}>
                         This example demonstrates the same optimizations as the props version, but using React Context for state management.
                         Notice how Context affects rendering behavior and breaks some optimizations.
                     </Typography>
@@ -59,7 +38,7 @@ const MemoizedComponentsExampleContent: React.FC = () => {
                     <ColorLegendContext />
                 </Box>
 
-                <Grid container spacing={3}>
+                <Grid container>
                     <Grid item xs={12} md={6}>
                         <ParentControlsContext />
                     </Grid>
@@ -98,7 +77,7 @@ const MemoizedComponentsExampleContent: React.FC = () => {
                 <ObservationGuideContext />
 
                 {/* Code Examples Section */}
-                <Box sx={{ mt: 6 }}>
+                <Box className={styles.codeSection}>
                     <Typography variant="h5" gutterBottom>
                         Context Code Examples & Explanations
                     </Typography>

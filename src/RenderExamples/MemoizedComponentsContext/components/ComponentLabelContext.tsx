@@ -1,29 +1,27 @@
 import React, { ReactNode } from 'react';
 import { Box, Typography } from '@mui/material';
+import styles from 'MemoizedComponents.module.scss';
 
 interface ComponentLabelProps {
     color: string;
     children: ReactNode;
 }
 
+const colorClassMap: Record<string, string> = {
+    '#f44336': styles.labelRed,
+    '#ffb74d': styles.labelOrange,
+    '#66bb6a': styles.labelGreen,
+    '#ba68c8': styles.labelPurple,
+    '#42a5f5': styles.labelBlue
+};
+
 const ComponentLabelContext: React.FC<ComponentLabelProps> = ({ color, children }) => {
+    const labelColorClass = colorClassMap[color] ?? '';
     return (
-        <Box sx={{ position: 'relative' }}>
+        <Box className={styles.componentLabelWrapper}>
             <Typography 
                 variant="caption" 
-                sx={{ 
-                    position: 'absolute',
-                    top: -10,
-                    left: 10,
-                    backgroundColor: color,
-                    color: 'white',
-                    px: 1,
-                    py: 0.5,
-                    borderRadius: 1,
-                    fontSize: '0.75rem',
-                    fontWeight: 'bold',
-                    zIndex: 1
-                }}
+                className={`${styles.label} ${labelColorClass}`.trim()}
             >
                 CHILD COMPONENT
             </Typography>
