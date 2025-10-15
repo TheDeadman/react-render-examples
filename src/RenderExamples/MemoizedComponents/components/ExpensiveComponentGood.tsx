@@ -1,13 +1,14 @@
 import React, { useMemo } from 'react';
 import { Paper, Typography } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
+import { createCardStyles, createCaptionStyles, createTitleStyles, infoTextStyles } from '../styles';
 
 interface ExpensiveComponentGoodProps {
     multiplier: number;
 }
 
 function calculateExpensiveValue(multiplier: number): number {
-    console.log('✅ GOOD: Calculating expensive value with useMemo - only when multiplier changes!');
+    console.log('✅ GOOD: Calculating expensive value with useMemo - only when multiplier changes');
     return multiplier * 1000;
 }
 
@@ -19,28 +20,20 @@ const ExpensiveComponentGood: React.FC<ExpensiveComponentGoodProps> = ({ multipl
 
     return (
         <Paper 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #ba68c8',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a',
-                '&:hover': {
-                    backgroundColor: '#2a2a2a'
-                }
-            }}
+            sx={createCardStyles('#ba68c8')}
+            className='styled-card'
         >
             <RenderCount componentName="ExpensiveComponentGood" />
-            <Typography variant="h6" sx={{ color: '#ba68c8', fontWeight: 'bold' }}>
+            <Typography variant="h6" sx={createTitleStyles('#ba68c8')}>
                 ✅ Memoized Calculation
             </Typography>
-            <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
+            <Typography variant="body2" sx={infoTextStyles}>
                 🧮 useMemo prevents expensive recalculations
             </Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Typography variant="caption" sx={{ color: '#66bb6a', fontStyle: 'italic' }}>
-                Check console - this only logs when multiplier changes!
+            <Typography variant="caption" sx={createCaptionStyles('#66bb6a')}>
+                Check console - this only logs when multiplier changes.
             </Typography>
         </Paper>
     );

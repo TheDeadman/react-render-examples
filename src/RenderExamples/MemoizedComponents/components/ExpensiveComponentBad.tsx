@@ -1,13 +1,14 @@
 import React from 'react';
 import { Paper, Typography } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
+import { createCardStyles, createCaptionStyles, createTitleStyles, infoTextStyles } from '../styles';
 
 interface ExpensiveComponentBadProps {
     multiplier: number;
 }
 
 function calculateExpensiveValue(multiplier: number): number {
-    console.log('❌ BAD: Recalculating expensive value on every render!');
+    console.log('❌ BAD: Recalculating expensive value on every render');
     return multiplier * 1000;
 }
 
@@ -17,28 +18,19 @@ const ExpensiveComponentBad: React.FC<ExpensiveComponentBadProps> = ({ multiplie
 
     return (
         <Paper 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #f44336',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a',
-                '&:hover': {
-                    backgroundColor: '#2a2a2a'
-                }
-            }}
+            sx={createCardStyles('#f44336')}
         >
             <RenderCount componentName="ExpensiveComponentBad" />
-            <Typography variant="h6" sx={{ color: '#f44336', fontWeight: 'bold' }}>
+            <Typography variant="h6" sx={createTitleStyles('#f44336')}>
                 ❌ Non-Memoized Calculation
             </Typography>
-            <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
-                🔄 Recalculates on every render (expensive!)
+            <Typography variant="body2" sx={infoTextStyles}>
+                🔄 Recalculates on every render (expensive)
             </Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Typography variant="caption" sx={{ color: '#f44336', fontStyle: 'italic' }}>
-                Check console - this logs on every parent re-render!
+            <Typography variant="caption" sx={createCaptionStyles('#f44336')}>
+                Check the console to see how often this logs during parent renders
             </Typography>
         </Paper>
     );

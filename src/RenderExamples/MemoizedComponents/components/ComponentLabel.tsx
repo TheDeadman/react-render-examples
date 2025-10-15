@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import { createLabelStyles } from '../styles';
 
 interface ComponentLabelProps {
     color: string;
@@ -11,19 +12,7 @@ const ComponentLabel: React.FC<ComponentLabelProps> = ({ color, children }) => {
         <Box sx={{ position: 'relative' }}>
             <Typography 
                 variant="caption" 
-                sx={{ 
-                    position: 'absolute',
-                    top: -10,
-                    left: 10,
-                    backgroundColor: color,
-                    color: 'white',
-                    px: 1,
-                    py: 0.5,
-                    borderRadius: 1,
-                    fontSize: '0.75rem',
-                    fontWeight: 'bold',
-                    zIndex: 1
-                }}
+                sx={createLabelStyles(color)}
             >
                 CHILD COMPONENT
             </Typography>

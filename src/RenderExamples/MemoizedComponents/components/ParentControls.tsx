@@ -1,5 +1,6 @@
 import React from 'react';
 import { Paper, Typography, TextField, Box } from '@mui/material';
+import { createCardStyles, createTextFieldStyles, createTitleStyles, infoTextStyles } from '../styles';
 
 interface ParentControlsProps {
     unrelatedState: string;
@@ -18,14 +19,15 @@ const ParentControls: React.FC<ParentControlsProps> = ({
 }) => {
     return (
         <Paper 
-            sx={{ 
-                p: 2, 
-                border: '2px solid #42a5f5',
-                borderRadius: 2,
-                backgroundColor: '#1e1e1e'
-            }}
+            sx={createCardStyles('#42a5f5', {
+                m: 0,
+                backgroundColor: '#1e1e1e',
+                '&:hover': {
+                    backgroundColor: '#1e1e1e'
+                }
+            })}
         >
-            <Typography variant="h6" gutterBottom sx={{ color: '#42a5f5', fontWeight: 'bold' }}>
+            <Typography variant="h6" gutterBottom sx={createTitleStyles('#42a5f5')}>
                 🎛️ Parent State Controls
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -34,17 +36,7 @@ const ParentControls: React.FC<ParentControlsProps> = ({
                     value={unrelatedState}
                     onChange={(e) => onUnrelatedStateChange(e.target.value)}
                     fullWidth
-                    sx={{ 
-                        '& .MuiOutlinedInput-root': {
-                            backgroundColor: '#2a2a2a',
-                            '& fieldset': {
-                                borderColor: '#555'
-                            },
-                            '&:hover fieldset': {
-                                borderColor: '#42a5f5'
-                            }
-                        }
-                    }}
+                    sx={createTextFieldStyles('#42a5f5')}
                 />
                 <TextField
                     label="Multiplier"
@@ -52,19 +44,9 @@ const ParentControls: React.FC<ParentControlsProps> = ({
                     value={multiplier}
                     onChange={(e) => onMultiplierChange(Number(e.target.value))}
                     fullWidth
-                    sx={{ 
-                        '& .MuiOutlinedInput-root': {
-                            backgroundColor: '#2a2a2a',
-                            '& fieldset': {
-                                borderColor: '#555'
-                            },
-                            '&:hover fieldset': {
-                                borderColor: '#42a5f5'
-                            }
-                        }
-                    }}
+                    sx={createTextFieldStyles('#42a5f5')}
                 />
-                <Typography><strong>Count 1:</strong> {count1}</Typography>
+                <Typography sx={infoTextStyles}><strong>Count 1:</strong> {count1}</Typography>
             </Box>
         </Paper>
     );

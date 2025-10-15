@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import AppRouter from './overall/AppRouter';
 import { Box, Button, Container, createTheme, CssBaseline, Paper, ThemeProvider, Typography } from '@mui/material';
 import RenderCount from 'overall/RenderCount';
+import './App.scss'
 
 const darkTheme = createTheme({
     palette: {

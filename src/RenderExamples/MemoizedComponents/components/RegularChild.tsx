@@ -1,6 +1,7 @@
 import React from 'react';
 import { Paper, Typography, Button } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
+import { createButtonStyles, createCardStyles, createTitleStyles, infoTextStyles } from '../styles';
 
 interface RegularChildProps {
     value: number;
@@ -15,27 +16,22 @@ const RegularChild: React.FC<RegularChildProps> = ({
 }) => {
     return (
         <Paper 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #f44336',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a',
-                '&:hover': {
-                    backgroundColor: '#2a2a2a'
-                }
-            }}
+            sx={createCardStyles('#f44336')}
         >
             <RenderCount componentName="RegularChild" />
-            <Typography variant="h6" sx={{ color: '#f44336', fontWeight: 'bold' }}>
+            <Typography variant="h6" sx={createTitleStyles('#f44336')}>
                 Regular Child Component
             </Typography>
-            <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
+            <Typography variant="body2" sx={infoTextStyles}>
                 🔄 Always re-renders (no React.memo)
             </Typography>
             <Typography>Value: {value}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Button onClick={onIncrement} variant="contained" color="error" sx={{ mt: 1 }}>
+            <Button 
+                onClick={onIncrement} 
+                variant="contained" 
+                sx={createButtonStyles('#f44336', '#d32f2f')}
+            >
                 Increment
             </Button>
         </Paper>

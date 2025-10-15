@@ -12,6 +12,7 @@ import ComponentLabel from './components/ComponentLabel';
 import ColorLegend from './components/ColorLegend';
 import ParentControls from './components/ParentControls';
 import ObservationGuide from './ObservationGuide';
+import { createLabelStyles } from './styles';
 
 const MemoizedComponentsExample: React.FC = () => {
     const [count1, setCount1] = useState(0);
@@ -44,18 +45,13 @@ const MemoizedComponentsExample: React.FC = () => {
             >
                 {/* Parent Component Label */}
                 <Box 
-                    sx={{ 
-                        position: 'absolute',
+                    sx={createLabelStyles('#42a5f5', {
                         top: -12,
                         left: 16,
-                        backgroundColor: '#42a5f5',
-                        color: 'white',
                         px: 2,
                         py: 0.5,
-                        borderRadius: 1,
-                        fontSize: '0.875rem',
-                        fontWeight: 'bold'
-                    }}
+                        fontSize: '0.875rem'
+                    })}
                 >
                     PARENT COMPONENT
                 </Box>
@@ -99,7 +95,7 @@ const MemoizedComponentsExample: React.FC = () => {
                     <ComponentLabel color="#ffb74d">
                         <MemoizedChildWithBadCallback 
                             value={count1} 
-                            onIncrement={handleIncrement1Bad}  // Same non-memoized function!
+                            onIncrement={handleIncrement1Bad}  // Same non-memoized function
                             expensiveValue={expensiveValue} 
                         />
                     </ComponentLabel>
@@ -158,7 +154,7 @@ const MemoizedComponentsExample: React.FC = () => {
                 />
 
                 <CodeViewer
-                    title="Memoized Child with Non-Memoized Callback (Still Re-renders!)"
+                    title="Memoized Child with Non-Memoized Callback (Still Re-renders)"
                     code={codeSnippets.memoizedChildWithBadCallback}
                     explanation={explanations.memoizedChildWithBadCallback}
                 />

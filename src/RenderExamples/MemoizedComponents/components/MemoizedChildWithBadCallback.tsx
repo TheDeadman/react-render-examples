@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { Paper, Typography, Button } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
+import { createButtonStyles, createCardStyles, createTitleStyles, infoTextStyles } from '../styles';
 
 interface MemoizedChildWithBadCallbackProps {
     value: number;
@@ -15,22 +16,13 @@ const MemoizedChildWithBadCallback = memo<MemoizedChildWithBadCallbackProps>(({
 }) => {
     return (
         <Paper 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #ffb74d',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a',
-                '&:hover': {
-                    backgroundColor: '#2a2a2a'
-                }
-            }}
+            sx={createCardStyles('#ffb74d')}
         >
             <RenderCount componentName="MemoizedChildWithBadCallback" />
-            <Typography variant="h6" sx={{ color: '#ffb74d', fontWeight: 'bold' }}>
+            <Typography variant="h6" sx={createTitleStyles('#ffb74d')}>
                 Memoized Child + Non-Memoized Function
             </Typography>
-            <Typography variant="body2" sx={{ color: '#bbb', mb: 1 }}>
+            <Typography variant="body2" sx={infoTextStyles}>
                 ⚠️ React.memo but new function props = Still re-renders
             </Typography>
             <Typography>Value: {value}</Typography>
@@ -38,11 +30,7 @@ const MemoizedChildWithBadCallback = memo<MemoizedChildWithBadCallbackProps>(({
             <Button 
                 onClick={onIncrement} 
                 variant="contained" 
-                sx={{ 
-                    mt: 1, 
-                    backgroundColor: '#ffb74d', 
-                    '&:hover': { backgroundColor: '#ffa726' } 
-                }}
+                sx={createButtonStyles('#ffb74d', '#ffa726')}
             >
                 Increment
             </Button>
