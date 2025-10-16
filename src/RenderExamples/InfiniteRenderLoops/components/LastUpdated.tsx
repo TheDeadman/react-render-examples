@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Paper, Typography, Button } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
 import styles from 'MemoizedComponents.module.scss';
 import { useInfiniteLoopContext } from '../context';

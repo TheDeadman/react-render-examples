@@ -1,8 +1,6 @@
-import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Box } from '@mui/material';
 import Navbar from './NavBar';
-import RenderCount from './RenderCount';
 import ContextVsReduxRoot from '../RenderExamples/ContextVsRedux/ContextVsReduxRoot';
 import UseEffectVsMemoRoot from '../RenderExamples/useEffectVsMemo/UseEffectVsMemoRoot';
 import RenderOptimizationLanding from '../RenderOptimizationLanding';
@@ -10,6 +8,8 @@ import MemoizedComponentsExample from '../RenderExamples/MemoizedComponents/Memo
 import MemoizedComponentsContextExample from '../RenderExamples/MemoizedComponentsContext/MemoizedComponentsContextExample';
 import MemoizedComponentsReduxExample from '../RenderExamples/MemoizedComponentsRedux/MemoizedComponentsExample';
 import InfiniteRendersExample from '../RenderExamples/InfiniteRenderLoops/InfiniteRendersExample';
+import ExpandableListExample from '../RenderExamples/ExpandableList/ExpandableListExample';
+import ExpandableListReduxExample from '../RenderExamples/ExpandableListRedux/ExpandableListExample';
 
 const AppRouter = () => {
     return (
@@ -24,6 +24,8 @@ const AppRouter = () => {
                     <Route path="/techniques/context-vs-redux" element={<ContextVsReduxRoot />} />
                     <Route path="/techniques/useeffect-vs-usememo" element={<UseEffectVsMemoRoot />} />
                     <Route path="/techniques/infinite-render-loops" element={<InfiniteRendersExample />} />
+                    <Route path="/techniques/expandable-list" element={<ExpandableListExample />} />
+                    <Route path="/techniques/expandable-list-redux" element={<ExpandableListReduxExample />} />
                     
                     {/* Legacy routes for backward compatibility */}
                     <Route path="/examples/effectVsMemo" element={<UseEffectVsMemoRoot />} />

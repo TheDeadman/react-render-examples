@@ -4,6 +4,7 @@ import oneReducer from 'RenderExamples/ContextVsRedux/Redux/one.slice';
 import twoReducer from 'RenderExamples/ContextVsRedux/Redux/two.slice';
 import threeReducer from 'RenderExamples/ContextVsRedux/Redux/three.slice';
 import memoizedComponentsReducer from 'RenderExamples/MemoizedComponentsRedux/memoizedComponents.slice';
+import expandedListReducer from 'RenderExamples/ExpandableListRedux/expandableList.slice';
 // ...
 
 const reduxVsContext = combineReducers({
@@ -17,6 +18,7 @@ export const store = configureStore({
         renderCount: renderCountReducer,
         reduxVsContext: reduxVsContext,
         memoizedComponents: memoizedComponentsReducer,
+        expandedList: expandedListReducer,
     },
 })
 

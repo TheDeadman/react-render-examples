@@ -1,0 +1,46 @@
+import React from 'react';
+import { Paper, Typography, Button, Collapse, Box } from '@mui/material';
+import RenderCount from '../../../overall/RenderCount';
+import styles from 'MemoizedComponents.module.scss';
+
+interface ListItemProps {
+    id: number;
+    title: string;
+    description: string;
+    expanded: boolean;
+    onToggle: () => void;
+}
+
+const ListItem: React.FC<ListItemProps> = ({ id, title, description, expanded, onToggle }) => {
+    return (
+        <Paper className={`${styles.card} ${styles.cardRed}`} sx={{ m: 0, mb: 0 }}>
+            <RenderCount componentName={`ListItem-${id}`} />
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Typography variant="h6" className={`${styles.title} ${styles.titleRed}`}>
+                    {title}
+                </Typography>
+                <Button 
+                    onClick={onToggle}
+                    sx={{ 
+                        color: '#f44336',
+                        minWidth: '40px',
+                        fontSize: '1.2rem'
+                    }}
+                >
+                    {expanded ? '▲' : '▼'}
+                </Button>
+            </Box>
+            <Collapse in={expanded}>
+                <Typography 
+                    variant="body2" 
+                    className={styles.infoText}
+                    sx={{ mt: 2 }}
+                >
+                    {description}
+                </Typography>
+            </Collapse>
+        </Paper>
+    );
+};
+
+export default ListItem;

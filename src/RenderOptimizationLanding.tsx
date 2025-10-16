@@ -86,16 +86,16 @@ const RenderOptimizationLanding: React.FC = () => {
             isImplemented: true
         },
         {
-            title: "List Rendering Optimization",
-            description: "Techniques for optimized list rendering.",
-            route: "/techniques/list-rendering",
-            isImplemented: false
+            title: "Expandable List",
+            description: "Demonstrates a simple expandable/collapsible list and the challenges of preventing unnecessary re-renders of list items.",
+            route: "/techniques/expandable-list",
+            isImplemented: true
         },
-        {
-            title: "Component Splitting",
-            description: "How breaking components into smaller pieces can help isolate re-renders and improve performance.",
-            route: "/techniques/component-splitting",
-            isImplemented: false
+    {
+            title: "Expandable List Redux",
+            description: "Demonstrates the same expandable/collapsible list using Redux for state management, showcasing how Redux can help reduce re-renders.",
+            route: "/techniques/expandable-list-redux",
+            isImplemented: true
         }
     ];
 
@@ -122,24 +122,6 @@ const RenderOptimizationLanding: React.FC = () => {
                     </Grid>
                 ))}
             </Grid>
-
-            <Box sx={{ mt: 6, p: 3, backgroundColor: 'background.paper', borderRadius: 1 }}>
-                <Typography variant="h6" gutterBottom>
-                    How to Use These Examples
-                </Typography>
-                <Typography variant="body2" paragraph>
-                    • Each technique includes interactive components with render counters
-                </Typography>
-                <Typography variant="body2" paragraph>
-                    • Use the delay controls to simulate slow rendering and observe the effects
-                </Typography>
-                <Typography variant="body2" paragraph>
-                    • Toggle between different implementations to compare rendering behavior
-                </Typography>
-                <Typography variant="body2">
-                    • Check your browser's React DevTools for additional insights
-                </Typography>
-            </Box>
         </Container>
     );
 };
