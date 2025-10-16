@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from 'store/store';
 
 interface MemoizedComponentsState {
     count1: number;
@@ -28,19 +29,26 @@ const memoizedComponentsSlice = createSlice({
     },
 });
 
-export const { 
-    incrementCount1, 
-    setMultiplier, 
-    setUnrelatedState 
+export const {
+    incrementCount1,
+    setMultiplier,
+    setUnrelatedState
 } = memoizedComponentsSlice.actions;
 
-export const selectCount1 = (state: { memoizedComponents: MemoizedComponentsState }) => state.memoizedComponents.count1;
-export const selectMultiplier = (state: { memoizedComponents: MemoizedComponentsState }) => state.memoizedComponents.multiplier;
-export const selectUnrelatedState = (state: { memoizedComponents: MemoizedComponentsState }) => state.memoizedComponents.unrelatedState;
+export const selectCount1 = (state: RootState) => state.memoizedComponents.count1;
+export const selectMultiplier = (state: RootState) => state.memoizedComponents.multiplier;
+export const selectUnrelatedState = (state: RootState) => state.memoizedComponents.unrelatedState;
 
-export const selectExpensiveValue = (state: { memoizedComponents: MemoizedComponentsState }) => {
-    console.log('Computing expensive value (from Redux)...');
+export const selectExpensiveValueBad = (state: RootState) => {
+    console.log('❌Computing expensive value (from Redux)...');
     return state.memoizedComponents.multiplier * 1000;
 }
+
+export const selectExpensiveValue = createSelector([
+    selectMultiplier
+], (multiplier) => {
+    console.log('✅ Computing expensive value (from Redux)...');
+    return multiplier * 1000;
+});
 
 export default memoizedComponentsSlice.reducer;

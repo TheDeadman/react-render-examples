@@ -2,10 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { Box, Typography, Container, Grid } from '@mui/material';
 import RenderCount from '../../overall/RenderCount';
 import ListItem from './components/ListItem';
-import MemoizedListItem from './components/MemoizedListItem';
-import OptimizedListItem from './components/OptimizedListItem';
-import ListControls from './components/ListControls';
-import ColorLegend from './components/ColorLegend';
 import { listData } from './listData';
 import styles from 'MemoizedComponents.module.scss';
 

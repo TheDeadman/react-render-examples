@@ -120,28 +120,25 @@ export default MemoizedChild;`,
 
   expensiveComponentBad: `import React from 'react';
 import { Paper, Typography } from '@mui/material';
+import RenderCount from '../../../overall/RenderCount';
 import { useAppSelector } from 'store/hooks';
-import { selectMultiplier } from '../memoizedComponents.slice';
+import { selectExpensiveValueBad, selectMultiplier } from '../memoizedComponents.slice';
 import styles from 'MemoizedComponents.module.scss';
-
-function calculateExpensiveValue(multiplier: number): number {
-    console.log('❌ BAD: Recalculating expensive value on every render');
-    return multiplier * 1000;
-}
 
 const ExpensiveComponentBad = () => {
     const multiplier = useAppSelector(selectMultiplier);
-
-    // ❌ BAD: This will recalculate on every render
-    const expensiveValue = calculateExpensiveValue(multiplier);
+    
+    // ❌ BAD: This will recalculate everytime part of the slice state changes even though this component does not re-render.
+    const expensiveValue = useAppSelector(selectExpensiveValueBad);
 
     return (
         <Paper className={\`\${styles.card} \${styles.cardRed}\`}>
+            <RenderCount componentName="ExpensiveComponentBad" />
             <Typography variant="h6" className={\`\${styles.title} \${styles.titleRed}\`}>
                 Non-Memoized Calculation
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
-                🔄 Recalculates on every render (expensive)
+                🔄 Recalculates on every slice state change without a re-render (expensive)
             </Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
@@ -154,8 +151,8 @@ const ExpensiveComponentBad = () => {
 
 export default ExpensiveComponentBad;`,
 
-  expensiveComponentGood: `import React from 'react';
-import { Paper, Typography } from '@mui/material';
+  expensiveComponentGood: `import { Paper, Typography } from '@mui/material';
+import RenderCount from '../../../overall/RenderCount';
 import { useAppSelector } from 'store/hooks';
 import { selectExpensiveValue, selectMultiplier } from '../memoizedComponents.slice';
 import styles from 'MemoizedComponents.module.scss';
@@ -166,11 +163,12 @@ const ExpensiveComponentGood = () => {
 
     return (
         <Paper className={\`\${styles.card} \${styles.cardPurple}\`}>
+            <RenderCount componentName="ExpensiveComponentGood" />
             <Typography variant="h6" className={\`\${styles.title} \${styles.titlePurple}\`}>
                 Memoized Calculation
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
-                ✅ useMemo prevents expensive recalculations
+                ✅ createSelector prevents expensive recalculations
             </Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
@@ -244,18 +242,75 @@ const MemoizedChildWithBadCallback = memo(() => {
 MemoizedChildWithBadCallback.displayName = 'MemoizedChildWithBadCallback';
 
 export default MemoizedChildWithBadCallback;`,
+
+    slice: `import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from 'store/store';
+
+interface MemoizedComponentsState {
+    count1: number;
+    multiplier: number;
+    unrelatedState: string;
+}
+
+const initialState: MemoizedComponentsState = {
+    count1: 0,
+    multiplier: 1,
+    unrelatedState: '',
+};
+
+const memoizedComponentsSlice = createSlice({
+    name: 'memoizedComponents',
+    initialState,
+    reducers: {
+        incrementCount1: (state) => {
+            state.count1 += 1;
+        },
+        setMultiplier: (state, action: PayloadAction<number>) => {
+            state.multiplier = action.payload;
+        },
+        setUnrelatedState: (state, action: PayloadAction<string>) => {
+            state.unrelatedState = action.payload;
+        },
+    },
+});
+
+export const {
+    incrementCount1,
+    setMultiplier,
+    setUnrelatedState
+} = memoizedComponentsSlice.actions;
+
+export const selectCount1 = (state: RootState) => state.memoizedComponents.count1;
+export const selectMultiplier = (state: RootState) => state.memoizedComponents.multiplier;
+export const selectUnrelatedState = (state: RootState) => state.memoizedComponents.unrelatedState;
+
+export const selectExpensiveValueBad = (state: RootState) => {
+    console.log('❌Computing expensive value (from Redux)...');
+    return state.memoizedComponents.multiplier * 1000;
+}
+
+export const selectExpensiveValue = createSelector([
+    selectMultiplier
+], (multiplier) => {
+    console.log('✅ Computing expensive value (from Redux)...');
+    return multiplier * 1000;
+});
+
+export default memoizedComponentsSlice.reducer;`
 };
 
 export const explanations = {
-    regularChild: "This component re-renders whenever the Redux values it selects change because it is not wrapped in React.memo(). If count1 or the derived expensive value updates, this component updates as well.",
+    regularChild: "This component only re-renders when the subscribed state changes. The parent never re-renders in this example, so memoization is not needed here.",
   
-    memoizedChild: "React.memo() cannot skip renders when the component still subscribes to changing Redux state. This component re-renders each time the values returned from useAppSelector change, even though the component is memoized.",
+    memoizedChild: "React.memo is unnecessary here because the component already uses useAppSelector to subscribe only to specific pieces of state. The parent does not re-render in this example. The component will re-render only when those selected values change.",
   
-    expensiveComponentBad: "This component shows how an expensive calculation without memoization reruns every time its subscribed multiplier value changes. Watch the console log to see the recalculation whenever multiplier updates.",
+    expensiveComponentBad: "This component shows how an expensive calculation selector without memoization by \"createSelector\" reruns every time a piece of the slice statechanges. Watch the console log to see the recalculation whenever multiplier updates.",
   
     expensiveComponentGood: "This component uses a memoized selector so the expensive calculation only recomputes when the multiplier dependency changes. It avoids unnecessary recalculations even when other Redux state updates.",
   
     parentComponent: "The Redux parent component demonstrates lifting state into the store while child components subscribe only to the values they need. Each child uses useAppSelector or useAppDispatch instead of receiving props, highlighting selective rendering based on subscribed slices of state.",
 
-    memoizedChildWithBadCallback: "Even though this component is wrapped in React.memo(), it still re-renders when its selected Redux values change. Creating a new callback on each render also defeats memoization, so it updates whenever count1 or the derived expensive value changes."
+    memoizedChildWithBadCallback: "This is essentially the same as the Memoized Child Component. Because we can import our dispatch function and action function directly where needed, we don't need to pass it down as a prop. These functions also don't need to be memoized because they have stable references.",
+
+    slice: "This redux slice abstracts the state management logic out of the components. The components can subscribe to the state that they use and be unaffected by other pieces of state. Note that calculated selectors will run on every state change for the slice but the components using them will only re-render if the result is different. This can be prevented by using createSelector to only run the calculation again if any of the 'input selectors' returns a different result."
 };

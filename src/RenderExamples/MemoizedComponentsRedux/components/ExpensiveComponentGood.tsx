@@ -1,4 +1,3 @@
-import React from 'react';
 import { Paper, Typography } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
 import { useAppSelector } from 'store/hooks';
@@ -16,7 +15,7 @@ const ExpensiveComponentGood = () => {
                 Memoized Calculation
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
-                ✅ useMemo prevents expensive recalculations
+                ✅ createSelector prevents expensive recalculations
             </Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>

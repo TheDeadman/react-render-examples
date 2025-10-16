@@ -100,6 +100,12 @@ const MemoizedComponentsExample: React.FC = () => {
                 </Typography>
 
                 <CodeViewer
+                    title="Redux Toolkit Slice"
+                    code={codeSnippets.slice}
+                    explanation={explanations.slice}
+                />
+
+                <CodeViewer
                     title="Parent Component"
                     code={codeSnippets.parentComponent}
                     explanation={explanations.parentComponent}

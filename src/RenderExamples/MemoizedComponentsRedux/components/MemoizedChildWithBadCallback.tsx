@@ -19,7 +19,7 @@ const MemoizedChildWithBadCallback = memo(() => {
                 Memoized Child + Non-Memoized Function (Redux)
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
-                ⚠️ React.memo + Redux with a non memoized function still rerenders
+                ✅ React.memo + Redux action that doesn't need to be memoized.
             </Typography>
             <Typography>Value: {count1}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>

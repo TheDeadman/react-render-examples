@@ -17,7 +17,7 @@ const MemoizedChild = memo(() => {
                 Memoized Child Component (Redux)
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
-                ⚠️ React.memo + Redux rerenders when the subscribed state updates
+                ✅ React.memo + Redux action that doesn't need to be memoized.
             </Typography>
             <Typography>Value: {count1}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
