@@ -17,7 +17,7 @@ const ExpensiveComponentBadContext: React.FC = () => {
         <Paper className={`${styles.card} ${styles.cardRed}`}>
             <RenderCount componentName="ExpensiveComponentBadContext" />
             <Typography variant="h6" className={`${styles.title} ${styles.titleRed}`}>
-                ❌ Non-Memoized Calculation (Context)
+                Non-Memoized Calculation (Context)
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
                 🔄 Recalculates on every render (expensive)

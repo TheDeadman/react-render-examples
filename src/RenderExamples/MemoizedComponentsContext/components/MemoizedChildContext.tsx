@@ -14,7 +14,7 @@ const MemoizedChildContext = memo(() => {
                 Memoized Child Component (Context)
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
-                ⚠️ React.memo + Context = Still re-renders when any context value changes
+                ⚠️ React.memo + Context + useCallback = Still re-renders when any context value changes
             </Typography>
             <Typography>Value: {count1}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>

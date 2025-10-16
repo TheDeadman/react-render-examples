@@ -138,7 +138,7 @@ const ExpensiveComponentBad = () => {
     return (
         <Paper className={\`\${styles.card} \${styles.cardRed}\`}>
             <Typography variant="h6" className={\`\${styles.title} \${styles.titleRed}\`}>
-                ❌ Non-Memoized Calculation
+                Non-Memoized Calculation
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
                 🔄 Recalculates on every render (expensive)
@@ -167,10 +167,10 @@ const ExpensiveComponentGood = () => {
     return (
         <Paper className={\`\${styles.card} \${styles.cardPurple}\`}>
             <Typography variant="h6" className={\`\${styles.title} \${styles.titlePurple}\`}>
-                ✅ Memoized Calculation
+                Memoized Calculation
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
-                🧮 useMemo prevents expensive recalculations
+                ✅ useMemo prevents expensive recalculations
             </Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
@@ -247,15 +247,15 @@ export default MemoizedChildWithBadCallback;`,
 };
 
 export const explanations = {
-  regularChild: "This component re-renders every time ANY Redux state changes because it's NOT wrapped in React.memo() and subscribes to Redux store. Without memo, Redux components always re-render when their subscribed state changes.",
+    regularChild: "This component re-renders whenever the Redux values it selects change because it is not wrapped in React.memo(). If count1 or the derived expensive value updates, this component updates as well.",
   
-  memoizedChild: "This component is wrapped in React.memo() but still re-renders on ANY Redux state change. React.memo() with Redux only prevents re-renders if the component doesn't subscribe to the store, but since it uses useAppSelector, it will re-render whenever any subscribed state changes.",
+    memoizedChild: "React.memo() cannot skip renders when the component still subscribes to changing Redux state. This component re-renders each time the values returned from useAppSelector change, even though the component is memoized.",
   
-  expensiveComponentBad: "This component demonstrates expensive calculations without useMemo in Redux. The expensive calculation runs on every render when ANY Redux state changes. Notice how it logs to the console every time you change unrelated state.",
+    expensiveComponentBad: "This component shows how an expensive calculation without memoization reruns every time its subscribed multiplier value changes. Watch the console log to see the recalculation whenever multiplier updates.",
   
-  expensiveComponentGood: "This component uses useMemo() to memoize expensive calculations even with Redux. It only recalculates when the specific 'multiplier' dependency changes, not on every Redux state change. This shows useMemo still works within Redux components.",
+    expensiveComponentGood: "This component uses a memoized selector so the expensive calculation only recomputes when the multiplier dependency changes. It avoids unnecessary recalculations even when other Redux state updates.",
   
-  parentComponent: "The Redux parent component demonstrates how state management shifts from local state and props to Redux store subscriptions. Each child component uses useAppSelector/useAppDispatch instead of receiving props. This shows how Redux changes the rendering patterns compared to props-based state management.",
+    parentComponent: "The Redux parent component demonstrates lifting state into the store while child components subscribe only to the values they need. Each child uses useAppSelector or useAppDispatch instead of receiving props, highlighting selective rendering based on subscribed slices of state.",
 
-  memoizedChildWithBadCallback: "This Redux component shows that React.memo() has limited effectiveness with Redux. Even though it's memoized, it re-renders whenever ANY Redux state changes because it subscribes to the store via useAppSelector. Redux components have different optimization strategies compared to props-based components."
+    memoizedChildWithBadCallback: "Even though this component is wrapped in React.memo(), it still re-renders when its selected Redux values change. Creating a new callback on each render also defeats memoization, so it updates whenever count1 or the derived expensive value changes."
 };

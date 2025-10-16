@@ -2,11 +2,11 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import styles from 'MemoizedComponents.module.scss';
 
-const ColorLegendContext: React.FC = () => {
+const ColorLegend: React.FC = () => {
     return (
         <Box className={styles.legend}>
             <Typography variant="subtitle2" className={styles.legendTitle}>
-                Component Types (Context Version):
+                Component Types:
             </Typography>
             <Box className={styles.legendItem}>
                 <Box className={`${styles.legendSwatch} ${styles.legendSwatchRed}`} />
@@ -14,11 +14,11 @@ const ColorLegendContext: React.FC = () => {
             </Box>
             <Box className={styles.legendItem}>
                 <Box className={`${styles.legendSwatch} ${styles.legendSwatchOrange}`} />
-                <Typography variant="caption">Context + React.memo</Typography>
+                <Typography variant="caption">Partial Optimization</Typography>
             </Box>
             <Box className={styles.legendItem}>
                 <Box className={`${styles.legendSwatch} ${styles.legendSwatchGreen}`} />
-                <Typography variant="caption">Context + useCallback</Typography>
+                <Typography variant="caption">Full Optimization</Typography>
             </Box>
             <Box className={styles.legendItem}>
                 <Box className={`${styles.legendSwatch} ${styles.legendSwatchPurple}`} />
@@ -28,4 +28,4 @@ const ColorLegendContext: React.FC = () => {
     );
 };
 
-export default ColorLegendContext;
+export default ColorLegend;

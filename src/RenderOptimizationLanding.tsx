@@ -80,6 +80,12 @@ const RenderOptimizationLanding: React.FC = () => {
             isImplemented: true
         },
         {
+            title: "Infinite Render Loops",
+            description: "Basic causes of infinite render loops",
+            route: "/techniques/infinite-render-loops",
+            isImplemented: true
+        },
+        {
             title: "List Rendering Optimization",
             description: "Techniques for optimized list rendering.",
             route: "/techniques/list-rendering",

@@ -20,7 +20,7 @@ const ExpensiveComponentGoodContext: React.FC = () => {
                 ✅ Memoized Expensive Component (Context)
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
-                🧮 useMemo prevents expensive recalculations
+                ✅ useMemo prevents expensive recalculations
             </Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>

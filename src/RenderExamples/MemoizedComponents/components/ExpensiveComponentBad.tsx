@@ -20,7 +20,7 @@ const ExpensiveComponentBad: React.FC<ExpensiveComponentBadProps> = ({ multiplie
         <Paper className={`${styles.card} ${styles.cardRed}`}>
             <RenderCount componentName="ExpensiveComponentBad" />
             <Typography variant="h6" className={`${styles.title} ${styles.titleRed}`}>
-                ❌ Non-Memoized Calculation
+                Non-Memoized Calculation
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
                 🔄 Recalculates on every render (expensive)

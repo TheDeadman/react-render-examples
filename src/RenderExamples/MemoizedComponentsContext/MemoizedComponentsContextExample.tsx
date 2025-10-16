@@ -32,7 +32,7 @@ const MemoizedComponentsExampleContent: React.FC = () => {
                     </Typography>
                     <Typography variant="body1" paragraph className={styles.headerDescription}>
                         This example demonstrates the same optimizations as the props version, but using React Context for state management.
-                        Notice how Context affects rendering behavior and breaks some optimizations.
+                        Notice how Context affects rendering behavior and breaks some optimizations. It is helpful to reduce prop drilling, but comes with trade-offs. Certain types of optimizations, like React.memo, may not work as expected because context changes can trigger re-renders in all consumer components.
                     </Typography>
                     
                     {/* Color Legend */}
@@ -63,7 +63,7 @@ const MemoizedComponentsExampleContent: React.FC = () => {
                     </Grid>
 
                     <Grid item xs={12} md={6}>
-                        <ComponentLabelContext color="#ffb74d">
+                        <ComponentLabelContext color="#66bb6a">
                             {/* Remove END */}
                             <MemoizedChildContext />
                             {/* Remove START */}

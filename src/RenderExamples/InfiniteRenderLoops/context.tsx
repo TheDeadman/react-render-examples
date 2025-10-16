@@ -1,0 +1,43 @@
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+
+interface InfiniteLoopContextType {
+    count: number;
+    lastUpdated: string;
+    handleIncrement: () => void;
+    handleSetLastUpdated: () => void;
+}
+
+const InfiniteLoopContext = createContext<InfiniteLoopContextType | undefined>(undefined);
+
+interface InfiniteLoopProviderProps {
+    children: ReactNode;
+}
+
+export const InfiniteLoopProvider: React.FC<InfiniteLoopProviderProps> = ({ children }) => {    
+    const [count, setCount] = useState(0);
+    const [lastUpdated, setLastUpdated] = useState(new Date().toISOString());
+
+    const handleIncrement = () => setCount(count + 1);
+    const handleSetLastUpdated = () => setLastUpdated(new Date().toISOString());
+
+    const value = {
+        count,
+        lastUpdated,
+        handleIncrement,
+        handleSetLastUpdated
+    };
+
+    return (
+        <InfiniteLoopContext.Provider value={value}>
+            {children}
+        </InfiniteLoopContext.Provider>
+    );
+};
+
+export const useInfiniteLoopContext = () => {
+    const context = useContext(InfiniteLoopContext);
+    if (context === undefined) {
+        throw new Error('useInfiniteLoopContext must be used within a InfiniteLoopProvider');
+    }
+    return context;
+};

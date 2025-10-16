@@ -22,10 +22,10 @@ const ExpensiveComponentGood: React.FC<ExpensiveComponentGoodProps> = ({ multipl
         <Paper className={`${styles.card} ${styles.cardPurple}`}>
             <RenderCount componentName="ExpensiveComponentGood" />
             <Typography variant="h6" className={`${styles.title} ${styles.titlePurple}`}>
-                ✅ Memoized Calculation
+                Memoized Calculation
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
-                🧮 useMemo prevents expensive recalculations
+                ✅ useMemo prevents expensive recalculations
             </Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>

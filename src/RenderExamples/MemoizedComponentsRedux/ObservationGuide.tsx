@@ -8,16 +8,16 @@ const ObservationGuide: React.FC = () => {
                 What to Observe (Redux Version):
             </Typography>
             <Typography variant="body2" paragraph>
-                • Type in "Unrelated State" field - notice NO child components re-render. Redux only re-renders components when their subscribed state changes
+                • Type in "Unrelated State" field - notice NO child components re-render. Redux only re-renders components when their subscribed state changes. 
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Regular Child (Red):</strong> Re-renders when count1 or multiplier changes (subscribed via selectCount1 and selectExpensiveValue)
+                • <strong>Regular Child (Redux):</strong> Re-renders when count1 or multiplier changes (subscribed via selectCount1 and selectExpensiveValue). This component would re-render if the parent re-rendered.
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Child + Non-Memoized Function (Orange):</strong> React.memo works with Redux. Only re-renders when count1 or multiplier changes, not on unrelated state
+                • <strong>Memoized Child + Non-Memoized Function (Redux):</strong> React.memo works with Redux. Redux action functions do not get recreated each render and will never be the cause of a re-render. Only re-renders when count1 or multiplier changes, not on unrelated state
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Child (Green):</strong> React.memo works perfectly. Only re-renders when subscribed state (count1 or multiplier) actually changes
+                • <strong>Memoized Child (Redux):</strong> React.memo works perfectly. Only re-renders when subscribed state (count1 or multiplier) actually changes
             </Typography>
             <Typography variant="body2" paragraph>
                 • <strong>Expensive Components (Red & Purple):</strong> Only re-render when multiplier changes since they only subscribe to selectMultiplier

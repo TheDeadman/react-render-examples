@@ -99,7 +99,7 @@ const ExpensiveComponentBad: React.FC<ExpensiveComponentBadProps> = ({ multiplie
     return (
         <Paper className={\`\${styles.card} \${styles.cardRed}\`}>
             <Typography variant="h6" className={\`\${styles.title} \${styles.titleRed}\`}>
-                ❌ Non-Memoized Calculation
+                Non-Memoized Calculation
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
                 🔄 Recalculates on every render (expensive)
@@ -137,10 +137,10 @@ const ExpensiveComponentGood: React.FC<ExpensiveComponentGoodProps> = ({ multipl
     return (
         <Paper className={\`\${styles.card} \${styles.cardPurple}\`}>
             <Typography variant="h6" className={\`\${styles.title} \${styles.titlePurple}\`}>
-                ✅ Memoized Calculation
+                Memoized Calculation
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
-                🧮 useMemo prevents expensive recalculations
+                ✅ useMemo prevents expensive recalculations
             </Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>

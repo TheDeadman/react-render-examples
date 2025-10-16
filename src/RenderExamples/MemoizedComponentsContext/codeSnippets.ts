@@ -210,7 +210,7 @@ const ExpensiveComponentBadContext: React.FC = () => {
     return (
         <Paper className={\`\${styles.card} \${styles.cardRed}\`}>
             <Typography variant="h6" className={\`\${styles.title} \${styles.titleRed}\`}>
-                ❌ Non-Memoized Calculation (Context)
+                Non-Memoized Calculation (Context)
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
                 🔄 Recalculates on every render (expensive)
@@ -246,7 +246,7 @@ const ExpensiveComponentGoodContext: React.FC = () => {
                 ✅ Memoized Expensive Component (Context)
             </Typography>
             <Typography variant="body2" className={styles.infoText}>
-                🧮 useMemo prevents expensive recalculations
+                ✅ useMemo prevents expensive recalculations
             </Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
