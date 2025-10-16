@@ -14,7 +14,7 @@ const ObservationGuide: React.FC = () => {
                 • <strong>Regular Child (Redux):</strong> Re-renders when count1 or multiplier changes (subscribed via selectCount1 and selectExpensiveValue). This component would re-render if the parent re-rendered.
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Child + Non-Memoized Function (Redux):</strong> React.memo works with Redux. Redux action functions do not get recreated each render and will never be the cause of a re-render. Only re-renders when count1 or multiplier changes, not on unrelated state
+                • <strong>Memoized Child + Non-Memoized Function (Redux):</strong> React.memo is unnecessary here. Redux action functions do not get recreated each render and will never be the cause of a re-render. Only re-renders when count1 or multiplier changes, not on unrelated state
             </Typography>
             <Typography variant="body2" paragraph>
                 • <strong>Memoized Child (Redux):</strong> React.memo is unnecessary here. Only re-renders when subscribed state (count1 or multiplier) actually changes
