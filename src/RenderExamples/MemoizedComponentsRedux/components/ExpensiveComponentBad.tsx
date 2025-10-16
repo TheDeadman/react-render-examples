@@ -1,4 +1,3 @@
-import React from 'react';
 import { Paper, Typography } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
 import { useAppSelector } from 'store/hooks';
