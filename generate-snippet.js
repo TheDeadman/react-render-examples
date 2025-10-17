@@ -13,8 +13,6 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import prettier from 'prettier';
 
-let prettierLoader;
-
 function dataParserForExt(ext) {
   switch (ext) {
     case '.ts':
@@ -52,7 +50,7 @@ async function* walk(dir) {
     const res = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       const lower = entry.name.toLowerCase();
-      if (["node_modules", ".git", "dist", "build", ".next", "out"].includes(lower)) continue;
+      if (["node_modules", ".git", "dist", "build", ".next", "out", "snippets"].includes(lower)) continue;
       yield* walk(res);
     } else {
       yield res;
@@ -61,7 +59,7 @@ async function* walk(dir) {
 }
 
 function looksLikeSnippetFile(file) {
-  return /Snippet\.ts$/.test(file);
+  return /\.snippet\.ts$/i.test(file);
 }
 
 function shouldSkip(file) {
@@ -77,13 +75,16 @@ function lowerFirst(s) {
   return s.length ? s[0].toLowerCase() + s.slice(1) : s;
 }
 
-function targetPathFor(srcPath) {
-  const dir = path.dirname(srcPath);
+function targetPathFor(root, srcPath) {
   const ext = path.extname(srcPath);
   if (!exts.has(ext)) return null;
-  const base = path.basename(srcPath, ext);
-  const outBase = `${lowerFirst(base)}Snippet.ts`;
-  return path.join(dir, outBase);
+  const relativePath = path.relative(root, srcPath);
+  if (relativePath.startsWith('..')) return null;
+  const dir = path.dirname(relativePath);
+  const base = path.basename(relativePath, ext);
+  const outBase = `${lowerFirst(base)}.snippet.ts`;
+  const targetDir = dir === '.' ? '' : dir;
+  return path.join(root, 'snippets', targetDir, outBase);
 }
 
 function toTemplateLiteralSafe(content) {
@@ -118,16 +119,17 @@ async function writeSnippet(srcPath, outPath, body) {
 
   const prev = await fs.readFile(outPath, "utf8").catch(() => null);
   if (prev === fileText) return { outPath, status: "unchanged" };
+  await fs.mkdir(path.dirname(outPath), { recursive: true });
   await fs.writeFile(outPath, fileText, "utf8");
   return { outPath, status: "written" };
 }
 
-async function processFile(file) {
+async function processFile(root, file) {
   if (shouldSkip(file)) return null;
   const ext = path.extname(file);
   if (!exts.has(ext)) return null;
 
-  const outPath = targetPathFor(file);
+  const outPath = targetPathFor(root, file);
   if (!outPath) return null;
 
   try {
@@ -135,8 +137,8 @@ async function processFile(file) {
     const firstLine = body.split(/\r?\n/, 1)[0].trim();
     if (firstLine !== "// Generate Snippet") return null;
 
-  body = removeMarkedSections(body);
-  body = await formatSnippetBody(body, ext);
+    body = removeMarkedSections(body);
+    body = await formatSnippetBody(body, ext);
 
     const result = await writeSnippet(file, outPath, body);
     return { src: file, out: outPath, ...result };
@@ -149,7 +151,7 @@ async function processFile(file) {
   const results = [];
   for (const root of roots) {
     for await (const file of walk(root)) {
-      const r = await processFile(file);
+      const r = await processFile(root, file);
       if (r) results.push(r);
     }
   }
