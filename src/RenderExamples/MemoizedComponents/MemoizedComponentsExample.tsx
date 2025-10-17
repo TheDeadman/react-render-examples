@@ -14,7 +14,7 @@ import ParentControls from './components/ParentControls';
 import ObservationGuide from './ObservationGuide';
 import styles from 'MemoizedComponents.module.scss';
 
-export const explanations = "The parent component shows the complete optimization strategy: useCallback() prevents function recreation, useMemo() prevents expensive recalculations, and the child components use React.memo(). The key insight: ALL THREE hooks must work together - useCallback is only beneficial when passing functions to memoized components.";
+export const explanation = "The parent component shows the complete optimization strategy: useCallback() prevents function recreation, useMemo() prevents expensive recalculations, and the child components use React.memo(). The key insight: ALL THREE hooks must work together - useCallback is only beneficial when passing functions to memoized components.";
 
 const MemoizedComponentsExample = () => {
     const [count1, setCount1] = useState(0);

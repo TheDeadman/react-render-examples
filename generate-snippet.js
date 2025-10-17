@@ -108,7 +108,9 @@ function removeMarkedSections(content) {
       skipping = false;
       continue;
     }
-    if (!skipping) result.push(line);
+    if (!skipping && !line.includes('export const explanation')) {
+      result.push(line);
+    }
   }
   return result.join('\n');
 }
