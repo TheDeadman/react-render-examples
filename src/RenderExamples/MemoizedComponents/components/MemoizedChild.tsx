@@ -4,6 +4,8 @@ import { Paper, Typography, Button } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
 import styles from 'MemoizedComponents.module.scss';
 
+export const explanation = "This component is wrapped in React.memo() AND receives a memoized callback (useCallback). It only re-renders when its props actually change. Both conditions are necessary - React.memo() for shallow prop comparison + useCallback() for stable function references.";
+
 interface MemoizedChildProps {
     value: number;
     onIncrement: () => void;

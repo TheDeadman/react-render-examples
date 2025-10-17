@@ -4,6 +4,8 @@ import { Paper, Typography, Button } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
 import styles from 'MemoizedComponents.module.scss';
 
+export const explanation = "This component re-renders every time the parent re-renders because it's NOT wrapped in React.memo(). Without memo, React always re-renders child components when the parent re-renders, regardless of whether props have changed.";
+
 interface RegularChildProps {
     value: number;
     onIncrement: () => void;

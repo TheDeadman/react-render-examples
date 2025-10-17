@@ -4,6 +4,8 @@ import { Paper, Typography } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
 import styles from 'MemoizedComponents.module.scss';
 
+export const explanation = "This component demonstrates what happens WITHOUT useMemo in a calculated value. The expensive calculation runs on every render. Notice how it logs to the console every time you type in the 'Unrelated State' field.";
+
 interface ExpensiveComponentBadProps {
     multiplier: number;
 }

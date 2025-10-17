@@ -3,6 +3,8 @@ import React from 'react';
 import { Paper, Typography, TextField, Box } from '@mui/material';
 import styles from 'MemoizedComponents.module.scss';
 
+export const explanation = "Parent component controls state that affects child components. Changing 'Unrelated State' triggers all child renders, while changing 'Multiplier' affects only those depending on it.";
+
 interface ParentControlsProps {
     unrelatedState: string;
     onUnrelatedStateChange: (value: string) => void;

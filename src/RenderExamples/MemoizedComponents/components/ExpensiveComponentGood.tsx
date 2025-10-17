@@ -4,6 +4,8 @@ import { Paper, Typography } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
 import styles from 'MemoizedComponents.module.scss';
 
+export const explanation = "This component uses useMemo() to memoize the expensive calculation. It only recalculates when the 'multiplier' dependency actually changes, not on every render. Type in 'Unrelated State' vs changing the multiplier to see the difference in console logs.";
+
 interface ExpensiveComponentGoodProps {
     multiplier: number;
 }

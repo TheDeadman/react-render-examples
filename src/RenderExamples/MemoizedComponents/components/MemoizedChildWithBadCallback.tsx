@@ -4,6 +4,8 @@ import { Paper, Typography, Button } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';
 import styles from 'MemoizedComponents.module.scss';
 
+export const explanation = "Even though this component is wrapped in React.memo(), it still re-renders every time because it receives a new function reference (handleIncrement1Bad) on each render. React.memo() does shallow comparison - if any prop changes (including function references), it re-renders. This demonstrates why useCallback() and useMemo() are essential when using React.memo().";
+
 interface MemoizedChildWithBadCallbackProps {
     value: number;
     onIncrement: () => void;
