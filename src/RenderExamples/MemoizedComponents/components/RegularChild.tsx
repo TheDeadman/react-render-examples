@@ -1,3 +1,4 @@
+// Generate Snippet
 import React from 'react';
 import { Paper, Typography, Button } from '@mui/material';
 import RenderCount from '../../../overall/RenderCount';

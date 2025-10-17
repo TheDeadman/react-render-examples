@@ -11,6 +11,34 @@
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import prettier from 'prettier';
+
+let prettierLoader;
+
+function dataParserForExt(ext) {
+  switch (ext) {
+    case '.ts':
+    case '.tsx':
+      return 'typescript';
+    case '.jsx':
+      return 'babel';
+    case '.js':
+      return 'babel';
+    default:
+      return null;
+  }
+}
+
+async function formatSnippetBody(content, ext) {
+  const parser = dataParserForExt(ext);
+  if (!parser) return content;
+
+  try {
+    return prettier.format(content, { parser, singleQuote: true, tabWidth: 4 });
+  } catch {
+    return content;
+  }
+}
 
 const exts = new Set([".tsx", ".jsx", ".ts", ".js"]);
 const now = new Date().toISOString();
@@ -107,7 +135,8 @@ async function processFile(file) {
     const firstLine = body.split(/\r?\n/, 1)[0].trim();
     if (firstLine !== "// Generate Snippet") return null;
 
-    body = removeMarkedSections(body);
+  body = removeMarkedSections(body);
+  body = await formatSnippetBody(body, ext);
 
     const result = await writeSnippet(file, outPath, body);
     return { src: file, out: outPath, ...result };
