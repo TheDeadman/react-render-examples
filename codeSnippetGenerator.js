@@ -2,23 +2,13 @@
 // generate-snippets.mjs
 // Usage:
 //   node generate-snippets.mjs [paths...]
-// Examples:
-//   node generate-snippets.mjs src/components
-//   node generate-snippets.mjs .
 //
-// What it does:
-//   For each React component file (default: .tsx, .jsx, .ts, .js),
-//   it creates a sibling file named like "<lowerFirstBase>Snippet.ts"
-//   that exports the component's source code as:
-//     const snippet = `...`;
-//     export default snippet;
+// This version only generates a snippet if the source file begins with the line:
+//   // Generate Snippet
 //
-//   Example: Dropdown.tsx  -> dropdownSnippet.ts
-//
-// Notes:
-//   - Skips files that already look like snippet files (*Snippet.ts).
-//   - Skips common test/story/typings files (.test., .spec., .stories., .d.ts).
-//   - Escapes backticks and "${" to keep template literal intact.
+// For each matching React component file (.tsx, .jsx, .ts, .js),
+// it creates a sibling file named like "<lowerFirstBase>Snippet.ts"
+// exporting the file's content as a string.
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
@@ -34,7 +24,6 @@ async function* walk(dir) {
   for (const entry of entries) {
     const res = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      // Skip node_modules and build output folders
       const lower = entry.name.toLowerCase();
       if (["node_modules", ".git", "dist", "build", ".next", "out"].includes(lower)) continue;
       yield* walk(res);
@@ -71,10 +60,7 @@ function targetPathFor(srcPath) {
 }
 
 function toTemplateLiteralSafe(content) {
-  // Escape backticks and the start of template placeholders
-  return content
-    .replaceAll("`", "\\`")
-    .replaceAll("${", "\\${");
+  return content.replaceAll("`", "\\`").replaceAll("${", "\\${");
 }
 
 function fileHeader(srcPath) {
@@ -85,14 +71,8 @@ async function writeSnippet(srcPath, outPath, body) {
   const header = fileHeader(srcPath);
   const fileText = `${header}\nconst snippet = \`${toTemplateLiteralSafe(body)}\`;\n\nexport default snippet;\n`;
 
-  try {
-    // Only write if changed, to avoid touching timestamps unnecessarily
-    const prev = await fs.readFile(outPath, "utf8").catch(() => null);
-    if (prev !== null && prev === fileText) {
-      return { outPath, status: "unchanged" };
-    }
-  } catch {}
-
+  const prev = await fs.readFile(outPath, "utf8").catch(() => null);
+  if (prev === fileText) return { outPath, status: "unchanged" };
   await fs.writeFile(outPath, fileText, "utf8");
   return { outPath, status: "written" };
 }
@@ -107,6 +87,10 @@ async function processFile(file) {
 
   try {
     const body = await fs.readFile(file, "utf8");
+    // Only process if the first line is exactly '// Generate Snippet'
+    const firstLine = body.split(/\r?\n/, 1)[0].trim();
+    if (firstLine !== "// Generate Snippet") return null;
+
     const result = await writeSnippet(file, outPath, body);
     return { src: file, out: outPath, ...result };
   } catch (err) {
@@ -123,7 +107,6 @@ async function processFile(file) {
     }
   }
 
-  // Pretty print summary
   const grouped = results.reduce(
     (acc, r) => {
       if (r.error) acc.errors.push(r);
