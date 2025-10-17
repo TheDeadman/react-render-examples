@@ -12,6 +12,13 @@ import ComponentLabel from './components/ComponentLabel';
 import ColorLegend from './components/ColorLegend';
 import ParentControls from './components/ParentControls';
 import ObservationGuide from './ObservationGuide';
+import parentComponentSnippet from './snippets/memoizedComponentsExample.snippet';
+import regularChildSnippet from './snippets/components/regularChild.snippet';
+import memoizedChildSnippet from './snippets/components/memoizedChild.snippet';
+import memoizedChildWithBadCallbackSnippet from './snippets/components/memoizedChildWithBadCallback.snippet';
+import expensiveComponentBadSnippet from './snippets/components/expensiveComponentBad.snippet';
+import expensiveComponentGoodSnippet from './snippets/components/expensiveComponentGood.snippet';
+import * as snippetExplanations from './snippets/explanations';
 import styles from 'MemoizedComponents.module.scss';
 
 export const explanation = "The parent component shows the complete optimization strategy: useCallback() prevents function recreation, useMemo() prevents expensive recalculations, and the child components use React.memo(). The key insight: ALL THREE hooks must work together - useCallback is only beneficial when passing functions to memoized components.";
@@ -134,38 +141,38 @@ const MemoizedComponentsExample = () => {
 
                 <CodeViewer
                     title="Parent Component with useCallback & useMemo"
-                    code={codeSnippets.parentComponent}
-                    explanation={explanations.parentComponent}
+                    code={parentComponentSnippet}
+                    explanation={snippetExplanations.memoizedComponentsExampleExplanation}
                 />
 
                 <CodeViewer
                     title="Regular Child Component (Non-Memoized)"
-                    code={codeSnippets.regularChild}
-                    explanation={explanations.regularChild}
+                    code={regularChildSnippet}
+                    explanation={snippetExplanations.regularChildExplanation}
                 />
 
                 <CodeViewer
                     title="Memoized Child Component (React.memo)"
-                    code={codeSnippets.memoizedChild}
-                    explanation={explanations.memoizedChild}
+                    code={memoizedChildSnippet}
+                    explanation={snippetExplanations.memoizedChildExplanation}
                 />
 
                 <CodeViewer
                     title="Memoized Child with Non-Memoized Callback (Still Re-renders)"
-                    code={codeSnippets.memoizedChildWithBadCallback}
-                    explanation={explanations.memoizedChildWithBadCallback}
+                    code={memoizedChildWithBadCallbackSnippet}
+                    explanation={snippetExplanations.memoizedChildWithBadCallbackExplanation}
                 />
 
                 <CodeViewer
                     title="Expensive Component (WITHOUT useMemo - Bad Performance)"
-                    code={codeSnippets.expensiveComponentBad}
-                    explanation={explanations.expensiveComponentBad}
+                    code={expensiveComponentBadSnippet}
+                    explanation={snippetExplanations.expensiveComponentBadExplanation}
                 />
 
                 <CodeViewer
                     title="Expensive Component (WITH useMemo - Good Performance)"
-                    code={codeSnippets.expensiveComponentGood}
-                    explanation={explanations.expensiveComponentGood}
+                    code={expensiveComponentGoodSnippet}
+                    explanation={snippetExplanations.expensiveComponentGoodExplanation}
                 />
             </Box>
             </Box>
