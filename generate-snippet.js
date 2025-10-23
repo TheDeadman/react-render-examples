@@ -13,6 +13,9 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import prettier from 'prettier';
 
+// Add JSX attribute names here to omit them from generated snippets.
+const propertiesToRemove = ['className', 'variant'];
+
 function dataParserForExt(ext) {
   switch (ext) {
     case '.ts':
@@ -132,6 +135,149 @@ function explanationNameFor(srcPath) {
   return /^[a-zA-Z_$]/.test(name) ? name : `_${name}`;
 }
 
+function stripProperties(content, properties) {
+  if (!properties.length) return content;
+  const propertySet = new Set(properties);
+  let i = 0;
+  while (i < content.length) {
+    const ch = content[i];
+    if (!isIdentifierStart(ch)) {
+      i += 1;
+      continue;
+    }
+
+    let endName = i;
+    while (endName < content.length && isIdentifierPart(content[endName])) {
+      endName += 1;
+    }
+
+    const identifier = content.slice(i, endName);
+    if (!propertySet.has(identifier)) {
+      i = endName;
+      continue;
+    }
+
+    const prevChar = i > 0 ? content[i - 1] : '';
+    if (prevChar && !/\s|<|,/.test(prevChar)) {
+      i = endName;
+      continue;
+    }
+
+    let cursor = endName;
+    while (cursor < content.length && /\s/.test(content[cursor])) cursor += 1;
+
+    let endIndex = cursor;
+    if (content[cursor] === '=') {
+      cursor += 1;
+      while (cursor < content.length && /\s/.test(content[cursor])) cursor += 1;
+      endIndex = consumeAttributeValue(content, cursor);
+    } else {
+      endIndex = cursor;
+    }
+
+    let startIndex = i;
+    while (startIndex > 0 && content[startIndex - 1] === ' ') {
+      startIndex -= 1;
+    }
+
+    content = content.slice(0, startIndex) + content.slice(endIndex);
+    i = startIndex;
+  }
+
+  return content;
+}
+
+function consumeAttributeValue(str, index) {
+  if (index >= str.length) return index;
+  const ch = str[index];
+  if (ch === '"' || ch === "'") {
+    return consumeQuotedString(str, index);
+  }
+  if (ch === '`') {
+    return consumeTemplateString(str, index);
+  }
+  if (ch === '{') {
+    return consumeBraces(str, index);
+  }
+
+  let cursor = index;
+  while (cursor < str.length && !/\s|>|\//.test(str[cursor])) {
+    cursor += 1;
+  }
+  return cursor;
+}
+
+function consumeQuotedString(str, index) {
+  const quote = str[index];
+  let cursor = index + 1;
+  while (cursor < str.length) {
+    const ch = str[cursor];
+    if (ch === '\\') {
+      cursor += 2;
+      continue;
+    }
+    if (ch === quote) {
+      cursor += 1;
+      break;
+    }
+    cursor += 1;
+  }
+  return cursor;
+}
+
+function consumeTemplateString(str, index) {
+  let cursor = index + 1;
+  while (cursor < str.length) {
+    const ch = str[cursor];
+    if (ch === '\\') {
+      cursor += 2;
+      continue;
+    }
+    if (ch === '`') {
+      cursor += 1;
+      break;
+    }
+    if (ch === '$' && str[cursor + 1] === '{') {
+      cursor = consumeBraces(str, cursor + 1);
+      continue;
+    }
+    cursor += 1;
+  }
+  return cursor;
+}
+
+function consumeBraces(str, index) {
+  let cursor = index + 1;
+  let depth = 1;
+  while (cursor < str.length && depth > 0) {
+    const ch = str[cursor];
+    if (ch === '\\') {
+      cursor += 2;
+      continue;
+    }
+    if (ch === '"' || ch === "'") {
+      cursor = consumeQuotedString(str, cursor);
+      continue;
+    }
+    if (ch === '`') {
+      cursor = consumeTemplateString(str, cursor);
+      continue;
+    }
+    if (ch === '{') depth += 1;
+    else if (ch === '}') depth -= 1;
+    cursor += 1;
+  }
+  return cursor;
+}
+
+function isIdentifierStart(ch) {
+  return /[A-Za-z_$]/.test(ch);
+}
+
+function isIdentifierPart(ch) {
+  return /[A-Za-z0-9_$-]/.test(ch);
+}
+
 async function writeSnippet(srcPath, outPath, body) {
   const header = fileHeader(srcPath);
   const fileText = `${header}\nconst snippet = \`${toTemplateLiteralSafe(body)}\`;\n\nexport default snippet;\n`;
@@ -188,9 +334,10 @@ async function processFile(root, file) {
     const firstLine = body.split(/\r?\n/, 1)[0].trim();
     if (firstLine !== "// Generate Snippet") return null;
 
-    const { content: contentWithoutExplanation, explanation } = stripExplanation(body);
-    body = removeMarkedSections(contentWithoutExplanation);
-    body = await formatSnippetBody(body, ext);
+  const { content: contentWithoutExplanation, explanation } = stripExplanation(body);
+  body = removeMarkedSections(contentWithoutExplanation);
+  body = stripProperties(body, propertiesToRemove);
+  body = await formatSnippetBody(body, ext);
 
     const result = await writeSnippet(file, outPath, body);
     const explanationExport = explanation

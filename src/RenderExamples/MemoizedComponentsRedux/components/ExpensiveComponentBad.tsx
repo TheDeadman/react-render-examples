@@ -1,8 +1,12 @@
+// Generate Snippet
 import { Paper, Typography } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import { useAppSelector } from 'store/hooks';
 import { selectExpensiveValueBad, selectMultiplier } from '../memoizedComponents.slice';
 import styles from 'MemoizedComponents.module.scss';
+// Remove START
+import RenderCount from '../../../overall/RenderCount';
+export const explanation = "This component shows how an expensive calculation selector without memoization by \"createSelector\" reruns every time a piece of the slice state changes. Watch the console log to see the recalculation whenever multiplier updates.";
+// Remove END
 
 const ExpensiveComponentBad = () => {
     const multiplier = useAppSelector(selectMultiplier);

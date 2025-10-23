@@ -1,9 +1,13 @@
-import React, { memo } from 'react';
+// Generate Snippet
+import { memo } from 'react';
 import { Paper, Typography, Button } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { selectCount1, selectExpensiveValue, incrementCount1 } from '../memoizedComponents.slice';
 import styles from 'MemoizedComponents.module.scss';
+// Remove START
+import RenderCount from '../../../overall/RenderCount';
+export const explanation = "This is essentially the same as the Memoized Child Component. Because we can import our dispatch function and action function directly where needed, we don't need to pass it down as a prop. These functions also don't need to be memoized because they have stable references.";
+// Remove END
 
 const MemoizedChildWithBadCallback = memo(() => {
     const dispatch = useAppDispatch();

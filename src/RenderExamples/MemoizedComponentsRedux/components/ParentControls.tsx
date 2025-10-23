@@ -1,8 +1,12 @@
+// Generate Snippet
 import React from 'react';
 import { Paper, Typography, TextField, Box } from '@mui/material';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
 import { selectMultiplier, selectUnrelatedState, setUnrelatedState, setMultiplier, selectCount1 } from '../memoizedComponents.slice';
 import styles from 'MemoizedComponents.module.scss';
+// Remove START
+export const explanation = "This redux slice abstracts the state management logic out of the components. The components can subscribe to the state that they use and be unaffected by other pieces of state. Note that calculated selectors will run on every state change for the slice but the components using them will only re-render if the result is different. This can be prevented by using createSelector to only run the calculation again if any of the 'input selectors' returns a different result.";
+// Remove END
 
 const ParentControls: React.FC = () => {
     const dispatch = useAppDispatch();

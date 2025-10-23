@@ -1,18 +1,30 @@
+// Generate Snippet
 import React from 'react';
 import { Box, Typography, Container, Grid } from '@mui/material';
-import RenderCount from '../../overall/RenderCount';
-import CodeViewer from './CodeViewer';
-import { codeSnippets, explanations } from './codeSnippets';
 import RegularChild from './components/RegularChild';
 import MemoizedChild from './components/MemoizedChild';
 import MemoizedChildWithBadCallback from './components/MemoizedChildWithBadCallback';
 import ExpensiveComponentBad from './components/ExpensiveComponentBad';
 import ExpensiveComponentGood from './components/ExpensiveComponentGood';
-import ComponentLabel from './components/ComponentLabel';
-import ColorLegend from './components/ColorLegend';
 import ParentControls from './components/ParentControls';
-import ObservationGuide from './ObservationGuide';
 import styles from 'MemoizedComponents.module.scss';
+// Remove START
+import ComponentLabel from './components/ComponentLabel';
+import RenderCount from '../../overall/RenderCount';
+import CodeViewer from './CodeViewer';
+// import { codeSnippets, explanations } from './codeSnippets';
+import sliceSnippet from './snippets/memoizedComponents.slice.snippet';
+import parentSnippet from './snippets/memoizedComponentsExample.snippet';
+import regularChildSnippet from './snippets/components/regularChild.snippet';
+import expensiveBadSnippet from './snippets/components/expensiveComponentBad.snippet';
+import expensiveGoodSnippet from './snippets/components/expensiveComponentGood.snippet';
+import memoizedChildSnippet from './snippets/components/memoizedChild.snippet';
+import memoizedChildBadSnippet from './snippets/components/memoizedChildWithBadCallback.snippet';
+import ColorLegend from './components/ColorLegend';
+import ObservationGuide from './ObservationGuide';
+import * as explanations from './snippets/explanations';
+export const explanation = "The Redux parent component demonstrates lifting state into the store while child components subscribe only to the values they need. Each child uses useAppSelector or useAppDispatch instead of receiving props, highlighting selective rendering based on subscribed slices of state.";
+// Remove END
 
 const MemoizedComponentsExample: React.FC = () => {
     return (
@@ -101,44 +113,44 @@ const MemoizedComponentsExample: React.FC = () => {
 
                 <CodeViewer
                     title="Redux Toolkit Slice"
-                    code={codeSnippets.slice}
-                    explanation={explanations.slice}
+                    code={sliceSnippet}
+                    explanation={explanations.memoizedComponents_sliceExplanation}
                 />
 
                 <CodeViewer
                     title="Parent Component"
-                    code={codeSnippets.parentComponent}
-                    explanation={explanations.parentComponent}
+                    code={parentSnippet}
+                    explanation={explanations.memoizedComponentsExampleExplanation}
                 />
 
                 <CodeViewer
                     title="Regular Child Component"
-                    code={codeSnippets.regularChild}
-                    explanation={explanations.regularChild}
+                    code={regularChildSnippet}
+                    explanation={explanations.regularChildExplanation}
                 />
 
                 <CodeViewer
                     title="Memoized Child Component"
-                    code={codeSnippets.memoizedChild}
-                    explanation={explanations.memoizedChild}
+                    code={memoizedChildSnippet}
+                    explanation={explanations.memoizedChildExplanation}
                 />
 
                 <CodeViewer
                     title="Memoized Child with Non-Memoized Callback"
-                    code={codeSnippets.memoizedChildWithBadCallback}
-                    explanation={explanations.memoizedChildWithBadCallback}
+                    code={memoizedChildBadSnippet}
+                    explanation={explanations.memoizedChildWithBadCallbackExplanation}
                 />
 
                 <CodeViewer
                     title="Expensive Component (WITHOUT useMemo - Bad Performance)"
-                    code={codeSnippets.expensiveComponentBad}
-                    explanation={explanations.expensiveComponentBad}
+                    code={expensiveBadSnippet}
+                    explanation={explanations.expensiveComponentBadExplanation}
                 />
 
                 <CodeViewer
                     title="Expensive Component (WITH useMemo - Good Performance)"
-                    code={codeSnippets.expensiveComponentGood}
-                    explanation={explanations.expensiveComponentGood}
+                    code={expensiveGoodSnippet}
+                    explanation={explanations.expensiveComponentGoodExplanation}
                 />
             </Box>
             </Box>

@@ -1,9 +1,13 @@
-import React, { memo } from 'react';
+// Generate Snippet
+import { memo } from 'react';
 import { Paper, Typography, Button } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { selectCount1, selectExpensiveValue, incrementCount1 } from '../memoizedComponents.slice';
 import styles from 'MemoizedComponents.module.scss';
+// Remove START
+import RenderCount from '../../../overall/RenderCount';
+export const explanation = "React.memo is unnecessary here because the component already uses useAppSelector to subscribe only to specific pieces of state. The parent does not re-render in this example. The component will re-render only when those selected values change.";
+// Remove END
 
 const MemoizedChild = memo(() => {
     const dispatch = useAppDispatch();

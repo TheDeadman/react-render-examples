@@ -1,6 +1,10 @@
+// Generate Snippet
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'store/store';
 
+// Remove START
+export const explanation = "This redux slice abstracts the state management logic out of the components. The components can subscribe to the state that they use and be unaffected by other pieces of state. Note that calculated selectors will run on every state change for the slice but the components using them will only re-render if the result is different. This can be prevented by using createSelector to only run the calculation again if any of the 'input selectors' returns a different result.";
+// Remove END
 interface MemoizedComponentsState {
     count1: number;
     multiplier: number;
