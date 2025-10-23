@@ -22,23 +22,14 @@ const ParentControls: React.FC<ParentControlsProps> = ({
     count1,
 }) => {
     return (
-        <Paper
-            className={\`\${styles.card} \${styles.cardBlue} \${styles.cardParent}\`}
-        >
-            <Typography
-                variant="h6"
-                gutterBottom
-                className={\`\${styles.title} \${styles.titleBlue}\`}
-            >
-                🎛️ Parent State Controls
-            </Typography>
-            <Box className={styles.parentControls}>
+        <Paper>
+            <Typography gutterBottom>🎛️ Parent State Controls</Typography>
+            <Box>
                 <TextField
                     label="Unrelated State (triggers all renders)"
                     value={unrelatedState}
                     onChange={(e) => onUnrelatedStateChange(e.target.value)}
                     fullWidth
-                    className={styles.textFieldBlue}
                 />
                 <TextField
                     label="Multiplier"
@@ -46,9 +37,8 @@ const ParentControls: React.FC<ParentControlsProps> = ({
                     value={multiplier}
                     onChange={(e) => onMultiplierChange(Number(e.target.value))}
                     fullWidth
-                    className={styles.textFieldBlue}
                 />
-                <Typography className={styles.infoText}>
+                <Typography>
                     <strong>Count 1:</strong> {count1}
                 </Typography>
             </Box>

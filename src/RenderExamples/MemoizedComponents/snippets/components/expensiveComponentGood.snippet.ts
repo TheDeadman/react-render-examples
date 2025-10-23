@@ -26,23 +26,14 @@ const ExpensiveComponentGood: React.FC<ExpensiveComponentGoodProps> = ({
     }, [multiplier]);
 
     return (
-        <Paper className={\`\${styles.card} \${styles.cardPurple}\`}>
-            <RenderCount componentName="ExpensiveComponentGood" />
-            <Typography
-                variant="h6"
-                className={\`\${styles.title} \${styles.titlePurple}\`}
-            >
-                Memoized Calculation
-            </Typography>
-            <Typography variant="body2" className={styles.infoText}>
+        <Paper>
+            <Typography>Memoized Calculation</Typography>
+            <Typography>
                 ✅ useMemo prevents expensive recalculations
             </Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Typography
-                variant="caption"
-                className={\`\${styles.caption} \${styles.captionGreen}\`}
-            >
+            <Typography>
                 Check the console to confirm that logging only occurs when
                 multiplier changes
             </Typography>

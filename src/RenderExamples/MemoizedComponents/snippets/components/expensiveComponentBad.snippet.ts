@@ -22,23 +22,12 @@ const ExpensiveComponentBad: React.FC<ExpensiveComponentBadProps> = ({
     const expensiveValue = calculateExpensiveValue(multiplier);
 
     return (
-        <Paper className={\`\${styles.card} \${styles.cardRed}\`}>
-            <RenderCount componentName="ExpensiveComponentBad" />
-            <Typography
-                variant="h6"
-                className={\`\${styles.title} \${styles.titleRed}\`}
-            >
-                Non-Memoized Calculation
-            </Typography>
-            <Typography variant="body2" className={styles.infoText}>
-                🔄 Recalculates on every render (expensive)
-            </Typography>
+        <Paper>
+            <Typography>Non-Memoized Calculation</Typography>
+            <Typography>🔄 Recalculates on every render (expensive)</Typography>
             <Typography>Multiplier: {multiplier}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Typography
-                variant="caption"
-                className={\`\${styles.caption} \${styles.captionRed}\`}
-            >
+            <Typography>
                 Check the console to see how often this logs during parent
                 renders
             </Typography>

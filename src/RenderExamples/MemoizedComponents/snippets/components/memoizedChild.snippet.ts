@@ -15,26 +15,12 @@ interface MemoizedChildProps {
 const MemoizedChild = memo<MemoizedChildProps>(
     ({ value, onIncrement, expensiveValue }) => {
         return (
-            <Paper className={\`\${styles.card} \${styles.cardGreen}\`}>
-                <RenderCount componentName="MemoizedChild" />
-                <Typography
-                    variant="h6"
-                    className={\`\${styles.title} \${styles.titleGreen}\`}
-                >
-                    Memoized Child Component
-                </Typography>
-                <Typography variant="body2" className={styles.infoText}>
-                    ✅ React.memo + useCallback = Optimized
-                </Typography>
+            <Paper>
+                <Typography>Memoized Child Component</Typography>
+                <Typography>✅ React.memo + useCallback = Optimized</Typography>
                 <Typography>Value: {value}</Typography>
                 <Typography>Expensive Value: {expensiveValue}</Typography>
-                <Button
-                    onClick={onIncrement}
-                    variant="contained"
-                    className={\`\${styles.button} \${styles.buttonGreen}\`}
-                >
-                    Increment
-                </Button>
+                <Button onClick={onIncrement}>Increment</Button>
             </Paper>
         );
     },

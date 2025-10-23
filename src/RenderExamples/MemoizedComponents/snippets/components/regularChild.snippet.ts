@@ -18,26 +18,12 @@ const RegularChild: React.FC<RegularChildProps> = ({
     expensiveValue,
 }) => {
     return (
-        <Paper className={\`\${styles.card} \${styles.cardRed}\`}>
-            <RenderCount componentName="RegularChild" />
-            <Typography
-                variant="h6"
-                className={\`\${styles.title} \${styles.titleRed}\`}
-            >
-                Regular Child Component
-            </Typography>
-            <Typography variant="body2" className={styles.infoText}>
-                🔄 Always re-renders (no React.memo)
-            </Typography>
+        <Paper>
+            <Typography>Regular Child Component</Typography>
+            <Typography>🔄 Always re-renders (no React.memo)</Typography>
             <Typography>Value: {value}</Typography>
             <Typography>Expensive Value: {expensiveValue}</Typography>
-            <Button
-                onClick={onIncrement}
-                variant="contained"
-                className={\`\${styles.button} \${styles.buttonRed}\`}
-            >
-                Increment
-            </Button>
+            <Button onClick={onIncrement}>Increment</Button>
         </Paper>
     );
 };
