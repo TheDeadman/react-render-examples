@@ -63,8 +63,7 @@ export const useMemoizedComponentsContext = () => {
     return context;
 };`,
 
-  parentComponentContext: `import React from 'react';
-import { Container } from '@mui/material';
+  parentComponentContext: `import { Container } from '@mui/material';
 import { MemoizedComponentsProvider } from './context';
 import RegularChildContext from './components/RegularChildContext';
 import MemoizedChildContext from './components/MemoizedChildContext';
@@ -73,7 +72,7 @@ import ExpensiveComponentBadContext from './components/ExpensiveComponentBadCont
 import ExpensiveComponentGoodContext from './components/ExpensiveComponentGoodContext';
 import ParentControlsContext from './components/ParentControlsContext';
 
-const MemoizedComponentsExampleContent: React.FC = () => {
+const MemoizedComponentsExampleContent = () => {
     return (
         <Container maxWidth="lg">
             <ParentControlsContext />
@@ -86,7 +85,7 @@ const MemoizedComponentsExampleContent: React.FC = () => {
     );
 };
 
-const MemoizedComponentsContextExample: React.FC = () => {
+const MemoizedComponentsContextExample = () => {
     return (
         <MemoizedComponentsProvider>
             <MemoizedComponentsExampleContent />
@@ -96,12 +95,11 @@ const MemoizedComponentsContextExample: React.FC = () => {
 
 export default MemoizedComponentsContextExample;`,
 
-  regularChildContext: `import React from 'react';
-import { Paper, Typography, Button } from '@mui/material';
+  regularChildContext: `import { Paper, Typography, Button } from '@mui/material';
 import { useMemoizedComponentsContext } from '../context';
 import styles from 'MemoizedComponents.module.scss';
 
-const RegularChildContext: React.FC = () => {
+const RegularChildContext = () => {
     const { count1, handleIncrement1Bad, expensiveValue } = useMemoizedComponentsContext();
 
     return (
@@ -193,12 +191,11 @@ MemoizedChildWithBadCallbackContext.displayName = 'MemoizedChildWithBadCallbackC
 
 export default MemoizedChildWithBadCallbackContext;`,
 
-  expensiveComponentBadContext: `import React from 'react';
-import { Paper, Typography } from '@mui/material';
+  expensiveComponentBadContext: `import { Paper, Typography } from '@mui/material';
 import { useMemoizedComponentsContext } from '../context';
 import styles from 'MemoizedComponents.module.scss';
 
-const ExpensiveComponentBadContext: React.FC = () => {
+const ExpensiveComponentBadContext = () => {
     const { multiplier } = useMemoizedComponentsContext();
     
     // ❌ BAD: This will recalculate on every render
@@ -231,7 +228,7 @@ import { Paper, Typography } from '@mui/material';
 import { useMemoizedComponentsContext } from '../context';
 import styles from 'MemoizedComponents.module.scss';
 
-const ExpensiveComponentGoodContext: React.FC = () => {
+const ExpensiveComponentGoodContext = () => {
     const { multiplier } = useMemoizedComponentsContext();
     
     // ✅ GOOD: This only recalculates when multiplier changes

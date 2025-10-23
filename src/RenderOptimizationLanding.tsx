@@ -47,7 +47,7 @@ const TechniqueCard: React.FC<TechniqueCardProps> = ({ title, description, route
     );
 };
 
-const RenderOptimizationLanding: React.FC = () => {
+const RenderOptimizationLanding = () => {
     const techniques = [
         {
             title: "Memoized Components",

@@ -1,7 +1,6 @@
-import React from 'react';
 import { Box, Typography } from '@mui/material';
 
-const ObservationGuide: React.FC = () => {
+const ObservationGuide = () => {
     return (
         <Box sx={{ mt: 4, p: 3, backgroundColor: '#1e1e1e', borderRadius: 1, border: '1px solid #333' }}>
             <Typography variant="h6" gutterBottom>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Paper, Typography, TextField, Box } from '@mui/material';
 import styles from 'MemoizedComponents.module.scss';
 

@@ -1,16 +1,25 @@
-import React, { useMemo } from 'react';
+// Generate Snippet
+import { useMemo } from 'react';
 import { Paper, Typography } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import { useMemoizedComponentsContext } from '../context';
 import styles from 'MemoizedComponents.module.scss';
+// Remove START
+import RenderCount from '../../../overall/RenderCount';
 
-const ExpensiveComponentGoodContext: React.FC = () => {
+export const explanation = "useMemo() still works within components. Even though the component re-renders on every context change, the expensive calculation only runs when the multiplier dependency actually changes. This shows how to optimize expensive operations even in a context-heavy architecture.";
+// Remove END
+
+function calculateExpensiveValue(multiplier: number): number {
+    console.log('✅ GOOD: Calculating expensive value with useMemo - only when multiplier changes');
+    return multiplier * 1000;
+}
+
+const ExpensiveComponentGoodContext = () => {
     const { multiplier } = useMemoizedComponentsContext();
     
     // ✅ GOOD: This only recalculates when multiplier changes
     const expensiveValue = useMemo(() => {
-        console.log('✅ GOOD (Context): Calculating expensive value with useMemo - only when multiplier changes');
-        return multiplier * 1000;
+        return calculateExpensiveValue(multiplier);
     }, [multiplier]);
 
     return (

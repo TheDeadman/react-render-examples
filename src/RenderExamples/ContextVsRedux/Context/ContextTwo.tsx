@@ -2,10 +2,12 @@
 import React, { createContext, useContext, useState, ReactNode, useMemo } from 'react';
 import { useAppContextOne } from './ContextOne';
 
+// Remove START
 export const explanation = "Placeholder";
+// Remove END
 
-export type ListItem = { title: string; description: string }
-// Define the shape of the context
+export type ListItem = { title: string, description: string };
+
 interface AppContextType {
     textValTwo: string;
     lastUpdated: number;
@@ -13,7 +15,6 @@ interface AppContextType {
     setTextValTwo: React.Dispatch<React.SetStateAction<string>>;
 }
 
-// Create the context with default values
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 // Create a provider to wrap the app and provide state to compTwonts

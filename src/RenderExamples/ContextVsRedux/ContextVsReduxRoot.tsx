@@ -4,7 +4,7 @@ import RenderCount from '../../overall/RenderCount';
 import ContextParent from './Context/ContextParent';
 import ReduxParent from './Redux/ReduxParent';
 
-const ContextVsReduxRoot: React.FC = () => {
+const ContextVsReduxRoot = () => {
     const [currentVersion, setCurrentVersion] = useState('context');
     
     return (

@@ -18,7 +18,7 @@ import styles from 'MemoizedComponents.module.scss';
 export const explanation = "The parent component that handles rendering the list items and tracking the expanded item index.";
 // Remove END
 
-const ExpandableListExample: React.FC = () => {
+const ExpandableListExample = () => {
     const [expandedIndexRegular, setExpandedIndexRegular] = useState<number | null>(null);
 
     const handleToggleRegular = useCallback((index: number) => {
@@ -69,7 +69,6 @@ const ExpandableListExample: React.FC = () => {
                     </Box>
                     {/* Remove START */}
                 </Box>
-
 
                 <ObservationGuide />
                 <br/>

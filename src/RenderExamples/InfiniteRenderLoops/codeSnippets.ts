@@ -79,7 +79,6 @@ export default RegularChild;`,
     };`,
 
 
-
 };
 
 export const explanations = {

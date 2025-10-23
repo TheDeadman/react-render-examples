@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './index.css';
 import { Provider } from 'react-redux';
 import { store } from 'store/store';
+import './index.css';
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== 'development') {
@@ -31,7 +31,6 @@ async function enableMocking() {
 // DONE: Generate Code for Infinite loop
 // DONE: Generate Code for Expandable List
 // DONE: Generate Code for Expandable List Redux
-
 
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);

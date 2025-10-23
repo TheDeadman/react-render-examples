@@ -1,8 +1,13 @@
-import React, { memo } from 'react';
+// Generate Snippet
+import { memo } from 'react';
 import { Paper, Typography, Button } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import { useMemoizedComponentsContext } from '../context';
 import styles from 'MemoizedComponents.module.scss';
+// Remove START
+import RenderCount from '../../../overall/RenderCount';
+
+export const explanation = "This demonstrates the key limitation of React Context: even though this component is wrapped in React.memo(), it still re-renders on EVERY context change. This happens because the context provider creates a new value object on each render, breaking memoization.";
+// Remove END
 
 const MemoizedChildContext = memo(() => {
     const { count1, handleIncrement2, expensiveValue } = useMemoizedComponentsContext();

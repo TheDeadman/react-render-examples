@@ -1,9 +1,13 @@
-import React from 'react';
+// Generate Snippet
 import { Paper, Typography, TextField, Box } from '@mui/material';
 import { useMemoizedComponentsContext } from '../context';
 import styles from 'MemoizedComponents.module.scss';
+// Remove START
 
-const ParentControlsContext: React.FC = () => {
+export const explanation = "ph";
+// Remove END
+
+const ParentControlsContext = () => {
     const { 
         unrelatedState, 
         setUnrelatedState, 

@@ -14,7 +14,7 @@ import path from 'node:path';
 import prettier from 'prettier';
 
 // Add JSX attribute names here to omit them from generated snippets.
-const propertiesToRemove = ['className', 'variant'];
+const propertiesToRemove = ['className', 'variant', 'fullWidth', 'type'];
 // List JSX component names whose elements should be stripped from snippets.
 const componentsToRemove = ['RenderCount'];
 
@@ -467,8 +467,11 @@ async function processFile(root, file) {
 
     const { content: contentWithoutExplanation, explanation } = stripExplanation(body);
     body = removeMarkedSections(contentWithoutExplanation);
-    body = stripComponents(body, componentsToRemove);
-    body = stripProperties(body, propertiesToRemove);
+    const isJsxFile = ext === '.tsx' || ext === '.jsx';
+    if (isJsxFile) {
+      body = stripComponents(body, componentsToRemove);
+      body = stripProperties(body, propertiesToRemove);
+    }
     body = await formatSnippetBody(body, ext);
 
     const result = await writeSnippet(file, outPath, body);

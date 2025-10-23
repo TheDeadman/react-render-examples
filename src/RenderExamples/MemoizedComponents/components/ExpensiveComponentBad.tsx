@@ -1,12 +1,10 @@
 // Generate Snippet
-import React from 'react';
 import { Paper, Typography } from '@mui/material';
 import styles from 'MemoizedComponents.module.scss';
 // Remove START
 import RenderCount from '../../../overall/RenderCount';
-// Remove END
-
 export const explanation = "This component demonstrates what happens WITHOUT useMemo in a calculated value. The expensive calculation runs on every render. Notice how it logs to the console every time you type in the 'Unrelated State' field.";
+// Remove END
 
 interface ExpensiveComponentBadProps {
     multiplier: number;

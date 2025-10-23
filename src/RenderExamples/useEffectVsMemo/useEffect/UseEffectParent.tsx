@@ -1,5 +1,4 @@
 // Generate Snippet
-import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 import { ContextOneProvider } from './ContextOne';
 import { ContextTwoProvider } from './ContextTwo';
@@ -23,11 +22,10 @@ import consumerThreeSnippet from './snippets/components/consumerThree.snippet';
 import combinedValueConsumerSnippet from './snippets/components/combinedValueConsumer.snippet';
 
 
-
 export const explanation = "The Parent component placeholder.";
 // Remove END
 
-const UseEffectParent: React.FC = () => {
+const UseEffectParent = () => {
     return (
         <ContextOneProvider key="effect-version">
             <ContextTwoProvider key="effect-version">

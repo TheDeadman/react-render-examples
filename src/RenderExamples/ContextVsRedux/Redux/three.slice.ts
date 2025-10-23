@@ -1,10 +1,12 @@
 // Generate Snippet
-import { createSelector, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from 'store/store'
 
+// Remove START
 export const explanation = "Place holder";
-// Define a type for the slice state
+// Remove END
+
 interface ThreeState {
     textVal: string;
 }

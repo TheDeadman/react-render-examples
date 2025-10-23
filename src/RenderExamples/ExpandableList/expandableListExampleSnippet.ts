@@ -9,7 +9,7 @@ import ListItem from './components/ListItem';
 import { listData } from './listData';
 import styles from 'MemoizedComponents.module.scss';
 
-const ExpandableListExample: React.FC = () => {
+const ExpandableListExample = () => {
     const [expandedIndexRegular, setExpandedIndexRegular] = useState<number | null>(null);
 
     const handleToggleRegular = useCallback((index: number) => {

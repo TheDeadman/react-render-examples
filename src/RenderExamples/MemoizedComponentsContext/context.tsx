@@ -1,4 +1,7 @@
+// Generate Snippet
 import React, { createContext, useContext, useState, useMemo, useCallback, ReactNode } from 'react';
+
+export const explanation = "React Context creates a provider that shares state across components without prop drilling. However, when ANY value in the context changes, ALL consumers re-render because the context value object is recreated. This breaks React.memo() optimizations and can cause performance issues in large applications.";
 
 interface MemoizedComponentsContextType {
     count1: number;

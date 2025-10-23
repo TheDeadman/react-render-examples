@@ -4,17 +4,15 @@ import { useAppContextTwo } from './ContextTwo';
 import { useAppContextThree } from './ContextThree';
 
 export type ListItem = { title: string; description: string }
-// Define the shape of the context
+
 interface AppContextType {
     // textVal: string;
     // lastUpdated: number;
     // setTextVal: React.Dispatch<React.SetStateAction<string>>;
 }
 
-// Create the context with default values
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-// Create a provider to wrap the app and provide state to components
 export const LastUpdatedProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const { textVal: textValOne, lastUpdated: lastUpdatedOne } = useAppContextOne();
     const { textValTwo, lastUpdated: lastUpdatedTwo } = useAppContextTwo();

@@ -1,5 +1,4 @@
 // Generate Snippet
-import React from 'react';
 import { Paper, Typography, Button } from '@mui/material';
 import { useAppSelector, useAppDispatch } from '../../../store/hooks';
 import { selectCount1, selectExpensiveValue, incrementCount1 } from '../memoizedComponents.slice';
@@ -9,7 +8,7 @@ import RenderCount from '../../../overall/RenderCount';
 export const explanation = "This component only re-renders when the subscribed state changes. The parent never re-renders in this example, so memoization is not needed here.";
 // Remove END
 
-const RegularChild: React.FC = () => {
+const RegularChild = () => {
     const dispatch = useAppDispatch();
     const count1 = useAppSelector(selectCount1);
     const expensiveValue = useAppSelector(selectExpensiveValue);

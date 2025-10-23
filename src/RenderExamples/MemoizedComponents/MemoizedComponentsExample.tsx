@@ -166,7 +166,6 @@ const MemoizedComponentsExample = () => {
                     explanation={snippetExplanations.memoizedChildExplanation}
                 />
 
-
                 <CodeViewer
                     title="Expensive Component (WITHOUT useMemo - Bad Performance)"
                     code={expensiveComponentBadSnippet}

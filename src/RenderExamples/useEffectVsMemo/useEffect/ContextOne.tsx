@@ -1,18 +1,18 @@
 // Generate Snippet
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+// Remove START
 export const explanation = "Placeholder";
+// Remove END
 
-export type ListItem = { title: string; description: string }
-// Define the shape of the context
+export type ListItem = { title: string, description: string }
+
 interface AppContextType {
     textVal: string;
     setTextVal: React.Dispatch<React.SetStateAction<string>>;
 }
 
-// Create the context with default values
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-// Create a provider to wrap the app and provide state to components
 export const ContextOneProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [textVal, setTextVal] = useState('ContextOne');
     return (

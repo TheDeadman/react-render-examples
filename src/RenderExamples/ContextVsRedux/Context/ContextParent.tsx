@@ -1,5 +1,4 @@
 // Generate Snippet
-import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 import { ContextOneProvider } from './ContextOne';
 import { ContextTwoProvider } from './ContextTwo';
@@ -19,7 +18,6 @@ import contextParentSnippet from './snippets/contextParent.snippet';
 import consumerOneSnippet from './snippets/components/consumerOne.snippet';
 import consumerTwoSnippet from './snippets/components/consumerTwo.snippet';
 import consumerThreeSnippet from './snippets/components/consumerThree.snippet';
-
 
 export const explanation = "The ContextParent component demonstrates how multiple context providers can be combined and consumed. ";
 // Remove END
@@ -49,7 +47,7 @@ const CombinedValueConsumer = () => {
     )
 }
 
-const ContextParent: React.FC = () => {
+const ContextParent = () => {
     return (
         <ContextOneProvider>
             <ContextTwoProvider>

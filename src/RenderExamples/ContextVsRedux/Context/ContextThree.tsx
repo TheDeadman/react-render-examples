@@ -2,10 +2,12 @@
 import React, { createContext, useContext, useState, ReactNode, useMemo } from 'react';
 import { useAppContextTwo } from './ContextTwo';
 
+// Remove START
 export const explanation = "Placeholder";
+// Remove END
 
-export type ListItem = { title: string; description: string }
-// Define the shape of the context
+export type ListItem = { title: string, description: string };
+
 interface AppContextType {
     textValThree: string;
     lastUpdated: number;
@@ -13,10 +15,8 @@ interface AppContextType {
     setTextValThree: React.Dispatch<React.SetStateAction<string>>;
 }
 
-// Create the context with default values
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-// Create a provider to wrap the app and provide state to components
 export const ContextThreeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     // const {textVal} = useAppContextOne();
     const {combinedTextValTwo} = useAppContextTwo();

@@ -4,7 +4,7 @@ import RenderCount from '../../overall/RenderCount';
 import UseEffectParent from './useEffect/UseEffectParent';
 import UseMemoParent from './useMemo/UseMemoParent';
 
-const UseEffectVsMemoRoot: React.FC = () => {
+const UseEffectVsMemoRoot = () => {
     const [currentVersion, setCurrentVersion] = useState('useEffect');
     
     return (

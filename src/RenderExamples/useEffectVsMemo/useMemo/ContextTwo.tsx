@@ -2,16 +2,17 @@
 import React, { createContext, useContext, useState, ReactNode, useMemo } from 'react';
 import { useAppContextOne } from './ContextOne';
 
+// Remove START
 export const explanation = "Placeholder";
-export type ListItem = { title: string; description: string }
-// Define the shape of the context
+// Remove END
+export type ListItem = { title: string, description: string }
+
 interface AppContextType {
     textValTwo: string;
     combinedTextValTwo: string;
     setTextValTwo: React.Dispatch<React.SetStateAction<string>>;
 }
 
-// Create the context with default values
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 // Create a provider to wrap the app and provide state to compTwonts

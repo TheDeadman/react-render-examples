@@ -1,5 +1,4 @@
 // Generate Snippet
-import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 import { ContextOneProvider } from './ContextOne';
 import { ContextTwoProvider } from './ContextTwo';
@@ -22,12 +21,10 @@ import consumerTwoSnippet from './snippets/components/consumerTwo.snippet';
 import consumerThreeSnippet from './snippets/components/consumerThree.snippet';
 import combinedValueConsumerSnippet from './snippets/components/combinedValueConsumer.snippet';
 
-
 export const explanation = "The Parent component placeholder.";
 // Remove END
 
-
-const UseMemoParent: React.FC = () => {
+const UseMemoParent = () => {
     return (
         <ContextOneProvider key="memo-version">
             <ContextTwoProvider key="memo-version">

@@ -1,9 +1,8 @@
 // Generate Snippet
-import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 import TextForm from './TextForm';
 import { useAppSelector } from '../../../store/hooks';
-import { selectCombinedTextValThree, selectTextValThree } from './three.slice';
+import { selectCombinedTextValThree } from './three.slice';
 import SliceOneConsumer from './components/ConsumerOne';
 import SliceTwoConsumer from './components/ConsumerTwo';
 import SliceThreeConsumer from './components/ConsumerThree';
@@ -20,10 +19,8 @@ import consumerOneSnippet from './snippets/components/consumerOne.snippet';
 import consumerTwoSnippet from './snippets/components/consumerTwo.snippet';
 import consumerThreeSnippet from './snippets/components/consumerThree.snippet';
 
-
 export const explanation = "The ReduxParent component demonstrates how multiple Redux slices can be combined and consumed. ";
 // Remove END
-
 
 const CombinedValueConsumer = () => {
     const combinedTextValThree = useAppSelector(selectCombinedTextValThree);
@@ -50,7 +47,7 @@ const CombinedValueConsumer = () => {
     )
 }
 
-const ReduxParent: React.FC = () => {
+const ReduxParent = () => {
     return (
         <>
             <Box

@@ -1,5 +1,4 @@
 // Generate Snippet
-import React from 'react';
 import { Box, Typography, Container } from '@mui/material';
 import { useAppSelector } from 'store/hooks';
 import { selectListData } from './expandableList.slice';
@@ -18,7 +17,7 @@ import ObservationGuide from './ObservationGuide';
 export const explanation = "The parent component that handles rendering the list items. Does not need to know the index of the expanded item.";
 // Remove END
 
-const ExpandableListReduxExample: React.FC = () => {
+const ExpandableListReduxExample = () => {
     const listData = useAppSelector(selectListData)
     return (
         <Container maxWidth="lg">
@@ -38,7 +37,6 @@ const ExpandableListReduxExample: React.FC = () => {
                         This example shows an expandable/collapsible list and how redux can help isolate renders between list items with very little effort.
                     </Typography>
                 </Box>
-
 
                 <Box sx={{ mt: 4 }}>
                     <Typography variant="h5" gutterBottom className={`${styles.title} ${styles.titleRed}`}>

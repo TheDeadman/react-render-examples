@@ -1,5 +1,4 @@
 // Generate Snippet
-import React from 'react';
 import { Box, Typography, Container, Grid } from '@mui/material';
 import RegularChild from './components/RegularChild';
 import MemoizedChild from './components/MemoizedChild';
@@ -26,7 +25,7 @@ import * as explanations from './snippets/explanations';
 export const explanation = "The Redux parent component demonstrates lifting state into the store while child components subscribe only to the values they need. Each child uses useAppSelector or useAppDispatch instead of receiving props, highlighting selective rendering based on subscribed slices of state.";
 // Remove END
 
-const MemoizedComponentsExample: React.FC = () => {
+const MemoizedComponentsExample = () => {
     return (
         <Container maxWidth="lg">
             {/* Remove START */}

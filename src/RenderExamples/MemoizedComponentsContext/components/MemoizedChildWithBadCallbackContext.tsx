@@ -1,8 +1,13 @@
-import React, { memo } from 'react';
+// Generate Snippet
+import { memo } from 'react';
 import { Paper, Typography, Button } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import { useMemoizedComponentsContext } from '../context';
 import styles from 'MemoizedComponents.module.scss';
+// Remove START
+import RenderCount from '../../../overall/RenderCount';
+
+export const explanation = "This component shows that with Context, even the distinction between memoized and non-memoized functions becomes irrelevant for preventing re-renders. React.memo() is completely ineffective with Context because context consumers always re-render when the context value changes, regardless of optimization strategies.";
+// Remove END
 
 const MemoizedChildWithBadCallbackContext = memo(() => {
     const { count1, handleIncrement1Bad, expensiveValue } = useMemoizedComponentsContext();

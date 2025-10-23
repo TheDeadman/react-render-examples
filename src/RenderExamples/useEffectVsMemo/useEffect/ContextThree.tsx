@@ -2,19 +2,19 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { useAppContextTwo } from './ContextTwo';
 
+// Remove START
 export const explanation = "Placeholder";
-export type ListItem = { title: string; description: string }
-// Define the shape of the context
+// Remove END
+export type ListItem = { title: string, description: string }
+
 interface AppContextType {
     textValThree: string;
     combinedTextValThree: string;
     setTextValThree: React.Dispatch<React.SetStateAction<string>>;
 }
 
-// Create the context with default values
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-// Create a provider to wrap the app and provide state to components
 export const ContextThreeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const { combinedTextValTwo } = useAppContextTwo();
     const [textValThree, setTextValThree] = useState('ContextThree');
@@ -23,7 +23,6 @@ export const ContextThreeProvider: React.FC<{ children: ReactNode }> = ({ childr
     useEffect(() => {
         setCombinedTextValThree(`${combinedTextValTwo}-${textValThree}`)
     }, [combinedTextValTwo, textValThree])
-
 
     return (
         <AppContext.Provider value={{ textValThree, combinedTextValThree, setTextValThree }}>

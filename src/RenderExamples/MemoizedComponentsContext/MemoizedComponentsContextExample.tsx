@@ -1,5 +1,4 @@
 // Generate Snippet
-import React from 'react';
 import { Box, Typography, Container, Grid } from '@mui/material';
 import { MemoizedComponentsProvider } from './context';
 import RegularChildContext from './components/RegularChildContext';
@@ -8,17 +7,26 @@ import MemoizedChildWithBadCallbackContext from './components/MemoizedChildWithB
 import ExpensiveComponentBadContext from './components/ExpensiveComponentBadContext';
 import ExpensiveComponentGoodContext from './components/ExpensiveComponentGoodContext';
 import ParentControlsContext from './components/ParentControlsContext';
-// Remove START
-import ComponentLabelContext from './components/ComponentLabelContext';
-import { codeSnippetsContext, explanationsContext } from './codeSnippets';
-import CodeViewerContext from './CodeViewerContext';
-import ColorLegendContext from './components/ColorLegendContext';
-import RenderCount from '../../overall/RenderCount';
-import ObservationGuideContext from './ObservationGuideContext';
-// Remove END
 import styles from 'MemoizedComponents.module.scss';
+// Remove START
+import RenderCount from '../../overall/RenderCount';
+import memoizedComponentsParentSnippet from './snippets/memoizedComponentsContextExample.snippet';
+import contextSnippet from './snippets/context.snippet';
+import regularChildSnippet from './snippets/components/regularChildContext.snippet';
+import memoizedChildSnippet from './snippets/components/memoizedChildContext.snippet';
+import memoizedChildWithBadCallbackSnippet from './snippets/components/memoizedChildWithBadCallbackContext.snippet';
+import expensiveComponentBadSnippet from './snippets/components/expensiveComponentBadContext.snippet';
+import expensiveComponentGoodSnippet from './snippets/components/expensiveComponentGoodContext.snippet';
+import * as explanationsContext from './snippets/explanations';
+import ColorLegendContext from './components/ColorLegendContext';
+import ComponentLabelContext from './components/ComponentLabelContext';
+import ObservationGuideContext from './ObservationGuideContext';
+import CodeViewerContext from './CodeViewerContext';
 
-const MemoizedComponentsExampleContent: React.FC = () => {
+export const explanation = "The Context parent component demonstrates how React Context shifts state management from local state and props to a centralized provider. The provider wraps all consumers and manages shared state. Unlike props-based examples, child components get data directly from context rather than through prop passing.";
+// Remove END
+
+const MemoizedComponentsExampleContent = () => {
     return (
         <Container maxWidth="lg">
             {/* Remove START */}
@@ -103,44 +111,44 @@ const MemoizedComponentsExampleContent: React.FC = () => {
 
                     <CodeViewerContext
                         title="React Context Provider (The Source of Re-renders)"
-                        code={codeSnippetsContext.context}
-                        explanation={explanationsContext.context}
+                        code={contextSnippet}
+                        explanation={explanationsContext.contextExplanation}
                     />
 
                     <CodeViewerContext
                         title="Parent Component (Context Provider Pattern)"
-                        code={codeSnippetsContext.parentComponentContext}
-                        explanation={explanationsContext.parentComponentContext}
+                        code={memoizedComponentsParentSnippet}
+                        explanation={explanationsContext.memoizedComponentsContextExampleExplanation}
                     />
 
                     <CodeViewerContext
                         title="Regular Child Component (Context Version)"
-                        code={codeSnippetsContext.regularChildContext}
-                        explanation={explanationsContext.regularChildContext}
+                        code={regularChildSnippet}
+                        explanation={explanationsContext.regularChildContextExplanation}
                     />
 
                     <CodeViewerContext
                         title="Memoized Child + Non-Memoized Function (Context Version)"
-                        code={codeSnippetsContext.memoizedChildWithBadCallbackContext}
-                        explanation={explanationsContext.memoizedChildWithBadCallbackContext}
+                        code={memoizedChildWithBadCallbackSnippet}
+                        explanation={explanationsContext.memoizedChildWithBadCallbackContextExplanation}
                     />
 
                     <CodeViewerContext
                         title="Memoized Child Component (Context Breaks React.memo)"
-                        code={codeSnippetsContext.memoizedChildContext}
-                        explanation={explanationsContext.memoizedChildContext}
+                        code={memoizedChildSnippet}
+                        explanation={explanationsContext.memoizedChildContextExplanation}
                     />
 
                     <CodeViewerContext
                         title="Expensive Component (WITHOUT useMemo - Context Version)"
-                        code={codeSnippetsContext.expensiveComponentBadContext}
-                        explanation={explanationsContext.expensiveComponentBadContext}
+                        code={expensiveComponentBadSnippet}
+                        explanation={explanationsContext.expensiveComponentBadContextExplanation}
                     />
 
                     <CodeViewerContext
                         title="Expensive Component (WITH useMemo - Context Version)"
-                        code={codeSnippetsContext.expensiveComponentGoodContext}
-                        explanation={explanationsContext.expensiveComponentGoodContext}
+                        code={expensiveComponentGoodSnippet}
+                        explanation={explanationsContext.expensiveComponentGoodContextExplanation}
                     />
                 </Box>
             </Box>
@@ -149,7 +157,7 @@ const MemoizedComponentsExampleContent: React.FC = () => {
     );
 };
 
-const MemoizedComponentsContextExample: React.FC = () => {
+const MemoizedComponentsContextExample = () => {
     return (
         <MemoizedComponentsProvider>
             <MemoizedComponentsExampleContent />

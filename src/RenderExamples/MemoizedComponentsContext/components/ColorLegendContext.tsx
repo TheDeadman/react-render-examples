@@ -1,8 +1,7 @@
-import React from 'react';
 import { Box, Typography } from '@mui/material';
 import styles from 'MemoizedComponents.module.scss';
 
-const ColorLegendContext: React.FC = () => {
+const ColorLegendContext = () => {
     return (
         <Box className={styles.legend}>
             <Typography variant="subtitle2" className={styles.legendTitle}>

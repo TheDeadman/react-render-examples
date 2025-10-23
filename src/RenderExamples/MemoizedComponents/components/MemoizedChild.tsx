@@ -1,12 +1,12 @@
 // Generate Snippet
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { Paper, Typography, Button } from '@mui/material';
+import styles from 'MemoizedComponents.module.scss';
 // Remove START
 import RenderCount from '../../../overall/RenderCount';
-// Remove END
-import styles from 'MemoizedComponents.module.scss';
 
 export const explanation = "This component is wrapped in React.memo() AND receives a memoized callback (useCallback). It only re-renders when its props actually change. Both conditions are necessary - React.memo() for shallow prop comparison + useCallback() for stable function references.";
+// Remove END
 
 interface MemoizedChildProps {
     value: number;

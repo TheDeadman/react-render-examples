@@ -1,10 +1,14 @@
-import React from 'react';
+// Generate Snippet
 import { Paper, Typography, Button } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import { useMemoizedComponentsContext } from '../context';
 import styles from 'MemoizedComponents.module.scss';
+// Remove START
+import RenderCount from '../../../overall/RenderCount';
 
-const RegularChildContext: React.FC = () => {
+export const explanation = "This component behaves the same as the props version - it re-renders on every context change because it's not wrapped in React.memo(). The difference is that it gets data from context instead of props.";
+// Remove END
+
+const RegularChildContext = () => {
     const { count1, handleIncrement1Bad, expensiveValue } = useMemoizedComponentsContext();
 
     return (

@@ -1,5 +1,4 @@
 // Generate Snippet
-import React from 'react';
 import { Paper, Typography, Button, Collapse, Box } from '@mui/material';
 import styles from 'MemoizedComponents.module.scss';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
