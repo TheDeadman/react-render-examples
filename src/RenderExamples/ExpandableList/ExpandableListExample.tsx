@@ -71,7 +71,7 @@ const ExpandableListExample: React.FC = () => {
                 </Box>
 
 
-                        <ObservationGuide />
+                <ObservationGuide />
                 <br/>
                 <CodeViewer
                     title="listData.ts"

@@ -28,9 +28,9 @@ async function enableMocking() {
 // TODO: Check Expandable List Redux Verbiage.
 // TODO: Generate Code for Context vs Redux
 // TODO: Generate Code for useEffect vs useMemo
-// TODO: Generate Code for Infinite loop
-// TODO: Generate Code for Expandable List
-// TODO: Generate Code for Expandable List Redux
+// DONE: Generate Code for Infinite loop
+// DONE: Generate Code for Expandable List
+// DONE: Generate Code for Expandable List Redux
 
 
 
