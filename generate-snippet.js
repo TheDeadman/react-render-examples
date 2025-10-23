@@ -108,7 +108,7 @@ function removeMarkedSections(content) {
       skipping = false;
       continue;
     }
-    if (!skipping) {
+    if (!skipping && !line.includes('// Generate Snippet')) {
       result.push(line);
     }
   }

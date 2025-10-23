@@ -1,116 +1,40 @@
+// Generate Snippet
 import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
-import { ContextOneProvider, useAppContextOne } from './ContextOne';
-import { ContextTwoProvider, useAppContextTwo } from './ContextTwo';
-import { ContextThreeProvider, useAppContextThree } from './ContextThree';
+import { ContextOneProvider } from './ContextOne';
+import { ContextTwoProvider } from './ContextTwo';
+import { ContextThreeProvider } from './ContextThree';
+import ContextOneConsumer from './components/ConsumerOne';
+import ContextTwoConsumer from './components/ConsumerTwo';
+import ContextThreeConsumer from './components/ConsumerThree';
+import CombinedValueConsumer from './components/CombinedValueConsumer';
 import TextForm from './TextForm';
+// Remove START
+import RenderCount from '../../../overall/RenderCount';
+import CodeViewer from 'overall/CodeViewer';
+import * as snippetExplanations from './snippets/explanations';
+import contextOneSnippet from './snippets/contextOne.snippet';
+import contextTwoSnippet from './snippets/contextTwo.snippet';
+import contextThreeSnippet from './snippets/contextThree.snippet';
+import useMemoParentSnippet from './snippets/useMemoParent.snippet';
+import consumerOneSnippet from './snippets/components/consumerOne.snippet';
+import consumerTwoSnippet from './snippets/components/consumerTwo.snippet';
+import consumerThreeSnippet from './snippets/components/consumerThree.snippet';
+import combinedValueConsumerSnippet from './snippets/components/combinedValueConsumer.snippet';
 
-// const 
-const ContextOneConsumer = () => {
-    const { textVal } = useAppContextOne();
-    return (
-        <Box 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #ff6f00',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a',
-                '&:hover': {
-                    backgroundColor: '#2a2a2a'
-                }
-            }}
-        >
-            <RenderCount componentName="ConsumerOne" />
-            <Typography variant="body2" sx={{ color: '#ff6f00', fontWeight: 'bold' }}>
-                useMemo One Consumer
-            </Typography>
-            <Typography>Value: {textVal}</Typography>
-        </Box>
-    )
-}
 
-const ContextTwoConsumer = () => {
-    const { textValTwo } = useAppContextTwo();
-    return (
-        <Box 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #ff6f00',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a',
-                '&:hover': {
-                    backgroundColor: '#2a2a2a'
-                }
-            }}
-        >
-            <RenderCount componentName="ConsumerTwo" />
-            <Typography variant="body2" sx={{ color: '#ff6f00', fontWeight: 'bold' }}>
-                useMemo Two Consumer
-            </Typography>
-            <Typography>Value: {textValTwo}</Typography>
-        </Box>
-    )
-}
+export const explanation = "The Parent component placeholder.";
+// Remove END
 
-const ContextThreeConsumer = () => {
-    const { textValThree } = useAppContextThree();
-    return (
-        <Box 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #ff6f00',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a',
-                '&:hover': {
-                    backgroundColor: '#2a2a2a'
-                }
-            }}
-        >
-            <RenderCount componentName="ConsumerThree" />
-            <Typography variant="body2" sx={{ color: '#ff6f00', fontWeight: 'bold' }}>
-                useMemo Three Consumer
-            </Typography>
-            <Typography>Value: {textValThree}</Typography>
-        </Box>
-    )
-}
-
-const CombinedValueConsumer = () => {
-    const { combinedTextValThree } = useAppContextThree();
-
-        return (
-        <Box 
-            sx={{ 
-                p: 2, 
-                m: 1, 
-                border: '2px solid #ff6f00',
-                borderRadius: 2,
-                backgroundColor: '#1a1a1a',
-                '&:hover': {
-                    backgroundColor: '#2a2a2a'
-                }
-            }}
-        >
-            <RenderCount componentName="ConsumerThree" />
-            <Typography variant="body2" sx={{ color: '#ff6f00', fontWeight: 'bold' }}>
-                useMemo Combined Value Consumer
-            </Typography>
-            <Typography>Value: {combinedTextValThree}</Typography>
-        </Box>
-    )
-}
 
 const UseMemoParent: React.FC = () => {
     return (
         <ContextOneProvider key="memo-version">
             <ContextTwoProvider key="memo-version">
                 <ContextThreeProvider key="memo-version">
-                    <Box 
-                        sx={{ 
+                    {/* Remove START */}
+                    <Box
+                        sx={{
                             border: '2px solid #ff6f00',
                             borderRadius: 2,
                             p: 2,
@@ -120,8 +44,8 @@ const UseMemoParent: React.FC = () => {
                         }}
                     >
                         {/* useMemo Section Label */}
-                        <Box 
-                            sx={{ 
+                        <Box
+                            sx={{
                                 position: 'absolute',
                                 top: -12,
                                 left: 16,
@@ -136,7 +60,7 @@ const UseMemoParent: React.FC = () => {
                         >
                             USEMEMO VERSION
                         </Box>
-                        
+
                         <RenderCount componentName="UseMemoParent" />
                         <Typography variant="h5" gutterBottom sx={{ color: '#ff6f00', mt: 2 }}>
                             useMemo Version
@@ -144,25 +68,85 @@ const UseMemoParent: React.FC = () => {
                         <Typography variant="body2" paragraph sx={{ color: '#bbb' }}>
                             Computations are memoized and only recalculate when dependencies change
                         </Typography>
-                        
+
                         <Grid container spacing={2}>
                             <Grid item xs={12} md={6}>
+                            {/* Remove END */}
                                 <ContextOneConsumer />
+                                                    {/* Remove START */}
                             </Grid>
                             <Grid item xs={12} md={6}>
+                    {/* Remove END */}
                                 <ContextTwoConsumer />
+                                                    {/* Remove START */}
                             </Grid>
                             <Grid item xs={12} md={6}>
+                    {/* Remove END */}
                                 <ContextThreeConsumer />
+                                                    {/* Remove START */}
                             </Grid>
                             <Grid item xs={12} md={6}>
+                    {/* Remove END */}
                                 <CombinedValueConsumer />
+                                                    {/* Remove START */}
                             </Grid>
                             <Grid item xs={12}>
+                    {/* Remove END */}
                                 <TextForm />
+                                                    {/* Remove START */}
                             </Grid>
                         </Grid>
                     </Box>
+                    {/* Remove END */}
+                    {/* Remove START */}
+                    {/* <ObservationGuide /> */}
+                    <br />
+                    <CodeViewer
+                        title="Context One"
+                        code={contextOneSnippet}
+                        explanation={snippetExplanations.contextOneExplanation}
+                    />
+
+                    <CodeViewer
+                        title="Context Two"
+                        code={contextTwoSnippet}
+                        explanation={snippetExplanations.contextTwoExplanation}
+                    />
+
+                    <CodeViewer
+                        title="Context Three"
+                        code={contextThreeSnippet}
+                        explanation={snippetExplanations.contextThreeExplanation}
+                    />
+
+                    <CodeViewer
+                        title="Parent Component"
+                        code={useMemoParentSnippet}
+                        explanation={snippetExplanations.useMemoParentExplanation}
+                    />
+                    <CodeViewer
+                        title="Consumer One Component"
+                        code={consumerOneSnippet}
+                        explanation={snippetExplanations.consumerOneExplanation}
+                    />
+
+                    <CodeViewer
+                        title="Consumer Two Component"
+                        code={consumerTwoSnippet}
+                        explanation={snippetExplanations.consumerTwoExplanation}
+                    />
+
+                    <CodeViewer
+                        title="Consumer Three Component"
+                        code={consumerThreeSnippet}
+                        explanation={snippetExplanations.consumerThreeExplanation}
+                    />
+                    <CodeViewer
+                        title="Combined Value Consumer Component"
+                        code={combinedValueConsumerSnippet}
+                        explanation={snippetExplanations.combinedValueConsumerExplanation}
+                    />
+                    {/* Remove END */}
                 </ContextThreeProvider>
             </ContextTwoProvider>
         </ContextOneProvider >

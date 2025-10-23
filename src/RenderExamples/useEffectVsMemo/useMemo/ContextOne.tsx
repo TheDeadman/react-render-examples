@@ -1,5 +1,7 @@
+// Generate Snippet
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
+export const explanation = "Placeholder";
 export type ListItem = { title: string; description: string }
 // Define the shape of the context
 interface AppContextType {

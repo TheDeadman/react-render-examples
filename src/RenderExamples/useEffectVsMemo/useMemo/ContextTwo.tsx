@@ -1,6 +1,8 @@
+// Generate Snippet
 import React, { createContext, useContext, useState, ReactNode, useMemo } from 'react';
 import { useAppContextOne } from './ContextOne';
 
+export const explanation = "Placeholder";
 export type ListItem = { title: string; description: string }
 // Define the shape of the context
 interface AppContextType {
