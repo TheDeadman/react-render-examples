@@ -13,9 +13,7 @@ interface AppContextType {
 // Create the context with default values
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-// Create a provider to wrap the app and provide state to compThreents
 export const ContextThreeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    // const {textVal} = useAppContextOne();
     const {combinedTextValTwo} = useAppContextTwo();
     const [textValThree, setTextValThree] = useState('ContextThree');
 

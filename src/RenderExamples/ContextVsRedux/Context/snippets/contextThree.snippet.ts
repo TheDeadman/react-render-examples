@@ -24,7 +24,7 @@ interface AppContextType {
 // Create the context with default values
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-// Create a provider to wrap the app and provide state to compThreents
+// Create a provider to wrap the app and provide state to components
 export const ContextThreeProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
