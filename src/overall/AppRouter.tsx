@@ -18,14 +18,14 @@ const AppRouter = () => {
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<RenderOptimizationLanding />} />
-                    <Route path="/techniques/memoized-components" element={<MemoizedComponentsExample />} />
-                    <Route path="/techniques/memoized-components-context" element={<MemoizedComponentsContextExample />} />
-                    <Route path="/techniques/memoized-components-redux" element={<MemoizedComponentsReduxExample />} />
-                    <Route path="/techniques/context-vs-redux" element={<ContextVsReduxRoot />} />
-                    <Route path="/techniques/useeffect-vs-usememo" element={<UseEffectVsMemoRoot />} />
-                    <Route path="/techniques/infinite-render-loops" element={<InfiniteRendersExample />} />
-                    <Route path="/techniques/expandable-list" element={<ExpandableListExample />} />
-                    <Route path="/techniques/expandable-list-redux" element={<ExpandableListReduxExample />} />
+                    <Route path="/memoized-components" element={<MemoizedComponentsExample />} />
+                    <Route path="/memoized-components-context" element={<MemoizedComponentsContextExample />} />
+                    <Route path="/memoized-components-redux" element={<MemoizedComponentsReduxExample />} />
+                    <Route path="/context-vs-redux" element={<ContextVsReduxRoot />} />
+                    <Route path="/useeffect-vs-usememo" element={<UseEffectVsMemoRoot />} />
+                    <Route path="/infinite-render-loops" element={<InfiniteRendersExample />} />
+                    <Route path="/expandable-list" element={<ExpandableListExample />} />
+                    <Route path="/expandable-list-redux" element={<ExpandableListReduxExample />} />
                     
                     {/* Legacy routes for backward compatibility */}
                     <Route path="/examples/effectVsMemo" element={<UseEffectVsMemoRoot />} />

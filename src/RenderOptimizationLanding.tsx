@@ -52,49 +52,49 @@ const RenderOptimizationLanding: React.FC = () => {
         {
             title: "Memoized Components",
             description: "React.memo, useMemo, and useCallback can prevent unnecessary re-renders and optimize component performance.",
-            route: "/techniques/memoized-components",
+            route: "/memoized-components",
             isImplemented: true
         },
         {
             title: "Memoized Components (Context)",
-            description: "React Context affects the same memoization techniques and why context can break React.memo optimizations.",
-            route: "/techniques/memoized-components-context",
+            description: "React Context with the same memoization techniques and why context can break optimizations strategies in certain scenarios.",
+            route: "/memoized-components-context",
             isImplemented: true
         },
         {
             title: "Memoized Components (Redux)",
-            description: "How Redux Toolkit affects memoization patterns and component rendering behavior compared to props and context.",
-            route: "/techniques/memoized-components-redux",
+            description: "How Redux Toolkit with the same memoization techniques and why some are not necessary.",
+            route: "/memoized-components-redux",
             isImplemented: true
         },
         {
             title: "Context vs Redux",
             description: "Compare rendering behavior between React Context and Redux when managing shared state across components.",
-            route: "/techniques/context-vs-redux",
+            route: "/context-vs-redux",
             isImplemented: true
         },
         {
             title: "useEffect vs useMemo",
             description: "Understand the rendering implications of using useEffect for derived state versus useMemo for computed values.",
-            route: "/techniques/useeffect-vs-usememo",
+            route: "/useeffect-vs-usememo",
             isImplemented: true
         },
         {
             title: "Infinite Render Loops",
-            description: "Basic causes of infinite render loops",
-            route: "/techniques/infinite-render-loops",
+            description: "Basic example of infinite render loops.",
+            route: "/infinite-render-loops",
             isImplemented: true
         },
         {
             title: "Expandable List",
             description: "Demonstrates a simple expandable/collapsible list and the challenges of preventing unnecessary re-renders of list items.",
-            route: "/techniques/expandable-list",
+            route: "/expandable-list",
             isImplemented: true
         },
     {
             title: "Expandable List Redux",
             description: "Demonstrates the same expandable/collapsible list using Redux for state management, showcasing how Redux can help reduce re-renders.",
-            route: "/techniques/expandable-list-redux",
+            route: "/expandable-list-redux",
             isImplemented: true
         }
     ];
@@ -104,10 +104,10 @@ const RenderOptimizationLanding: React.FC = () => {
             <RenderCount componentName="RenderOptimizationLanding" />
             <Box sx={{ mt: 4, mb: 4 }}>
                 <Typography variant="h2" component="h1" gutterBottom align="center">
-                    React Rendering Optimization Techniques
+                    React Rendering Examples
                 </Typography>
                 <Typography variant="h5" component="h2" gutterBottom align="center" color="text.secondary">
-                    Interactive examples demonstrating different approaches to optimize React rendering performance
+                    Interactive examples demonstrating different approaches to optimize React rendering performance and how they affect component rendering.
                 </Typography>
                 <Typography variant="body1" sx={{ mt: 3, mb: 4 }} align="center">
                     Each example includes render counters and configurable delays to help visualize 

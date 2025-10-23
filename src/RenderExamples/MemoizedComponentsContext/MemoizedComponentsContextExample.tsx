@@ -1,18 +1,21 @@
+// Generate Snippet
 import React from 'react';
 import { Box, Typography, Container, Grid } from '@mui/material';
-import RenderCount from '../../overall/RenderCount';
 import { MemoizedComponentsProvider } from './context';
-import CodeViewerContext from './CodeViewerContext';
-import { codeSnippetsContext, explanationsContext } from './codeSnippets';
 import RegularChildContext from './components/RegularChildContext';
 import MemoizedChildContext from './components/MemoizedChildContext';
 import MemoizedChildWithBadCallbackContext from './components/MemoizedChildWithBadCallbackContext';
 import ExpensiveComponentBadContext from './components/ExpensiveComponentBadContext';
 import ExpensiveComponentGoodContext from './components/ExpensiveComponentGoodContext';
-import ComponentLabelContext from './components/ComponentLabelContext';
-import ColorLegendContext from './components/ColorLegendContext';
 import ParentControlsContext from './components/ParentControlsContext';
+// Remove START
+import ComponentLabelContext from './components/ComponentLabelContext';
+import { codeSnippetsContext, explanationsContext } from './codeSnippets';
+import CodeViewerContext from './CodeViewerContext';
+import ColorLegendContext from './components/ColorLegendContext';
+import RenderCount from '../../overall/RenderCount';
 import ObservationGuideContext from './ObservationGuideContext';
+// Remove END
 import styles from 'MemoizedComponents.module.scss';
 
 const MemoizedComponentsExampleContent: React.FC = () => {

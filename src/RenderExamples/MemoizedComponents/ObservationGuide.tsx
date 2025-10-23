@@ -8,16 +8,16 @@ const ObservationGuide: React.FC = () => {
                 What to Observe:
             </Typography>
             <Typography variant="body2" paragraph>
-                • Type in "Unrelated State" field - notice which components re-render even though they are not referencing that state.
+                • Type in "Unrelated State" field - notice which components re-render even though NO child components are actually using this value.
             </Typography>
             <Typography variant="body2" paragraph>
                 • <strong>Regular Child:</strong> Always re-renders. It has no React.memo so parent re-renders always cause it to re-render.
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Child + Non-Memoized Function:</strong> Has React.memo but still re-renders every time because it receives a new function reference each render.
+                • <strong>Memoized Child + Non-Memoized Function:</strong> Has React.memo but it will never work because it receives a new function reference each render.
             </Typography>
             <Typography variant="body2" paragraph>
-                • <strong>Memoized Child + useCallback Function:</strong> Only re-renders when count1 or expensiveValue actually changes.
+                • <strong>Memoized Child + useCallback Function:</strong> The same as above but works properly because it receives a memoized function that was created with useCallback. Only re-renders when count1 or expensiveValue actually changes.
             </Typography>
             <Typography variant="body2" paragraph>
                 • <strong>Non-Memoized Expensive Component:</strong> Recalculates on every render - check console logs

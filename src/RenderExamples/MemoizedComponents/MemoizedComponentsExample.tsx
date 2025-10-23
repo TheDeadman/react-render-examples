@@ -1,16 +1,17 @@
 // Generate Snippet
 import { useState, useMemo, useCallback } from 'react';
 import { Box, Typography, Container, Grid } from '@mui/material';
-import RenderCount from '../../overall/RenderCount';
-import CodeViewer from './CodeViewer';
 import RegularChild from './components/RegularChild';
 import MemoizedChild from './components/MemoizedChild';
 import MemoizedChildWithBadCallback from './components/MemoizedChildWithBadCallback';
 import ExpensiveComponentBad from './components/ExpensiveComponentBad';
 import ExpensiveComponentGood from './components/ExpensiveComponentGood';
+import ParentControls from './components/ParentControls';
+// Remove START
+import RenderCount from '../../overall/RenderCount';
+import CodeViewer from './CodeViewer';
 import ComponentLabel from './components/ComponentLabel';
 import ColorLegend from './components/ColorLegend';
-import ParentControls from './components/ParentControls';
 import ObservationGuide from './ObservationGuide';
 import parentComponentSnippet from './snippets/memoizedComponentsExample.snippet';
 import regularChildSnippet from './snippets/components/regularChild.snippet';
@@ -19,9 +20,10 @@ import memoizedChildWithBadCallbackSnippet from './snippets/components/memoizedC
 import expensiveComponentBadSnippet from './snippets/components/expensiveComponentBad.snippet';
 import expensiveComponentGoodSnippet from './snippets/components/expensiveComponentGood.snippet';
 import * as snippetExplanations from './snippets/explanations';
+// Remove END
 import styles from 'MemoizedComponents.module.scss';
 
-export const explanation = "The parent component shows the complete optimization strategy: useCallback() prevents function recreation, useMemo() prevents expensive recalculations, and the child components use React.memo(). The key insight: ALL THREE hooks must work together - useCallback is only beneficial when passing functions to memoized components.";
+export const explanation = "The parent component shows the complete optimization strategy: useCallback() prevents function recreation, useMemo() prevents expensive recalculations, and the child components use React.memo(). The key insight: ALL THREE hooks must work together. Failure to use React.memo, useCallback, or useMemo will break the optimization chain in many cases.";
 
 const MemoizedComponentsExample = () => {
     const [count1, setCount1] = useState(0);
@@ -56,7 +58,8 @@ const MemoizedComponentsExample = () => {
                     </Typography>
                     <Typography variant="body1" paragraph className={styles.headerDescription}>
                         This example demonstrates React.memo, useMemo, and useCallback optimizations.
-                        Watch the render counters to see which components re-render when state changes.
+                        Watch the render counters to see which components re-render when state changes. 
+                        Scroll to the bottom to see code for each component.
                     </Typography>
                     
                     {/* Color Legend */}
@@ -93,7 +96,7 @@ const MemoizedComponentsExample = () => {
                         {/* Remove END */}
                         <MemoizedChildWithBadCallback 
                             value={count1} 
-                            onIncrement={handleIncrement1Bad}  // Same non-memoized function
+                            onIncrement={handleIncrement1Bad}
                             expensiveValue={expensiveValue} 
                         />
                         {/* Remove START */}
@@ -152,16 +155,17 @@ const MemoizedComponentsExample = () => {
                 />
 
                 <CodeViewer
+                    title="Memoized Child with Non-Memoized Callback (Still Re-renders)"
+                    code={memoizedChildWithBadCallbackSnippet}
+                    explanation={snippetExplanations.memoizedChildWithBadCallbackExplanation}
+                />
+                
+                <CodeViewer
                     title="Memoized Child Component (React.memo)"
                     code={memoizedChildSnippet}
                     explanation={snippetExplanations.memoizedChildExplanation}
                 />
 
-                <CodeViewer
-                    title="Memoized Child with Non-Memoized Callback (Still Re-renders)"
-                    code={memoizedChildWithBadCallbackSnippet}
-                    explanation={snippetExplanations.memoizedChildWithBadCallbackExplanation}
-                />
 
                 <CodeViewer
                     title="Expensive Component (WITHOUT useMemo - Bad Performance)"
