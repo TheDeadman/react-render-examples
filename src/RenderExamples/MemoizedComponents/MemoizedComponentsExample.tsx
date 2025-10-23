@@ -9,7 +9,7 @@ import ExpensiveComponentGood from './components/ExpensiveComponentGood';
 import ParentControls from './components/ParentControls';
 // Remove START
 import RenderCount from '../../overall/RenderCount';
-import CodeViewer from './CodeViewer';
+import CodeViewer from '../../overall/CodeViewer';
 import ComponentLabel from './components/ComponentLabel';
 import ColorLegend from './components/ColorLegend';
 import ObservationGuide from './ObservationGuide';
@@ -159,7 +159,7 @@ const MemoizedComponentsExample = () => {
                     code={memoizedChildWithBadCallbackSnippet}
                     explanation={snippetExplanations.memoizedChildWithBadCallbackExplanation}
                 />
-                
+
                 <CodeViewer
                     title="Memoized Child Component (React.memo)"
                     code={memoizedChildSnippet}

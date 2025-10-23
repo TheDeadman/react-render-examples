@@ -18,7 +18,7 @@ async function enableMocking() {
 }
 
 // DONE: Check all main page titles and descriptions. - 
-// TODO: Check Memoized Components Verbiage.
+// DONE: Check Memoized Components Verbiage.
 // TODO: Check Memoized Components Context Verbiage.
 // TODO: Check Memoized Components Redux Verbiage.
 // TODO: Check Context vs Redux Verbiage.
@@ -26,7 +26,11 @@ async function enableMocking() {
 // TODO: Check Infinite Render Loops Verbiage.
 // TODO: Check Expandable List Verbiage.
 // TODO: Check Expandable List Redux Verbiage.
-// TODO: Identify places that still need generated code
+// TODO: Generate Code for Context vs Redux
+// TODO: Generate Code for useEffect vs useMemo
+// TODO: Generate Code for Infinite loop
+// TODO: Generate Code for Expandable List
+// TODO: Generate Code for Expandable List Redux
 
 
 

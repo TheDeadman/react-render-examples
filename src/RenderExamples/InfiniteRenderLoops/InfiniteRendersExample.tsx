@@ -1,23 +1,33 @@
+// Generate Snippet
 import { Box, Typography, Container, Grid } from '@mui/material';
-import RenderCount from '../../overall/RenderCount';
-import CodeViewer from './CodeViewer';
-import { codeSnippets, explanations } from './codeSnippets';
 import RegularChild from './components/RegularChild';
-import ComponentLabel from './components/ComponentLabel';
-import ColorLegend from './components/ColorLegend';
 import ParentControls from './components/ParentControls';
-import ObservationGuide from './ObservationGuide';
 import styles from 'MemoizedComponents.module.scss';
 import LastUpdatedDisplay from './components/LastUpdated';
 import { InfiniteLoopProvider } from './context';
+// Remove START
+import CodeViewer from './CodeViewer';
+import ComponentLabel from './components/ComponentLabel';
+import ColorLegend from './components/ColorLegend';
+import ObservationGuide from './ObservationGuide';
+import RenderCount from '../../overall/RenderCount';
+
+import * as snippetExplanations from './snippets/explanations';
+import contextCodeSnippet from './snippets/context.snippet';
+import regularChildCodeSnippet from './snippets/components/regularChild.snippet';
+import parentControlsCodeSnippet from './snippets/components/parentControls.snippet';
+import parentCodeSnippet from './snippets/infiniteRendersExample.snippet';
+
+export const explanation = "Parent component rendering a provider and components that use the context.";
+// Remove END
 
 const InfiniteRendersExample = () => {
 
     return (
         <InfiniteLoopProvider>
 
-        <Container maxWidth="lg">
             {/* Remove START */}
+        <Container maxWidth="lg">
             <Box className={styles.examplePanel}>
                 {/* Parent Component Label */}
                 <Box className={styles.parentLabel}>
@@ -79,18 +89,28 @@ const InfiniteRendersExample = () => {
 
                     <CodeViewer
                         title="Context and Provider"
-                        code={codeSnippets.context}
-                        explanation={explanations.context}
+                        code={contextCodeSnippet}
+                        explanation={snippetExplanations.contextExplanation}
+                    />
+                                        <CodeViewer
+                        title="Parent Component"
+                        code={parentCodeSnippet}
+                        explanation={snippetExplanations.infiniteRendersExampleExplanation}
+                    />
+                                        <CodeViewer
+                        title="State Controls"
+                        code={parentControlsCodeSnippet}
+                        explanation={snippetExplanations.parentControlsExplanation}
                     />
                     <CodeViewer
                         title="Infinite Loop Culprit Component"
-                        code={codeSnippets.regularChild}
-                        explanation={explanations.regularChild}
+                        code={regularChildCodeSnippet}
+                        explanation={snippetExplanations.regularChildExplanation}
                     />
                 </Box>
             </Box>
-            {/* Remove END */}
         </Container>
+            {/* Remove END */}
         </InfiniteLoopProvider>
 
     );

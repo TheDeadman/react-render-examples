@@ -1,9 +1,15 @@
+// Generate Snippet
 import React from 'react';
 import { Paper, Typography, Button, Collapse, Box } from '@mui/material';
-import RenderCount from '../../../overall/RenderCount';
 import styles from 'MemoizedComponents.module.scss';
 import { useAppSelector, useAppDispatch } from 'store/hooks';
 import { selectIsExpanded, setExpandedId } from '../expandableList.slice';
+
+// Remove START
+import RenderCount from '../../../overall/RenderCount';
+
+export const explanation = "Individual list item that is NOT memoized. Uses a selector with the passed in ID to determine if it is expanded.";
+// Remove END
 
 interface ListItemProps {
     id: number;
@@ -21,28 +27,49 @@ const ListItem: React.FC<ListItemProps> = ({ id, title, description }) => {
         console.log(`Toggling item with id: ${id}`);
     }
     return (
-        <Paper className={`${styles.card} ${styles.cardRed}`} sx={{ m: 0, mb: 0 }}>
+        <Paper
+            // Remove START
+            className={`${styles.card} ${styles.cardRed}`} sx={{ m: 0, mb: 0 }}
+        // Remove END
+        >
+            {/* Remove START */}
             <RenderCount componentName={`ListItem-${id}`} />
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="h6" className={`${styles.title} ${styles.titleRed}`}>
+            {/* Remove END */}
+            <Box
+                // Remove START
+                sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+            // Remove END
+            >
+                <Typography
+
+                    // Remove START
+                    variant="h6" className={`${styles.title} ${styles.titleRed}`}
+                // Remove END
+                >
                     {title}
                 </Typography>
-                <Button 
+                <Button
                     onClick={onToggle}
-                    sx={{ 
+
+                    // Remove START
+                    sx={{
                         color: '#f44336',
                         minWidth: '40px',
                         fontSize: '1.2rem'
                     }}
+                // Remove END
                 >
                     {isExpanded ? '▲' : '▼'}
                 </Button>
             </Box>
             <Collapse in={isExpanded}>
-                <Typography 
-                    variant="body2" 
+                <Typography
+
+                    // Remove START
+                    variant="body2"
                     className={styles.infoText}
                     sx={{ mt: 2 }}
+                // Remove END
                 >
                     {description}
                 </Typography>

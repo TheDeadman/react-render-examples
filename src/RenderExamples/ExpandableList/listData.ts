@@ -1,3 +1,6 @@
+// Generate Snippet
+export const explanation = "Simple List Data that is mapped in the parent component.";
+
 export const listData = [
     {
         id: 1,

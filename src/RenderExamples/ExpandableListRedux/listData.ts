@@ -1,3 +1,7 @@
+// Generate Snippet
+
+export const explanation = "List Data";
+
 export const listData = [
     {
         id: 1,
